@@ -7,781 +7,1140 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f1117;
-  --bg2: #161b27;
-  --bg3: #1e2535;
-  --bg4: #252d3f;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text: #e8eaf0;
-  --text2: #8b93a8;
-  --text3: #5a6278;
-  --accent: #4f7cff;
-  --accent2: #6b8fff;
-  --green: #22c55e;
-  --green-bg: rgba(34,197,94,0.1);
-  --green-border: rgba(34,197,94,0.25);
-  --yellow: #f59e0b;
-  --yellow-bg: rgba(245,158,11,0.1);
-  --yellow-border: rgba(245,158,11,0.25);
-  --red: #ef4444;
-  --red-bg: rgba(239,68,68,0.1);
-  --red-border: rgba(239,68,68,0.25);
-  --blue: #3b82f6;
-  --blue-bg: rgba(59,130,246,0.12);
-  --blue-border: rgba(59,130,246,0.3);
-  --gold: #f0b429;
-  --gold-bg: rgba(240,180,41,0.1);
-  --gold-border: rgba(240,180,41,0.3);
-  --radius: 10px;
-  --radius-sm: 6px;
+  --bg:#0f1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252d3f;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#e8eaf0;--text2:#8b93a8;--text3:#5a6278;
+  --accent:#4f7cff;--accent2:#6b8fff;
+  --green:#22c55e;--green-bg:rgba(34,197,94,0.1);--green-border:rgba(34,197,94,0.25);
+  --yellow:#f59e0b;--yellow-bg:rgba(245,158,11,0.1);--yellow-border:rgba(245,158,11,0.25);
+  --red:#ef4444;--red-bg:rgba(239,68,68,0.1);--red-border:rgba(239,68,68,0.25);
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,0.12);--blue-border:rgba(59,130,246,0.3);
+  --gold:#f0b429;--gold-bg:rgba(240,180,41,0.1);--gold-border:rgba(240,180,41,0.3);
+  --radius:10px;--radius-sm:6px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-.page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+.page{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem;}
 
 /* HEADER */
-.header { margin-bottom: 2rem; }
-.header h1 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-.header .sub { font-size: 13px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
-.header .badge-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
-.badge-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
-.badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
-.badge-gold { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-border); }
+.header{margin-bottom:2rem;}
+.header-top{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4f7cff,#22c55e);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;}
+.header h1{font-size:22px;font-weight:600;}
+.header .sub{font-size:13px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-left:54px;}
+.badge-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border);}
+.badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.badge-gold{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
 
-/* TABS */
-.tabs { display: flex; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 1.5rem; }
-.tab { flex: 1; padding: 9px 12px; font-size: 13px; font-weight: 500; color: var(--text2); background: transparent; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; text-align: center; }
-.tab:hover { color: var(--text); background: var(--bg3); }
-.tab.active { background: var(--bg4); color: var(--text); border: 1px solid var(--border2); }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+/* MAIN TABS */
+.tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:4px;margin-bottom:1.5rem;overflow-x:auto;}
+.tab{flex:1;padding:9px 10px;font-size:12px;font-weight:500;color:var(--text2);background:transparent;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;text-align:center;white-space:nowrap;}
+.tab:hover{color:var(--text);background:var(--bg3);}
+.tab.active{background:var(--bg4);color:var(--text);border:1px solid var(--border2);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* SUB TABS (inside settings) */
+.subtabs{display:flex;gap:3px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;margin-bottom:1.25rem;}
+.subtab{flex:1;padding:7px 10px;font-size:12px;font-weight:500;color:var(--text3);background:transparent;border:none;border-radius:4px;cursor:pointer;transition:all 0.15s;text-align:center;white-space:nowrap;}
+.subtab:hover{color:var(--text2);background:var(--bg4);}
+.subtab.active{background:var(--bg4);color:var(--text);border:1px solid var(--border2);}
+.subtab-content{display:none;}
+.subtab-content.active{display:block;}
 
 /* CARDS */
-.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
-.card-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
-.card-title span { color: var(--accent2); }
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;}
+.card-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;}
+.card-title span{color:var(--accent2);}
 
-/* GRID */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+/* GRIDS */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
 
-/* KPI BLOCK */
-.kpi-block { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
-.kpi-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-.kpi-desc { font-size: 11px; color: var(--text3); margin-bottom: 1rem; line-height: 1.5; }
-.field { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.field label { font-size: 12px; color: var(--text2); flex: 1; min-width: 0; }
-.field input {
-  width: 80px; font-size: 12px; font-family: 'JetBrains Mono', monospace;
-  padding: 5px 8px; border: 1px solid var(--border2);
-  border-radius: var(--radius-sm); background: var(--bg4);
-  color: var(--text); outline: none; transition: border-color 0.15s;
-}
-.field input:focus { border-color: var(--accent); }
-.field .unit { font-size: 11px; color: var(--text3); min-width: 20px; font-family: 'JetBrains Mono', monospace; }
+/* FIELD */
+.kpi-block{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;margin-bottom:.75rem;}
+.kpi-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.kpi-desc{font-size:11px;color:var(--text3);margin-bottom:1rem;line-height:1.5;}
+.field{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.field label{font-size:12px;color:var(--text2);flex:1;min-width:0;}
+.field input[type=number]{width:80px;font-size:12px;font-family:'JetBrains Mono',monospace;padding:5px 8px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;transition:border-color 0.15s;}
+.field input[type=number]:focus{border-color:var(--accent);}
+.field input[type=text]{flex:1;font-size:12px;font-family:'Inter',sans-serif;padding:5px 8px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;transition:border-color 0.15s;}
+.field input[type=text]:focus{border-color:var(--accent);}
+.field .unit{font-size:11px;color:var(--text3);min-width:20px;font-family:'JetBrains Mono',monospace;}
+.field-section{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border);}
 
 /* CORRIDOR VIZ */
-.corridor { display: flex; gap: 3px; margin-top: 10px; }
-.cor-zone { flex: 1; border-radius: 4px; padding: 6px 4px; text-align: center; }
-.cor-zone .czlabel { font-size: 10px; font-weight: 500; display: block; }
-.cor-zone .czval { font-size: 11px; font-weight: 600; display: block; margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
-.cz-red { background: var(--red-bg); border: 1px solid var(--red-border); }
-.cz-red .czlabel { color: var(--red); }
-.cz-red .czval { color: #fca5a5; }
-.cz-yellow { background: var(--yellow-bg); border: 1px solid var(--yellow-border); }
-.cz-yellow .czlabel { color: var(--yellow); }
-.cz-yellow .czval { color: #fcd34d; }
-.cz-green { background: var(--green-bg); border: 1px solid var(--green-border); }
-.cz-green .czlabel { color: var(--green); }
-.cz-green .czval { color: #86efac; }
-.cz-extra { background: var(--gold-bg); border: 1px solid var(--gold-border); }
-.cz-extra .czlabel { color: var(--gold); }
-.cz-extra .czval { color: #fde68a; }
+.corridor{display:flex;gap:3px;margin-top:10px;}
+.cor-zone{flex:1;border-radius:4px;padding:6px 4px;text-align:center;}
+.czlabel{font-size:10px;font-weight:500;display:block;}
+.czval{font-size:11px;font-weight:600;display:block;margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.cz-red{background:var(--red-bg);border:1px solid var(--red-border);}
+.cz-red .czlabel{color:var(--red);}.cz-red .czval{color:#fca5a5;}
+.cz-yellow{background:var(--yellow-bg);border:1px solid var(--yellow-border);}
+.cz-yellow .czlabel{color:var(--yellow);}.cz-yellow .czval{color:#fcd34d;}
+.cz-green{background:var(--green-bg);border:1px solid var(--green-border);}
+.cz-green .czlabel{color:var(--green);}.cz-green .czval{color:#86efac;}
+.cz-extra{background:var(--gold-bg);border:1px solid var(--gold-border);}
+.cz-extra .czlabel{color:var(--gold);}.cz-extra .czval{color:#fde68a;}
+.cz-extra2{background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.4);}
+.cz-extra2 .czlabel{color:#fbbf24;}.cz-extra2 .czval{color:#fef3c7;}
 
 /* LOGIC BOX */
-.logic-box { background: rgba(79,124,255,0.05); border: 1px solid rgba(79,124,255,0.15); border-radius: var(--radius-sm); padding: 10px 12px; margin-top: 10px; }
-.logic-box p { font-size: 11px; color: var(--text2); line-height: 1.6; }
-.logic-box strong { color: var(--accent2); }
+.logic-box{background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.15);border-radius:var(--radius-sm);padding:10px 12px;margin-top:10px;}
+.logic-box p{font-size:11px;color:var(--text2);line-height:1.6;}
+.logic-box strong{color:var(--accent2);}
 
-/* STAT CARDS */
-.stat-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
-.stat-card .slabel { font-size: 11px; color: var(--text3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
-.stat-card .svalue { font-size: 24px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-.stat-card .sdesc { font-size: 11px; color: var(--text3); margin-top: 4px; }
-
-/* FACT INPUT SECTION */
-.fact-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.fact-row:last-child { border-bottom: none; }
-.fact-name { font-size: 13px; color: var(--text); min-width: 200px; }
-.fact-plan { font-size: 12px; color: var(--text3); min-width: 80px; font-family: 'JetBrains Mono', monospace; }
-.fact-input { width: 90px; font-size: 13px; font-family: 'JetBrains Mono', monospace; padding: 6px 10px; border: 1px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg4); color: var(--text); outline: none; transition: border-color 0.15s; }
-.fact-input:focus { border-color: var(--accent); }
-.fact-badge { min-width: 110px; text-align: center; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
-.fact-bonus { font-size: 16px; font-weight: 600; font-family: 'JetBrains Mono', monospace; min-width: 60px; text-align: right; }
-.bar-outer { flex: 1; height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; min-width: 60px; }
-.bar-inner { height: 100%; border-radius: 2px; transition: width 0.3s; }
+/* FACT INPUT */
+.fact-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.fact-row:last-child{border-bottom:none;}
+.fact-name{font-size:13px;color:var(--text);min-width:180px;}
+.fact-input{width:80px;font-size:13px;font-family:'JetBrains Mono',monospace;padding:6px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;transition:border-color 0.15s;}
+.fact-input:focus{border-color:var(--accent);}
+.fact-badge{min-width:110px;text-align:center;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;}
+.fact-bonus{font-size:16px;font-weight:600;font-family:'JetBrains Mono',monospace;min-width:60px;text-align:right;}
+.bar-outer{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;min-width:60px;}
+.bar-inner{height:100%;border-radius:2px;transition:width 0.3s;}
 
 /* RESULT PANEL */
-.result-panel { background: linear-gradient(135deg, rgba(79,124,255,0.08), rgba(34,197,94,0.05)); border: 1px solid rgba(79,124,255,0.2); border-radius: var(--radius); padding: 1.5rem; }
-.result-panel h3 { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 1rem; }
-.result-line { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-.result-line:last-child { border-bottom: none; }
-.result-line.total { font-size: 18px; font-weight: 600; padding-top: 12px; margin-top: 4px; }
-.result-line .rname { color: var(--text2); }
-.result-line .rval { font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+.result-panel{background:linear-gradient(135deg,rgba(79,124,255,0.08),rgba(34,197,94,0.05));border:1px solid rgba(79,124,255,0.2);border-radius:var(--radius);padding:1.5rem;}
+.result-panel h3{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:1rem;}
+.result-line{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.result-line:last-child{border-bottom:none;}
+.result-line.total{font-size:18px;font-weight:600;padding-top:12px;margin-top:4px;}
+.rname{color:var(--text2);}
+.rval{font-family:'JetBrains Mono',monospace;font-weight:500;}
 
-/* SIMULATION */
-.sim-month { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
-.sim-month-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.sim-month-name { font-size: 15px; font-weight: 600; color: var(--text); }
-.sim-month-total { font-size: 20px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-.sim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1rem; }
-.sim-kpi { background: var(--bg3); border-radius: var(--radius-sm); padding: 10px; border: 1px solid var(--border); }
-.sim-kpi .sk-name { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
-.sim-kpi .sk-fact { font-size: 16px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-.sim-kpi .sk-plan { font-size: 10px; color: var(--text3); margin-top: 2px; }
-.sim-kpi .sk-badge { font-size: 11px; font-weight: 600; margin-top: 6px; padding: 2px 8px; border-radius: 20px; display: inline-block; }
-.sim-kpi .sk-bonus { font-size: 13px; font-weight: 600; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+/* NOTICE */
+.notice{background:rgba(240,180,41,0.06);border:1px solid rgba(240,180,41,0.2);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;}
+.notice p{font-size:12px;color:#fcd34d;line-height:1.6;}
+.notice-info{background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.15);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;}
+.notice-info p{font-size:12px;color:var(--accent2);line-height:1.6;}
 
-/* COMPARISON TABLE */
-.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.compare-table th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
-.compare-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text2); }
-.compare-table td:first-child { color: var(--text); font-weight: 500; }
-.compare-table tr:last-child td { border-bottom: none; }
-.compare-table .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+/* QUAL ROWS */
+.qual-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+.qual-row:last-child{border-bottom:none;}
+.qual-check{width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex-shrink:0;margin-top:2px;}
+.qual-info{flex:1;}
+.qual-name{font-size:13px;color:var(--text);font-weight:500;}
+.qual-desc{font-size:11px;color:var(--text3);margin-top:3px;line-height:1.5;}
+.qual-bonus{font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--green);min-width:50px;text-align:right;}
 
-/* DIVIDER */
-.divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+/* REG TABLES */
+.reg-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.reg-table th{padding:7px 10px;text-align:left;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.reg-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;}
+.reg-table td:first-child{color:var(--text);font-weight:500;}
+.dyn-kpi-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.dyn-kpi-table th{padding:7px 10px;text-align:left;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.dyn-kpi-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;}
+.dyn-kpi-table td:first-child{color:var(--text);font-weight:500;width:150px;}
+.dz{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;border-radius:10px;font-family:'JetBrains Mono',monospace;margin:1px 1px;}
+.dz-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+.dz-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);}
+.dz-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.dz-extra{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
+.dz-extra2{background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);}
 
-/* SECTION HEADER */
-.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
-.section-header h2 { font-size: 14px; font-weight: 600; color: var(--text); }
-.section-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+/* HISTORY */
+.history-table{width:100%;border-collapse:collapse;font-size:13px;}
+.history-table th{padding:8px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap;}
+.history-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2);}
+.history-table td:first-child{color:var(--text);font-weight:500;}
+.history-table tr:hover td{background:var(--bg3);}
+.history-table .empty-row td{text-align:center;color:var(--text3);font-size:12px;padding:2rem;}
+.history-controls{display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap;align-items:center;}
+.history-filter{font-size:13px;padding:6px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;}
 
-/* TOGGLE */
-.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; }
-.toggle-label { font-size: 13px; color: var(--text2); }
-.toggle-btn { background: var(--bg4); border: 1px solid var(--border2); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--text2); cursor: pointer; transition: all 0.15s; }
-.toggle-btn.on { background: var(--blue-bg); border-color: var(--blue-border); color: var(--blue); }
-.toggle-btn:hover { border-color: var(--border2); }
+/* STAT */
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;}
+.stat-card .slabel{font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;}
+.stat-card .svalue{font-size:24px;font-weight:600;font-family:'JetBrains Mono',monospace;}
+.stat-card .sdesc{font-size:11px;color:var(--text3);margin-top:4px;}
 
-/* MONTH HEADER */
-.month-input-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
-.month-input-row label { font-size: 13px; color: var(--text2); }
-.month-input-row input[type=text], .month-input-row select {
-  font-size: 13px; padding: 6px 10px; border: 1px solid var(--border2);
-  border-radius: var(--radius-sm); background: var(--bg4); color: var(--text); outline: none;
-  font-family: 'Inter', sans-serif;
-}
-.month-input-row input[type=text] { width: 140px; }
+/* BTN */
+.btn{padding:8px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;border:none;}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent2);}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+.btn-danger:hover{background:rgba(239,68,68,0.2);}
+.btn-ghost{background:var(--bg4);color:var(--text2);border:1px solid var(--border2);}
+.btn-ghost:hover{color:var(--text);}
 
-@media (max-width: 640px) {
-  .grid-2, .grid-4, .grid-3, .sim-grid { grid-template-columns: 1fr 1fr; }
-  .fact-name { min-width: 120px; font-size: 12px; }
+/* MISC */
+.month-row{display:flex;align-items:center;gap:12px;margin-bottom:1rem;flex-wrap:wrap;}
+.month-row label{font-size:13px;color:var(--text2);}
+.month-row select{font-size:13px;padding:6px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;}
+.excl-row{padding:4px 0 8px;display:flex;align-items:center;gap:8px;}
+.excl-row input{accent-color:var(--text3);cursor:pointer;}
+.excl-row label{font-size:12px;color:var(--text3);cursor:pointer;}
+.hist-context{background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.12);border-radius:var(--radius-sm);padding:12px 16px;margin-top:1rem;}
+.hist-context p{font-size:12px;color:var(--text3);line-height:1.7;}
+.hist-context strong{color:var(--text2);}
+.zone-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+.zone-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);}
+.zone-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.zone-extra{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
+.zone-extra2{background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);}
+.zone-excl{background:var(--bg4);color:var(--text3);border:1px solid var(--border);}
+
+@media(max-width:640px){
+  .grid-3{grid-template-columns:1fr 1fr;}
+  .tabs{gap:2px;}.tab{padding:8px 6px;font-size:11px;}
+  .fact-name{min-width:120px;font-size:12px;}
 }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <div class="header">
-    <h1>Финансовая мотивация</h1>
-    <div class="sub">Менеджер платформы Etsy — Lolita · 2026</div>
-    <div class="badge-row">
-      <span class="badge badge-blue">Ставка $350</span>
-      <span class="badge badge-blue">Кач. бонус $350</span>
-      <span class="badge badge-green">Кол. бонус $200</span>
-      <span class="badge badge-gold">Экстра +$200</span>
+<!-- HEADER (dynamic) -->
+<div class="header">
+  <div class="header-top">
+    <div class="avatar">L</div>
+    <div><h1>Lolita — Финансовая мотивация</h1></div>
+  </div>
+  <div class="sub">Менеджер платформы Etsy · Sambanis / Portraithy · 2026–2027</div>
+  <div class="badge-row">
+    <span class="badge badge-blue">Ставка <span id="hdr_rate">$350</span></span>
+    <span class="badge badge-green">Кач. блок <span id="hdr_qual_max">$350</span></span>
+    <span class="badge badge-gold">KPI-бонус до <span id="hdr_kpi_max">$200</span> + экстра</span>
+  </div>
+</div>
+
+<!-- MAIN TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('regulation')">📋 Регламент</button>
+  <button class="tab" onclick="switchTab('settings')">⚙ Настройки</button>
+  <button class="tab" onclick="switchTab('simulation')">🔬 Симуляция</button>
+  <button class="tab" onclick="switchTab('month')">📅 План и факт</button>
+  <button class="tab" onclick="switchTab('history')">📊 История</button>
+</div>
+
+<!-- ========== REGULATION ========== -->
+<div id="tab-regulation" class="tab-content active">
+
+  <div class="card">
+    <div class="card-title">ЦКП — Ценный конечный продукт</div>
+    <p style="font-size:14px;color:var(--text);font-weight:500;line-height:1.7;">Магазин Etsy стабильно генерирует необходимый объём <strong style="color:var(--green)">релевантных лидов</strong> в рамках утверждённого бюджета и заданных параметров стоимости.</p>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <span class="badge badge-blue">Лиды, а не продажи</span>
+      <span class="badge badge-green">Релевантные, а не любые</span>
+      <span class="badge badge-gold">В рамках бюджета</span>
     </div>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('settings')">⚙ Настройки</button>
-    <button class="tab" onclick="switchTab('month')">📅 План месяца</button>
-    <button class="tab" onclick="switchTab('simulation')">📊 Симуляция</button>
+  <div class="card">
+    <div class="card-title">Структура выплат <span>(обновляется из настроек)</span></div>
+    <table class="reg-table" id="reg-structure-table">
+      <thead><tr><th>Компонент</th><th>Сумма</th><th>Условие</th></tr></thead>
+      <tbody id="reg-structure-tbody"></tbody>
+    </table>
   </div>
 
-  <!-- =================== TAB 1: SETTINGS =================== -->
-  <div id="tab-settings" class="tab-content active">
+  <div class="card">
+    <div class="card-title">Качественный блок <span>(обновляется из настроек)</span></div>
+    <div class="notice"><p>⭐ Ставка и качественный бонус — базовый стандарт работы менеджера платформы. Ожидается выполнение всегда. Не зависит от рынка — это системность и дисциплина.</p></div>
+    <table class="reg-table">
+      <thead><tr><th>Показатель</th><th>Период</th><th>Бонус</th></tr></thead>
+      <tbody id="reg-qual-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Количественный блок — KPI <span>(актуальные пороги из настроек)</span></div>
+    <div class="notice-info"><p>ℹ️ Таблица отображает текущие пороги и бонусы из настроек. Обновляется автоматически.</p></div>
+    <table class="dyn-kpi-table">
+      <thead><tr><th>KPI</th><th>🔴 Провал</th><th>🟡 Рабочая</th><th>🟢 Норма</th><th>🔵 Экстра</th></tr></thead>
+      <tbody id="reg-kpi-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Принципы системы</div>
+    <ul style="padding-left:18px;">
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Нет «всё или ничего» — жёлтый коридор даёт частичный бонус</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">План по лидам выставляется <strong style="color:var(--accent2)">каждый месяц отдельно</strong> с учётом сезонности</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Норма CAC привязана к рекламному бюджету и сезону — при изменении бюджета норма пересматривается</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Норма доли рынка обновляется при изменении состава конкурентов</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;">Форс-мажорные периоды исключаются из оценки</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Правила пересмотра норм</div>
+    <table class="reg-table">
+      <thead><tr><th>KPI</th><th>Когда</th><th>Основание</th></tr></thead>
+      <tbody>
+        <tr><td>Лиды (план)</td><td>Каждый месяц</td><td>Индивидуально под сезонность</td></tr>
+        <tr><td>SA%</td><td>Раз в квартал</td><td>Q3 2026: если >27.5% стабильно → порог поднимается</td></tr>
+        <tr><td>CAC</td><td>Раз в квартал / при смене бюджета</td><td>Новый бюджет → новая норма</td></tr>
+        <tr><td>Доля рынка</td><td>Раз в квартал</td><td>По итогам периода + изменение конкурентов</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Исторический контекст рынка</div>
+    <div class="hist-context">
+      <p><strong>Апр–Окт 2024:</strong> 19 конкурентов → доля 30–37%.<br>
+      <strong>Янв 2025:</strong> +9 конкурентов → доля упала до 22–25%.<br>
+      <strong>Апр 2025:</strong> Блокировка магазина — исключён из расчётов.<br>
+      <strong>Апр 2026:</strong> +7 сильных конкурентов → структурное падение до ~14–16%. Порог провала пересмотрен: 14%.</p>
+    </div>
+  </div>
+
+</div><!-- /regulation -->
+
+<!-- ========== SETTINGS ========== -->
+<div id="tab-settings" class="tab-content">
+  <div class="notice-info"><p>⚙ Изменения мгновенно применяются ко всем вкладкам. Сохраняются в браузере.</p></div>
+
+  <div class="subtabs">
+    <button class="subtab active" onclick="switchSubtab('sq')">📝 Ставка и качественные</button>
+    <button class="subtab" onclick="switchSubtab('skpi')">📈 Количественные KPI</button>
+  </div>
+
+  <!-- SUBTAB: Qualitative -->
+  <div id="subtab-sq" class="subtab-content active">
 
     <div class="card">
-      <div class="card-title">Структура выплат — <span>фиксированные параметры</span></div>
-      <div class="grid-4">
-        <div class="stat-card">
-          <div class="slabel">Ставка</div>
-          <div class="svalue" style="color:var(--text)">$350</div>
-          <div class="sdesc">фиксированная</div>
-        </div>
-        <div class="stat-card">
-          <div class="slabel">Кач. бонус</div>
-          <div class="svalue" style="color:var(--blue)">$350</div>
-          <div class="sdesc">отчёты + системность</div>
-        </div>
-        <div class="stat-card">
-          <div class="slabel">Кол. бонус</div>
-          <div class="svalue" style="color:var(--green)">$200</div>
-          <div class="sdesc">4 × $50 при выполнении</div>
-        </div>
-        <div class="stat-card">
-          <div class="slabel">Экстра</div>
-          <div class="svalue" style="color:var(--gold)">+$200</div>
-          <div class="sdesc">4 × $50 сверхнорма</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:13px; color:var(--text2)">Максимум без экстра</span>
-        <span style="font-size:18px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--text)">$900</span>
-      </div>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-        <span style="font-size:13px; color:var(--text2)">Максимум с экстра</span>
-        <span style="font-size:18px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--gold)">$1 100</span>
-      </div>
-    </div>
-
-    <div class="section-header" style="margin-top:1.5rem;">
-      <div class="dot"></div>
-      <h2>Настройка коридоров количественных KPI</h2>
-    </div>
-
-    <div class="grid-2">
-
-      <!-- KPI 1: ЛИДЫ -->
+      <div class="card-title">Фиксированная ставка</div>
       <div class="kpi-block">
-        <div class="kpi-name">1. Количество лидов</div>
-        <div class="kpi-desc">План выставляется каждый месяц отдельно с учётом сезонности. Используется процентный коридор от плана.</div>
-        <div class="field"><label>Жёлтый — от (% плана)</label><input type="number" id="s_leads_yellow" value="85" min="1" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Зелёный — от (% плана)</label><input type="number" id="s_leads_green" value="90" min="1" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Экстра — от (% плана)</label><input type="number" id="s_leads_extra" value="105" min="100" max="200" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_leads_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Бонус экстра</label><input type="number" id="s_leads_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Размер ставки</label><input type="number" id="s_rate" value="350" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="logic-box"><p>Ставка выплачивается <strong>всегда</strong>, независимо от результатов по KPI и отчётам.</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Качественный блок — отчёты и задачи</div>
+      <div class="notice"><p>📌 Описание и суммы каждого показателя. Редактируйте название и сумму прямо здесь.</p></div>
+
+      <div class="kpi-block" id="qual-settings-block">
+        <!-- rendered by JS -->
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-ghost" style="font-size:12px;padding:6px 14px" onclick="addQualItem()">+ Добавить показатель</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-top:1rem;padding:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
+      <button class="btn btn-primary save-settings-btn" onclick="applyAndSaveSettings()">💾 Сохранить</button>
+      <span class="settings-dirty-badge" style="display:none;font-size:11px;background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);padding:3px 10px;border-radius:20px;">● Есть несохранённые изменения</span>
+      <span style="font-size:12px;color:var(--text3)">Изменения применятся после нажатия «Сохранить»</span>
+    </div>
+
+  </div><!-- /subtab-sq -->
+
+  <!-- SUBTAB: Quantitative -->
+  <div id="subtab-skpi" class="subtab-content">
+
+    <div class="card">
+      <div class="card-title">KPI 1 — Количество лидов <span>(% от плана месяца)</span></div>
+      <div class="kpi-block">
+        <div class="kpi-name">Количество лидов ПЧ</div>
+        <div class="kpi-desc">План выставляется каждый месяц. Оценка — % выполнения от плана.</div>
+        <div class="field-section">Зоны</div>
+        <div class="field"><label>🔴 Провал — ниже</label><input type="number" id="s_leads_fail" value="85" min="1" max="100" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field"><label>🟡 Жёлтый — от</label><input type="number" id="s_leads_yellow" value="85" min="1" max="100" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field"><label>🟢 Зелёный — от</label><input type="number" id="s_leads_green" value="90" min="1" max="100" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field-section">Экстра-уровни (0 = отключить)</div>
+        <div class="field"><label>🔵 Экстра 1 — от</label><input type="number" id="s_leads_e1_from" value="100" min="100" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field"><label>🔵 Экстра 2 — от</label><input type="number" id="s_leads_e2_from" value="105" min="100" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field-section">Бонусы</div>
+        <div class="field"><label>Бонус жёлтый</label><input type="number" id="s_leads_byellow" value="25" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус зелёный</label><input type="number" id="s_leads_bonus" value="50" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра 1</label><input type="number" id="s_leads_be1" value="75" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра 2</label><input type="number" id="s_leads_be2" value="100" min="0" oninput="markDirty()"><span class="unit">$</span></div>
         <div class="corridor" id="cor_leads"></div>
-        <div class="logic-box">
-          <p><strong>Жёлтый:</strong> частичный бонус — не дотянула до нормы, но не провал. 50% от зелёного бонуса.<br>
-          <strong>Зелёный:</strong> норма выполнена — полный бонус.<br>
-          <strong>Экстра:</strong> план перевыполнен — повышенный бонус.<br>
-          <strong>Провал:</strong> значительное недовыполнение — бонус не начисляется.<br>
-          <em>План по лидам выставляется индивидуально каждый месяц с учётом сезонности.</em></p>
-        </div>
       </div>
+    </div>
 
-      <!-- KPI 2: SA% -->
+    <div class="card">
+      <div class="card-title">KPI 2 — Качество лидов SA%</div>
       <div class="kpi-block">
-        <div class="kpi-name">2. Качество лидов (SA%)</div>
-        <div class="kpi-desc">Доля лидов, купивших самостоятельно (без менеджера). Фиксированный порог — не зависит от плана месяца.</div>
-        <div class="field"><label>Порог провала — ниже</label><input type="number" id="s_sa_red" value="25" min="0" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Экстра — от</label><input type="number" id="s_sa_extra" value="30" min="0" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_sa_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Бонус экстра</label><input type="number" id="s_sa_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="kpi-name">SA% — Self-Acquired</div>
+        <div class="kpi-desc">Доля лидов, купивших самостоятельно. Среднее 2026: 26.8%.</div>
+        <div class="field-section">Зоны</div>
+        <div class="field"><label>🔴 Провал — ниже</label><input type="number" id="s_sa_red" value="25" min="0" max="100" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field-section">Экстра-уровни (0 = отключить)</div>
+        <div class="field"><label>🔵 Экстра 1 — от</label><input type="number" id="s_sa_e1_from" value="30" min="0" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field"><label>🔵 Экстра 2 — от</label><input type="number" id="s_sa_e2_from" value="35" min="0" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field-section">Бонусы</div>
+        <div class="field"><label>Бонус зелёный</label><input type="number" id="s_sa_bonus" value="50" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра 1</label><input type="number" id="s_sa_be1" value="75" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра 2</label><input type="number" id="s_sa_be2" value="100" min="0" oninput="markDirty()"><span class="unit">$</span></div>
         <div class="corridor" id="cor_sa"></div>
-        <div class="logic-box">
-          <p><strong>Зелёный:</strong> показатель в норме — полный бонус.<br>
-          <strong>Экстра:</strong> показатель превысил верхнюю планку — повышенный бонус. Ранее это был стандарт, теперь — сверхнорма.<br>
-          <strong>Провал:</strong> ниже порога — бонус не начисляется.<br>
-          <em>Аномальные периоды (системная просадка, форс-мажор) исключаются из оценки.</em></p>
-        </div>
       </div>
+    </div>
 
-      <!-- KPI 3: CAC -->
+    <div class="card">
+      <div class="card-title">KPI 3 — CAC</div>
       <div class="kpi-block">
-        <div class="kpi-name">3. CAC (стоимость привлечения)</div>
-        <div class="kpi-desc">Меньше — лучше. Норма меняется при изменении рекламного бюджета или сезона. Коридор задаётся в абсолютных значениях $.</div>
-        <div class="field"><label>Зелёный — до</label><input type="number" id="s_cac_green" value="38" min="1" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Жёлтый — до</label><input type="number" id="s_cac_yellow" value="45" min="1" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Экстра — ниже</label><input type="number" id="s_cac_extra" value="30" min="1" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_cac_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Бонус экстра</label><input type="number" id="s_cac_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="kpi-name">Cost per Acquired Customer</div>
+        <div class="kpi-desc">Меньше = лучше. Пересматривается при изменении рекламного бюджета.</div>
+        <div class="field-section">Зоны</div>
+        <div class="field"><label>🔵 Экстра — ниже</label><input type="number" id="s_cac_extra" value="30" min="1" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>🟢 Зелёный — до</label><input type="number" id="s_cac_green" value="38" min="1" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>🟡 Жёлтый — до</label><input type="number" id="s_cac_yellow" value="45" min="1" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field-section">Бонусы</div>
+        <div class="field"><label>Бонус жёлтый</label><input type="number" id="s_cac_byellow" value="25" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус зелёный</label><input type="number" id="s_cac_bonus" value="50" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра</label><input type="number" id="s_cac_bextra" value="100" min="0" oninput="markDirty()"><span class="unit">$</span></div>
         <div class="corridor" id="cor_cac"></div>
-        <div class="logic-box">
-          <p><strong>Экстра:</strong> CAC значительно ниже нормы — отличное управление бюджетом, повышенный бонус.<br>
-          <strong>Зелёный:</strong> CAC в допустимом коридоре — полный бонус.<br>
-          <strong>Жёлтый:</strong> CAC немного выше нормы — частичный бонус, не провал.<br>
-          <strong>Провал:</strong> CAC вышел за верхнюю границу — бонус не начисляется.<br>
-          <em>Норма пересматривается при изменении рекламного бюджета или сезона.</em></p>
-        </div>
       </div>
+    </div>
 
-      <!-- KPI 4: ДОЛЯ РЫНКА -->
+    <div class="card">
+      <div class="card-title">KPI 4 — Доля рынка (ПЧ + ХМ)</div>
       <div class="kpi-block">
-        <div class="kpi-name">4. Доля рынка (ПЧ+ХМ)</div>
-        <div class="kpi-desc">Совокупная доля продаж в нише. Норма пересматривается при изменении состава конкурентов. Текущая база: ~14% (после апреля 2026).</div>
-        <div class="field"><label>Порог провала — ниже</label><input type="number" id="s_mkt_red" value="14" min="0" max="100" step="0.1" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Экстра — от</label><input type="number" id="s_mkt_extra" value="16" min="0" max="100" step="0.1" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
-        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_mkt_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
-        <div class="field"><label>Бонус экстра</label><input type="number" id="s_mkt_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="kpi-name">Market Share — Portraithy + Sambanis</div>
+        <div class="kpi-desc">Совокупная доля двух магазинов. Норма пересматривается при изменении конкурентов.</div>
+        <div class="field-section">Зоны</div>
+        <div class="field"><label>🔴 Провал — ниже</label><input type="number" id="s_mkt_red" value="14" min="0" max="100" step="0.1" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field"><label>🔵 Экстра — от</label><input type="number" id="s_mkt_extra" value="16" min="0" max="100" step="0.1" oninput="markDirty()"><span class="unit">%</span></div>
+        <div class="field-section">Бонусы</div>
+        <div class="field"><label>Бонус зелёный</label><input type="number" id="s_mkt_bonus" value="50" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра</label><input type="number" id="s_mkt_bextra" value="100" min="0" oninput="markDirty()"><span class="unit">$</span></div>
         <div class="corridor" id="cor_mkt"></div>
-        <div class="logic-box">
-          <p><strong>Зелёный:</strong> доля в норме — полный бонус.<br>
-          <strong>Экстра:</strong> доля превысила верхнюю планку — рост в конкурентных условиях, повышенный бонус.<br>
-          <strong>Провал:</strong> доля ниже минимума — бонус не начисляется.<br>
-          <em>Норма пересматривается ежемесячно. При аномальных или отсутствующих данных — месяц исключается из оценки.</em></p>
-        </div>
-      </div>
-
-    </div><!-- /grid-2 -->
-  </div><!-- /tab-settings -->
-
-  <!-- =================== TAB 2: ПЛАН МЕСЯЦА =================== -->
-  <div id="tab-month" class="tab-content">
-
-    <div class="card">
-      <div class="card-title">Параметры месяца</div>
-      <div class="month-input-row">
-        <label>Название месяца</label>
-        <input type="text" id="m_name" value="Май 2026" oninput="calcMonth()">
-        <label style="margin-left:1rem;">Сезон</label>
-        <select id="m_season" onchange="calcMonth()">
-          <option value="normal">Обычный</option>
-          <option value="peak">Сезон (пик)</option>
-          <option value="low">Несезон (тихий)</option>
-        </select>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-title">Плановые показатели — <span>установи план и введи факт</span></div>
-
-      <div class="fact-row">
-        <div class="fact-name">Количество лидов</div>
-        <div class="fact-plan" id="mp_leads_plan_show">план: 230</div>
-        <input class="fact-input" type="number" id="mp_leads_plan" value="230" placeholder="план" oninput="calcMonth()">
-        <input class="fact-input" type="number" id="mf_leads" value="" placeholder="факт" oninput="calcMonth()">
-        <span class="fact-badge" id="mb_leads">—</span>
-        <div class="bar-outer"><div class="bar-inner" id="mbar_leads" style="width:0%"></div></div>
-        <span class="fact-bonus" id="mbonus_leads">—</span>
-      </div>
-
-      <div class="fact-row">
-        <div class="fact-name">Качество лидов SA (%)</div>
-        <div class="fact-plan">план: ≥<span id="mp_sa_show">25</span>%</div>
-        <input class="fact-input" type="number" id="mf_sa" value="" placeholder="факт %" oninput="calcMonth()" step="0.01">
-        <span class="fact-badge" id="mb_sa">—</span>
-        <div class="bar-outer"><div class="bar-inner" id="mbar_sa" style="width:0%"></div></div>
-        <span class="fact-bonus" id="mbonus_sa">—</span>
-      </div>
-
-      <div class="fact-row">
-        <div class="fact-name">CAC ($)</div>
-        <div class="fact-plan">норма: ≤$<span id="mp_cac_show">38</span></div>
-        <input class="fact-input" type="number" id="mf_cac" value="" placeholder="факт $" oninput="calcMonth()" step="0.1">
-        <span class="fact-badge" id="mb_cac">—</span>
-        <div class="bar-outer"><div class="bar-inner" id="mbar_cac" style="width:0%"></div></div>
-        <span class="fact-bonus" id="mbonus_cac">—</span>
-      </div>
-
-      <div class="fact-row">
-        <div class="fact-name">Доля рынка ПЧ+ХМ (%)</div>
-        <div class="fact-plan">норма: ≥<span id="mp_mkt_show">14</span>%</div>
-        <input class="fact-input" type="number" id="mf_mkt" value="" placeholder="факт %" oninput="calcMonth()" step="0.01">
-        <span class="fact-badge" id="mb_mkt">—</span>
-        <div class="bar-outer"><div class="bar-inner" id="mbar_mkt" style="width:0%"></div></div>
-        <span class="fact-bonus" id="mbonus_mkt">—</span>
-      </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:1rem;padding:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
+      <button class="btn btn-primary save-settings-btn" onclick="applyAndSaveSettings()">💾 Сохранить</button>
+      <span class="settings-dirty-badge" style="display:none;font-size:11px;background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);padding:3px 10px;border-radius:20px;">● Есть несохранённые изменения</span>
+      <span style="font-size:12px;color:var(--text3)">Изменения применятся после нажатия «Сохранить»</span>
     </div>
 
-    <div class="result-panel">
-      <h3>Итог месяца: <span id="m_name_result">—</span></h3>
-      <div class="result-line">
-        <span class="rname">Ставка фиксированная</span>
-        <span class="rval" style="color:var(--text)">$350</span>
-      </div>
-      <div class="result-line">
-        <span class="rname">Качественный бонус (отчёты)</span>
-        <span class="rval" style="color:var(--blue)">$350</span>
-      </div>
-      <div class="result-line">
-        <span class="rname">Бонус: Лиды</span>
-        <span class="rval" id="mr_leads" style="color:var(--text2)">—</span>
-      </div>
-      <div class="result-line">
-        <span class="rname">Бонус: SA%</span>
-        <span class="rval" id="mr_sa" style="color:var(--text2)">—</span>
-      </div>
-      <div class="result-line">
-        <span class="rname">Бонус: CAC</span>
-        <span class="rval" id="mr_cac" style="color:var(--text2)">—</span>
-      </div>
-      <div class="result-line">
-        <span class="rname">Бонус: Доля рынка</span>
-        <span class="rval" id="mr_mkt" style="color:var(--text2)">—</span>
-      </div>
-      <div class="result-line total">
-        <span class="rname" style="color:var(--text)">Итого к выплате</span>
-        <span class="rval" id="mr_total" style="color:var(--gold); font-size:24px">—</span>
-      </div>
+  </div><!-- /subtab-skpi -->
+</div><!-- /settings -->
+
+<!-- ========== SIMULATION ========== -->
+<div id="tab-simulation" class="tab-content">
+  <div class="card">
+    <div class="card-title">Симуляция кастомного месяца</div>
+    <div class="notice-info"><p>🔬 Введите любые значения — результат по текущим настройкам. Данные не сохраняются.</p></div>
+
+    <div class="fact-row">
+      <div class="fact-name">Кол-во лидов ПЧ</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">план:</span><input class="fact-input" type="number" id="cs_leads_plan" value="230" oninput="calcCustom()"></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">факт:</span><input class="fact-input" type="number" id="cs_leads_fact" value="215" oninput="calcCustom()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="cbar_leads"></div></div>
+      <span class="fact-badge" id="cbadge_leads">—</span>
+      <span class="fact-bonus" id="cbonus_leads">—</span>
     </div>
-  </div><!-- /tab-month -->
+    <div class="fact-row">
+      <div class="fact-name">SA%</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≥<span id="cs_sa_show">25</span>%</span></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">факт:</span><input class="fact-input" type="number" id="cs_sa_fact" value="27" oninput="calcCustom()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="cbar_sa"></div></div>
+      <span class="fact-badge" id="cbadge_sa">—</span>
+      <span class="fact-bonus" id="cbonus_sa">—</span>
+    </div>
+    <div class="fact-row">
+      <div class="fact-name">CAC $</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≤$<span id="cs_cac_show">38</span></span></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">$</span><input class="fact-input" type="number" id="cs_cac_fact" value="36" oninput="calcCustom()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="cbar_cac"></div></div>
+      <span class="fact-badge" id="cbadge_cac">—</span>
+      <span class="fact-bonus" id="cbonus_cac">—</span>
+    </div>
+    <div class="fact-row">
+      <div class="fact-name">Доля рынка %</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≥<span id="cs_mkt_show">14</span>%</span></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">факт:</span><input class="fact-input" type="number" id="cs_mkt_fact" value="15" oninput="calcCustom()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="cbar_mkt"></div></div>
+      <span class="fact-badge" id="cbadge_mkt">—</span>
+      <span class="fact-bonus" id="cbonus_mkt">—</span>
+    </div>
+  </div>
 
-  <!-- =================== TAB 3: СИМУЛЯЦИЯ =================== -->
-  <div id="tab-simulation" class="tab-content">
+  <div class="result-panel">
+    <h3>Результат симуляции</h3>
+    <div class="result-line"><span class="rname">Фиксированная ставка</span><span class="rval" id="cr_rate">—</span></div>
+    <div class="result-line"><span class="rname">Качественный бонус (100%)</span><span class="rval" id="cr_qual_max">—</span></div>
+    <div class="result-line"><span class="rname">KPI — лиды</span><span class="rval" id="cr_leads">—</span></div>
+    <div class="result-line"><span class="rname">KPI — SA%</span><span class="rval" id="cr_sa">—</span></div>
+    <div class="result-line"><span class="rname">KPI — CAC</span><span class="rval" id="cr_cac">—</span></div>
+    <div class="result-line"><span class="rname">KPI — доля рынка</span><span class="rval" id="cr_mkt">—</span></div>
+    <div class="result-line total"><span class="rname">Итого</span><span class="rval" id="cr_total" style="color:var(--green)">—</span></div>
+  </div>
+</div><!-- /simulation -->
 
-    <div class="card">
-      <div class="card-title">Симуляция по реальным данным — <span>март и апрель 2026</span></div>
-      <p style="font-size:12px; color:var(--text3); line-height:1.6;">Применяем текущие настройки коридоров к реальным показателям за март и апрель 2026. Ниже показано, сколько получила бы Lolita по новой системе.</p>
+<!-- ========== MONTH ========== -->
+<div id="tab-month" class="tab-content">
+  <div class="card">
+    <div class="card-title">Выберите месяц</div>
+    <div class="month-row">
+      <label>Месяц:</label>
+      <select id="mp_month_select" onchange="calcMonth()"><option value="">— выберите —</option></select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Качественный блок <span>(галочки влияют на итог)</span></div>
+    <div class="notice"><p>📌 Отметьте выполненные отчёты. Снятая галочка = бонус не начислен за этот пункт.</p></div>
+    <div id="month-qual-rows"><!-- rendered by JS --></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Количественный блок — KPI</div>
+
+    <div class="fact-row">
+      <div class="fact-name">Кол-во лидов ПЧ</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">план:</span><input class="fact-input" type="number" id="mp_leads_plan" value="230" oninput="calcMonth()" placeholder="план"></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">факт:</span><input class="fact-input" type="number" id="mp_leads_fact" placeholder="факт" oninput="calcMonth()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="bar_leads"></div></div>
+      <span class="fact-badge" id="badge_leads">—</span>
+      <span class="fact-bonus" id="bonus_leads">—</span>
     </div>
 
-    <div id="sim_march" class="sim-month"></div>
-    <div id="sim_april" class="sim-month"></div>
+    <div class="fact-row">
+      <div class="fact-name">Качество лидов SA%</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≥<span id="mp_sa_show">25</span>%</span></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">факт:</span><input class="fact-input" type="number" id="mp_sa_fact" placeholder="%" oninput="calcMonth()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="bar_sa"></div></div>
+      <span class="fact-badge" id="badge_sa">—</span>
+      <span class="fact-bonus" id="bonus_sa">—</span>
+    </div>
+    <div class="excl-row"><input type="checkbox" id="mp_sa_excl" onchange="calcMonth()"><label for="mp_sa_excl">Исключить из оценки (форс-мажор / аномалия)</label></div>
 
-    <div class="card" style="margin-top:1rem;">
-      <div class="card-title">Сравнение: старая vs новая система</div>
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Месяц</th>
-            <th>Старая система ($)</th>
-            <th>Новая система ($)</th>
-            <th>Разница</th>
-            <th>Потерянный заработок</th>
-          </tr>
-        </thead>
-        <tbody id="compare_body"></tbody>
+    <div class="fact-row">
+      <div class="fact-name">CAC</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≤$<span id="mp_cac_show">38</span></span></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">$</span><input class="fact-input" type="number" id="mp_cac_fact" placeholder="CAC" oninput="calcMonth()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="bar_cac"></div></div>
+      <span class="fact-badge" id="badge_cac">—</span>
+      <span class="fact-bonus" id="bonus_cac">—</span>
+    </div>
+    <div class="excl-row"><input type="checkbox" id="mp_cac_excl" onchange="calcMonth()"><label for="mp_cac_excl">Исключить из оценки</label></div>
+
+    <div class="fact-row">
+      <div class="fact-name">Доля рынка ПЧ+ХМ</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≥<span id="mp_mkt_show">14</span>%</span></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">факт:</span><input class="fact-input" type="number" id="mp_mkt_fact" placeholder="%" oninput="calcMonth()"></div>
+      <div class="bar-outer"><div class="bar-inner" id="bar_mkt"></div></div>
+      <span class="fact-badge" id="badge_mkt">—</span>
+      <span class="fact-bonus" id="bonus_mkt">—</span>
+    </div>
+    <div class="excl-row"><input type="checkbox" id="mp_mkt_excl" onchange="calcMonth()"><label for="mp_mkt_excl">Исключить из оценки</label></div>
+  </div>
+
+  <div class="result-panel">
+    <h3>Итоговый расчёт</h3>
+    <div class="result-line"><span class="rname">Фиксированная ставка</span><span class="rval" id="r_rate">$350</span></div>
+    <div class="result-line"><span class="rname">Качественный бонус</span><span class="rval" id="r_qual">—</span></div>
+    <div class="result-line"><span class="rname">KPI — лиды</span><span class="rval" id="r_leads">—</span></div>
+    <div class="result-line"><span class="rname">KPI — SA%</span><span class="rval" id="r_sa">—</span></div>
+    <div class="result-line"><span class="rname">KPI — CAC</span><span class="rval" id="r_cac">—</span></div>
+    <div class="result-line"><span class="rname">KPI — доля рынка</span><span class="rval" id="r_mkt">—</span></div>
+    <div class="result-line total"><span class="rname">Итого</span><span class="rval" id="r_total" style="color:var(--green)">—</span></div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-top:1rem;flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="saveMonth()">💾 Сохранить в историю</button>
+    <button class="btn btn-ghost" onclick="clearMonth()">✕ Очистить форму</button>
+  </div>
+  <div id="save-msg" style="font-size:12px;color:var(--green);margin-top:8px;display:none">✓ Месяц сохранён</div>
+</div><!-- /month -->
+
+<!-- ========== HISTORY ========== -->
+<div id="tab-history" class="tab-content">
+  <div class="card">
+    <div class="card-title">История по месяцам</div>
+    <div class="history-controls">
+      <select class="history-filter" id="hist_filter" onchange="renderHistory()">
+        <option value="all">Все месяцы</option>
+        <option value="2026">2026 год</option>
+        <option value="2027">2027 год</option>
+      </select>
+      <button class="btn btn-ghost" onclick="exportHistory()">📥 Экспорт CSV</button>
+      <button class="btn btn-danger" onclick="showClearConfirm()" style="margin-left:auto">🗑 Очистить всё</button>
+    </div>
+    <!-- inline confirm -->
+    <div id="clear-confirm" style="display:none;background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:1rem;display:none;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="font-size:13px;color:var(--red);flex:1">Удалить всю историю? Это нельзя отменить.</span>
+      <button class="btn btn-danger" onclick="confirmClearHistory()" style="padding:6px 16px">Да, удалить</button>
+      <button class="btn btn-ghost" onclick="hideClearConfirm()" style="padding:6px 16px">Отмена</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="history-table">
+        <thead><tr><th>Месяц</th><th>Лиды</th><th>SA%</th><th>CAC</th><th>Рынок</th><th>Кач.</th><th>KPI</th><th>Итого</th><th></th></tr></thead>
+        <tbody id="history-tbody"></tbody>
       </table>
     </div>
-
-    <div class="card" style="margin-top:1rem;">
-      <div class="card-title">Кастомная симуляция — <span>введи любые значения</span></div>
-      <div class="month-input-row">
-        <label>Название</label>
-        <input type="text" id="cs_name" value="Кастомный месяц" oninput="calcCustom()">
-      </div>
-      <div class="fact-row">
-        <div class="fact-name">Лиды: план</div>
-        <input class="fact-input" type="number" id="cs_leads_plan" value="230" oninput="calcCustom()">
-        <div class="fact-name" style="margin-left:8px;">факт</div>
-        <input class="fact-input" type="number" id="cs_leads_fact" value="200" oninput="calcCustom()">
-        <span class="fact-badge" id="csb_leads">—</span>
-        <span class="fact-bonus" id="csbonus_leads">—</span>
-      </div>
-      <div class="fact-row">
-        <div class="fact-name">SA% факт</div>
-        <input class="fact-input" type="number" id="cs_sa" value="27" step="0.1" oninput="calcCustom()">
-        <span class="fact-badge" id="csb_sa">—</span>
-        <span class="fact-bonus" id="csbonus_sa">—</span>
-      </div>
-      <div class="fact-row">
-        <div class="fact-name">CAC факт ($)</div>
-        <input class="fact-input" type="number" id="cs_cac" value="36" step="0.1" oninput="calcCustom()">
-        <span class="fact-badge" id="csb_cac">—</span>
-        <span class="fact-bonus" id="csbonus_cac">—</span>
-      </div>
-      <div class="fact-row">
-        <div class="fact-name">Доля рынка факт (%)</div>
-        <input class="fact-input" type="number" id="cs_mkt" value="15" step="0.1" oninput="calcCustom()">
-        <span class="fact-badge" id="csb_mkt">—</span>
-        <span class="fact-bonus" id="csbonus_mkt">—</span>
-      </div>
-      <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:14px; color:var(--text2)">Итого к выплате</span>
-        <span style="font-size:24px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--gold);" id="cs_total">—</span>
-      </div>
-    </div>
-
-  </div><!-- /tab-simulation -->
+  </div>
+  <div id="history-summary" class="grid-3" style="margin-top:1rem;display:none"></div>
+</div><!-- /history -->
 
 </div><!-- /page -->
-
 <script>
-// ===== STATE =====
-const REAL_DATA = {
-  march: { name: 'Март 2026', leads_plan: 183, leads_fact: 205, sa: 20.49, cac: 37.84, mkt: 0, mkt_excl: true },
-  april: { name: 'Апрель 2026', leads_plan: 232, leads_fact: 216, sa: 28.24, cac: 39.3, mkt: 15.98 }
-};
+// ==============================
+// DATA STRUCTURES
+// ==============================
+const MONTHS_ALL=['Январь 2026','Февраль 2026','Март 2026','Апрель 2026','Май 2026','Июнь 2026','Июль 2026','Август 2026','Сентябрь 2026','Октябрь 2026','Ноябрь 2026','Декабрь 2026','Январь 2027','Февраль 2027','Март 2027','Апрель 2027','Май 2027','Июнь 2027','Июль 2027','Август 2027','Сентябрь 2027','Октябрь 2027','Ноябрь 2027','Декабрь 2027'];
 
-function getS(id) { return parseFloat(document.getElementById(id).value) || 0; }
-function getSettings() {
+// Default qualitative items
+let qualItems=[
+  {name:'Системность фиксации изменений (100%)',desc:'Все изменения своевременно зафиксированы · Еженедельно',bonus:80},
+  {name:'Weekly Etsy Performance',desc:'Еженедельный отчёт с выводами и рекомендациями · Еженедельно',bonus:90},
+  {name:'Etsy Updates',desc:'Листинги, SEO, баннеры, акции, новые товары · Еженедельно',bonus:90},
+  {name:'Monthly Deep-Dive',desc:'Ежемесячный отчёт по шаблону с планом корректировок · Раз в месяц',bonus:90},
+];
+
+// ==============================
+// HELPERS
+// ==============================
+function v(id){const el=document.getElementById(id);return el?el.value:0;}
+function n(id){return +v(id)||0;}
+function si(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
+function st(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+
+// ==============================
+// SETTINGS
+// ==============================
+function getSettings(){
   return {
-    leads: { yellow: getS('s_leads_yellow'), green: getS('s_leads_green'), extra: getS('s_leads_extra'), bonus: getS('s_leads_bonus'), bextra: getS('s_leads_bextra') },
-    sa: { red: getS('s_sa_red'), extra: getS('s_sa_extra'), bonus: getS('s_sa_bonus'), bextra: getS('s_sa_bextra') },
-    cac: { green: getS('s_cac_green'), yellow: getS('s_cac_yellow'), extra: getS('s_cac_extra'), bonus: getS('s_cac_bonus'), bextra: getS('s_cac_bextra') },
-    mkt: { red: getS('s_mkt_red'), extra: getS('s_mkt_extra'), bonus: getS('s_mkt_bonus'), bextra: getS('s_mkt_bextra') }
+    rate:n('s_rate'),
+    leads_fail:n('s_leads_fail'),leads_yellow:n('s_leads_yellow'),leads_green:n('s_leads_green'),
+    leads_e1_from:n('s_leads_e1_from'),leads_e2_from:n('s_leads_e2_from'),
+    leads_byellow:n('s_leads_byellow'),leads_bonus:n('s_leads_bonus'),leads_be1:n('s_leads_be1'),leads_be2:n('s_leads_be2'),
+    sa_red:n('s_sa_red'),sa_e1_from:n('s_sa_e1_from'),sa_e2_from:n('s_sa_e2_from'),
+    sa_bonus:n('s_sa_bonus'),sa_be1:n('s_sa_be1'),sa_be2:n('s_sa_be2'),
+    cac_extra:n('s_cac_extra'),cac_green:n('s_cac_green'),cac_yellow:n('s_cac_yellow'),
+    cac_byellow:n('s_cac_byellow'),cac_bonus:n('s_cac_bonus'),cac_bextra:n('s_cac_bextra'),
+    mkt_red:n('s_mkt_red'),mkt_extra:n('s_mkt_extra'),mkt_bonus:n('s_mkt_bonus'),mkt_bextra:n('s_mkt_bextra'),
   };
 }
 
-// ===== KPI CALCULATORS =====
-function calcLeads(fact, plan, s) {
-  if (!fact || !plan) return { zone:'none', bonus:0, label:'—', pct:0 };
-  const pct = (fact / plan * 100);
-  if (pct >= s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра '+pct.toFixed(1)+'%', pct };
-  if (pct >= s.green) return { zone:'green', bonus:s.bonus, label:'✓ '+pct.toFixed(1)+'%', pct };
-  if (pct >= s.yellow) return { zone:'yellow', bonus:Math.round(s.bonus*0.5), label:'~ '+pct.toFixed(1)+'%', pct };
-  return { zone:'red', bonus:0, label:'✗ '+pct.toFixed(1)+'%', pct };
-}
-function calcSA(fact, s) {
-  if (!fact) return { zone:'none', bonus:0, label:'—', pct:0 };
-  if (fact >= s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра '+fact.toFixed(1)+'%', pct: Math.min(fact/s.extra*100,120) };
-  if (fact >= s.red) return { zone:'green', bonus:s.bonus, label:'✓ '+fact.toFixed(1)+'%', pct: fact/s.extra*100 };
-  return { zone:'red', bonus:0, label:'✗ '+fact.toFixed(1)+'%', pct: fact/s.red*80 };
-}
-function calcCAC(fact, s) {
-  if (!fact) return { zone:'none', bonus:0, label:'—', pct:0 };
-  if (fact < s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра $'+fact.toFixed(1), pct:95 };
-  if (fact <= s.green) return { zone:'green', bonus:s.bonus, label:'✓ $'+fact.toFixed(1), pct:70 };
-  if (fact <= s.yellow) return { zone:'yellow', bonus:Math.round(s.bonus*0.5), label:'~ $'+fact.toFixed(1), pct:40 };
-  return { zone:'red', bonus:0, label:'✗ $'+fact.toFixed(1), pct:15 };
-}
-function calcMkt(fact, s, excluded) {
-  if (excluded) return { zone:'excl', bonus:0, label:'Исключён', pct:0 };
-  if (!fact) return { zone:'none', bonus:0, label:'—', pct:0 };
-  if (fact >= s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра '+fact.toFixed(1)+'%', pct: Math.min(fact/s.extra*100,120) };
-  if (fact >= s.red) return { zone:'green', bonus:s.bonus, label:'✓ '+fact.toFixed(1)+'%', pct: fact/s.extra*100 };
-  return { zone:'red', bonus:0, label:'✗ '+fact.toFixed(1)+'%', pct: fact/s.red*80 };
+function saveSettings(){
+  localStorage.setItem('lolita_s3',JSON.stringify({s:getSettings(),q:qualItems}));
 }
 
-// ===== BADGE HELPER =====
-const ZONE_STYLES = {
-  red:    { bg:'var(--red-bg)',    color:'var(--red)',    border:'var(--red-border)',    barColor:'var(--red)' },
-  yellow: { bg:'var(--yellow-bg)', color:'var(--yellow)', border:'var(--yellow-border)', barColor:'var(--yellow)' },
-  green:  { bg:'var(--green-bg)',  color:'var(--green)',  border:'var(--green-border)',  barColor:'var(--green)' },
-  extra:  { bg:'var(--gold-bg)',   color:'var(--gold)',   border:'var(--gold-border)',   barColor:'var(--gold)' },
-  excl:   { bg:'rgba(139,147,168,0.1)', color:'var(--text3)', border:'var(--border)', barColor:'var(--text3)' },
-  none:   { bg:'transparent', color:'var(--text3)', border:'transparent', barColor:'transparent' }
-};
-function applyBadge(badgeId, res) {
-  const el = document.getElementById(badgeId);
-  if (!el) return;
-  const st = ZONE_STYLES[res.zone] || ZONE_STYLES.none;
-  el.style.background = st.bg; el.style.color = st.color;
-  el.style.border = '1px solid '+st.border;
-  el.textContent = res.label;
-}
-function applyBar(barId, res) {
-  const el = document.getElementById(barId);
-  if (!el) return;
-  const st = ZONE_STYLES[res.zone] || ZONE_STYLES.none;
-  el.style.width = Math.min(Math.max(res.pct,0),100).toFixed(1)+'%';
-  el.style.background = st.barColor;
-}
-function applyBonus(bonusId, res) {
-  const el = document.getElementById(bonusId);
-  if (!el) return;
-  const st = ZONE_STYLES[res.zone] || ZONE_STYLES.none;
-  el.style.color = res.zone==='none' ? 'var(--text3)' : st.color;
-  el.textContent = res.zone==='none' ? '—' : '$'+res.bonus;
-}
+// Applied settings — what actually drives all calculations
+let appliedSettings=null;
+let appliedQualItems=null;
+let settingsDirty=false;
 
-// ===== CORRIDOR RENDERER =====
-function renderCorridor(containerId, zones) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.innerHTML = zones.map(z => `<div class="cor-zone cz-${z.cls}"><span class="czlabel">${z.label}</span><span class="czval">${z.val}</span></div>`).join('');
-}
+function getAppliedSettings(){return appliedSettings||getSettings();}
+function getAppliedQual(){return appliedQualItems||qualItems;}
 
-function updateCorridors() {
-  const st = getSettings();
-  renderCorridor('cor_leads', [
-    { cls:'red', label:'Провал', val: '<'+st.leads.yellow+'%' },
-    { cls:'yellow', label:'Жёлтый', val: st.leads.yellow+'–'+(st.leads.green-1)+'%' },
-    { cls:'green', label:'Зелёный', val: st.leads.green+'–'+(st.leads.extra-1)+'%' },
-    { cls:'extra', label:'Экстра', val: '≥'+st.leads.extra+'%' }
-  ]);
-  renderCorridor('cor_sa', [
-    { cls:'red', label:'Провал', val: '<'+st.sa.red+'%' },
-    { cls:'green', label:'Зелёный', val: st.sa.red+'–'+(st.sa.extra-0.01).toFixed(0)+'%' },
-    { cls:'extra', label:'Экстра', val: '≥'+st.sa.extra+'%' }
-  ]);
-  renderCorridor('cor_cac', [
-    { cls:'extra', label:'Экстра', val: '<$'+st.cac.extra },
-    { cls:'green', label:'Зелёный', val: '$'+st.cac.extra+'–$'+st.cac.green },
-    { cls:'yellow', label:'Жёлтый', val: '$'+st.cac.green+'–$'+st.cac.yellow },
-    { cls:'red', label:'Провал', val: '>$'+st.cac.yellow }
-  ]);
-  renderCorridor('cor_mkt', [
-    { cls:'red', label:'Провал', val: '<'+st.mkt.red+'%' },
-    { cls:'green', label:'Зелёный', val: st.mkt.red+'–'+(st.mkt.extra-0.1).toFixed(1)+'%' },
-    { cls:'extra', label:'Экстра', val: '≥'+st.mkt.extra+'%' }
-  ]);
-}
-
-// ===== MONTH TAB =====
-function calcMonth() {
-  const st = getSettings();
-  const name = document.getElementById('m_name').value || '—';
-  document.getElementById('m_name_result').textContent = name;
-  const plan = parseFloat(document.getElementById('mp_leads_plan').value) || 0;
-  document.getElementById('mp_leads_plan_show').textContent = 'план: '+plan;
-  document.getElementById('mp_sa_show').textContent = st.sa.red;
-  document.getElementById('mp_cac_show').textContent = st.cac.green;
-  document.getElementById('mp_mkt_show').textContent = st.mkt.red;
-
-  const fLeads = parseFloat(document.getElementById('mf_leads').value);
-  const fSA = parseFloat(document.getElementById('mf_sa').value);
-  const fCAC = parseFloat(document.getElementById('mf_cac').value);
-  const fMkt = parseFloat(document.getElementById('mf_mkt').value);
-
-  const rL = calcLeads(fLeads, plan, st.leads);
-  const rS = calcSA(fSA, st.sa);
-  const rC = calcCAC(fCAC, st.cac);
-  const rM = calcMkt(fMkt, st.mkt, false);
-
-  [['mb_leads','mbar_leads','mbonus_leads',rL],['mb_sa','mbar_sa','mbonus_sa',rS],
-   ['mb_cac','mbar_cac','mbonus_cac',rC],['mb_mkt','mbar_mkt','mbonus_mkt',rM]].forEach(([b,bar,bon,r])=>{
-    applyBadge(b,r); applyBar(bar,r); applyBonus(bon,r);
+function markDirty(){
+  settingsDirty=true;
+  document.querySelectorAll('.save-settings-btn').forEach(btn=>{
+    btn.style.background='var(--yellow)';btn.style.color='#000';btn.textContent='💾 Сохранить изменения';
   });
-
-  const setRval = (id, r) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const st2 = ZONE_STYLES[r.zone] || ZONE_STYLES.none;
-    el.style.color = r.zone==='none' ? 'var(--text3)' : st2.color;
-    el.textContent = r.zone==='none' ? '—' : '$'+r.bonus;
-  };
-  setRval('mr_leads',rL); setRval('mr_sa',rS); setRval('mr_cac',rC); setRval('mr_mkt',rM);
-
-  const quant = rL.bonus + rS.bonus + rC.bonus + rM.bonus;
-  const total = 350 + 350 + quant;
-  const tEl = document.getElementById('mr_total');
-  tEl.textContent = '$'+total;
-  tEl.style.color = total >= 900 ? 'var(--gold)' : total >= 800 ? 'var(--green)' : total >= 700 ? 'var(--yellow)' : 'var(--red)';
+  document.querySelectorAll('.settings-dirty-badge').forEach(el=>el.style.display='inline-block');
 }
 
-// ===== SIMULATION RENDERER =====
-function renderSimMonth(containerId, data, st) {
-  const rL = calcLeads(data.leads_fact, data.leads_plan, st.leads);
-  const rS = calcSA(data.sa, st.sa);
-  const rC = calcCAC(data.cac, st.cac);
-  const rM = calcMkt(data.mkt, st.mkt, data.mkt_excl);
-  const quant = rL.bonus + rS.bonus + rC.bonus + rM.bonus;
-  const total = 350 + 350 + quant;
+function applyAndSaveSettings(){
+  appliedSettings=getSettings();
+  appliedQualItems=JSON.parse(JSON.stringify(qualItems));
+  saveSettings();
+  settingsDirty=false;
+  document.querySelectorAll('.save-settings-btn').forEach(btn=>{
+    btn.style.background='var(--green)';btn.style.color='#fff';btn.textContent='✓ Сохранено';
+    setTimeout(()=>{btn.style.background='var(--accent)';btn.style.color='#fff';btn.textContent='💾 Сохранить';},2000);
+  });
+  document.querySelectorAll('.settings-dirty-badge').forEach(el=>el.style.display='none');
+  updateAll();
+}
 
-  const zoneHtml = (r, name, factStr, planStr) => {
-    const s = ZONE_STYLES[r.zone] || ZONE_STYLES.none;
-    return `<div class="sim-kpi" style="border-color:${s.border}">
-      <div class="sk-name">${name}</div>
-      <div class="sk-fact" style="color:${s.color}">${factStr}</div>
-      <div class="sk-plan">${planStr}</div>
-      <span class="sk-badge" style="background:${s.bg};color:${s.color};border:1px solid ${s.border}">${r.label}</span>
-      <div class="sk-bonus" style="color:${s.color}">$${r.bonus}</div>
-    </div>`;
-  };
+function loadSettings(){
+  try{
+    const raw=localStorage.getItem('lolita_s3');
+    if(!raw) return;
+    const d=JSON.parse(raw);
+    if(d.s){
+      const m=d.s;
+      const map={'s_rate':m.rate,'s_leads_fail':m.leads_fail,'s_leads_yellow':m.leads_yellow,'s_leads_green':m.leads_green,
+        's_leads_e1_from':m.leads_e1_from,'s_leads_e2_from':m.leads_e2_from,
+        's_leads_byellow':m.leads_byellow,'s_leads_bonus':m.leads_bonus,'s_leads_be1':m.leads_be1,'s_leads_be2':m.leads_be2,
+        's_sa_red':m.sa_red,'s_sa_e1_from':m.sa_e1_from,'s_sa_e2_from':m.sa_e2_from,
+        's_sa_bonus':m.sa_bonus,'s_sa_be1':m.sa_be1,'s_sa_be2':m.sa_be2,
+        's_cac_extra':m.cac_extra,'s_cac_green':m.cac_green,'s_cac_yellow':m.cac_yellow,
+        's_cac_byellow':m.cac_byellow,'s_cac_bonus':m.cac_bonus,'s_cac_bextra':m.cac_bextra,
+        's_mkt_red':m.mkt_red,'s_mkt_extra':m.mkt_extra,'s_mkt_bonus':m.mkt_bonus,'s_mkt_bextra':m.mkt_bextra};
+      Object.entries(map).forEach(([id,val])=>{if(val!==undefined&&val!==null){const el=document.getElementById(id);if(el)el.value=val;}});
+    }
+    if(d.q&&Array.isArray(d.q)) qualItems=d.q;
+  }catch(e){}
+}
 
-  const totalColor = total >= 900 ? 'var(--gold)' : total >= 800 ? 'var(--green)' : total >= 700 ? 'var(--yellow)' : 'var(--red)';
-  const pctLeads = data.leads_plan ? (data.leads_fact/data.leads_plan*100).toFixed(1)+'%' : '—';
-
-  document.getElementById(containerId).innerHTML = `
-    <div class="sim-month-header">
-      <div class="sim-month-name">${data.name}</div>
-      <div class="sim-month-total" style="color:${totalColor}">$${total} <span style="font-size:13px;color:var(--text3)">из $900</span></div>
+// ==============================
+// QUALITATIVE ITEMS MANAGEMENT
+// ==============================
+function renderQualSettings(){
+  const block=document.getElementById('qual-settings-block');
+  if(!block) return;
+  block.innerHTML=qualItems.map((item,i)=>`
+    <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:10px;margin-bottom:8px;">
+      <div class="field"><label style="font-size:11px;color:var(--text3)">Название</label><input type="text" value="${escHtml(item.name)}" oninput="updateQualItem(${i},'name',this.value)"></div>
+      <div class="field"><label style="font-size:11px;color:var(--text3)">Описание</label><input type="text" value="${escHtml(item.desc)}" oninput="updateQualItem(${i},'desc',this.value)"></div>
+      <div class="field"><label style="font-size:11px;color:var(--text3)">Бонус</label><input type="number" value="${item.bonus}" min="0" style="width:80px;font-size:12px;font-family:'JetBrains Mono',monospace;padding:5px 8px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;" oninput="updateQualItem(${i},'bonus',+this.value)"><span class="unit">$</span>
+      ${qualItems.length>1?`<button onclick="removeQualItem(${i})" style="margin-left:auto;background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;">✕</button>`:''}
+      </div>
     </div>
-    <div class="sim-grid">
-      ${zoneHtml(rL,'Лиды',data.leads_fact+' шт','план '+data.leads_plan+' / '+pctLeads)}
-      ${zoneHtml(rS,'SA%',data.sa.toFixed(1)+'%','норма ≥'+st.sa.red+'%')}
-      ${zoneHtml(rC,'CAC','$'+data.cac,'норма ≤$'+st.cac.green)}
-      ${zoneHtml(rM,'Доля рынка',data.mkt_excl ? 'исключён' : data.mkt.toFixed(1)+'%','норма ≥'+st.mkt.red+'%')}
+  `).join('');
+}
+
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function updateQualItem(i,field,val){
+  qualItems[i][field]=val;
+  markDirty();
+  renderQualSettings();
+}
+function addQualItem(){
+  qualItems.push({name:'Новый показатель',desc:'Описание · Период',bonus:50});
+  markDirty();
+  renderQualSettings();
+}
+function removeQualItem(i){
+  qualItems.splice(i,1);
+  markDirty();
+  renderQualSettings();
+}
+
+function renderMonthQualRows(){
+  const el=document.getElementById('month-qual-rows');
+  if(!el) return;
+  const qi=getAppliedQual();
+  el.innerHTML=qi.map((item,i)=>`
+    <div class="qual-row">
+      <input type="checkbox" class="qual-check" id="mq${i}" checked onchange="calcMonth()">
+      <div class="qual-info"><div class="qual-name">${escHtml(item.name)}</div><div class="qual-desc">${escHtml(item.desc)}</div></div>
+      <div class="qual-bonus" id="mqval${i}">$${item.bonus}</div>
     </div>
-    <div style="display:flex;gap:1.5rem;font-size:12px;color:var(--text3);flex-wrap:wrap;">
-      <span>Ставка: <strong style="color:var(--text)">$350</strong></span>
-      <span>Кач. бонус: <strong style="color:var(--blue)">$350</strong></span>
-      <span>Кол. бонус: <strong style="color:${quant>0?'var(--green)':'var(--red)'}">$${quant}</strong></span>
-    </div>
-  `;
-  return { total, quant };
+  `).join('');
 }
 
-function calcCustom() {
-  const st = getSettings();
-  const plan = parseFloat(document.getElementById('cs_leads_plan').value)||0;
-  const fact = parseFloat(document.getElementById('cs_leads_fact').value);
-  const sa = parseFloat(document.getElementById('cs_sa').value);
-  const cac = parseFloat(document.getElementById('cs_cac').value);
-  const mkt = parseFloat(document.getElementById('cs_mkt').value);
-  const rL = calcLeads(fact, plan, st.leads);
-  const rS = calcSA(sa, st.sa);
-  const rC = calcCAC(cac, st.cac);
-  const rM = calcMkt(mkt, st.mkt, false);
-  applyBadge('csb_leads',rL); applyBonus('csbonus_leads',rL);
-  applyBadge('csb_sa',rS); applyBonus('csbonus_sa',rS);
-  applyBadge('csb_cac',rC); applyBonus('csbonus_cac',rC);
-  applyBadge('csb_mkt',rM); applyBonus('csbonus_mkt',rM);
-  const total = 350+350+rL.bonus+rS.bonus+rC.bonus+rM.bonus;
-  const el = document.getElementById('cs_total');
-  el.textContent = '$'+total;
-  el.style.color = total>=900?'var(--gold)':total>=800?'var(--green)':total>=700?'var(--yellow)':'var(--red)';
+function getQualBonus(){
+  return qualItems.reduce((sum,item,i)=>{
+    const cb=document.getElementById('mq'+i);
+    return sum+(cb&&cb.checked?item.bonus:0);
+  },0);
+}
+function getQualMax(){return qualItems.reduce((s,q)=>s+q.bonus,0);}
+
+// ==============================
+// CALC ENGINE
+// ==============================
+function calcLeads(fact,plan,s){
+  if(!fact||!plan) return{zone:'none',bonus:0,label:'—',pct:0};
+  const pct=fact/plan*100;
+  const e2ok=s.leads_be2>0&&s.leads_e2_from>0;
+  const e1ok=s.leads_be1>0&&s.leads_e1_from>0;
+  if(e2ok&&pct>=s.leads_e2_from) return{zone:'extra2',bonus:s.leads_be2,label:'🔵 Экстра 2',pct:Math.min(pct/s.leads_e2_from*95,110)};
+  if(e1ok&&pct>=s.leads_e1_from) return{zone:'extra',bonus:s.leads_be1,label:'🔵 Экстра 1',pct:95};
+  if(pct>=s.leads_green) return{zone:'green',bonus:s.leads_bonus,label:'🟢 Норма',pct:pct/Math.max(s.leads_e1_from||s.leads_e2_from||105,1)*90};
+  if(pct>=s.leads_yellow) return{zone:'yellow',bonus:s.leads_byellow,label:'🟡 Рабочая',pct:pct/s.leads_green*70};
+  return{zone:'red',bonus:0,label:'🔴 Провал',pct:pct/s.leads_yellow*25};
 }
 
-function updateSimulation() {
-  const st = getSettings();
-  const mR = renderSimMonth('sim_march', REAL_DATA.march, st);
-  const mA = renderSimMonth('sim_april', REAL_DATA.april, st);
-
-  // Old system results (from image data)
-  const OLD = { march: 800, april: 800 };
-  const tbody = document.getElementById('compare_body');
-  tbody.innerHTML = [
-    { name:'Март 2026', old: OLD.march, newV: mR.total },
-    { name:'Апрель 2026', old: OLD.april, newV: mA.total }
-  ].map(r => {
-    const diff = r.newV - r.old;
-    const diffStr = (diff>0?'+':'') + diff;
-    const diffColor = diff>0?'var(--green)':diff<0?'var(--red)':'var(--text2)';
-    const lostOld = r.old - 900;
-    const lostNew = r.newV - 900;
-    return `<tr>
-      <td>${r.name}</td>
-      <td class="mono">$${r.old}</td>
-      <td class="mono" style="color:var(--green)">$${r.newV}</td>
-      <td class="mono" style="color:${diffColor}">${diffStr}</td>
-      <td class="mono" style="color:${lostNew<0?'var(--red)':'var(--green)'}">${lostNew<0?lostNew:'✓'}</td>
-    </tr>`;
-  }).join('');
-  calcCustom();
+function calcSA(fact,s,excl){
+  if(excl) return{zone:'excl',bonus:0,label:'— Искл.',pct:0};
+  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,label:'—',pct:0};
+  fact=+fact;
+  const e2ok=s.sa_be2>0&&s.sa_e2_from>0;
+  const e1ok=s.sa_be1>0&&s.sa_e1_from>0;
+  if(e2ok&&fact>=s.sa_e2_from) return{zone:'extra2',bonus:s.sa_be2,label:'🔵 Экстра 2',pct:100};
+  if(e1ok&&fact>=s.sa_e1_from) return{zone:'extra',bonus:s.sa_be1,label:'🔵 Экстра 1',pct:90};
+  if(fact>=s.sa_red) return{zone:'green',bonus:s.sa_bonus,label:'🟢 Норма',pct:fact/(s.sa_e1_from||s.sa_e2_from||30)*80};
+  return{zone:'red',bonus:0,label:'🔴 Провал',pct:fact/s.sa_red*40};
 }
 
-// ===== SETTINGS SAVE/LOAD =====
-function saveSettings() {
-  const fields = ['s_leads_yellow','s_leads_green','s_leads_extra','s_leads_bonus','s_leads_bextra',
-    's_sa_red','s_sa_extra','s_sa_bonus','s_sa_bextra',
-    's_cac_green','s_cac_yellow','s_cac_extra','s_cac_bonus','s_cac_bextra',
-    's_mkt_red','s_mkt_extra','s_mkt_bonus','s_mkt_bextra'];
-  const data = {};
-  fields.forEach(id => { data[id] = document.getElementById(id).value; });
-  localStorage.setItem('lolita_settings', JSON.stringify(data));
-}
-function loadSettings() {
-  try {
-    const saved = localStorage.getItem('lolita_settings');
-    if (!saved) return;
-    const data = JSON.parse(saved);
-    Object.entries(data).forEach(([id, val]) => {
-      const el = document.getElementById(id);
-      if (el) el.value = val;
-    });
-  } catch(e) {}
+function calcCAC(fact,s,excl){
+  if(excl) return{zone:'excl',bonus:0,label:'— Искл.',pct:0};
+  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,label:'—',pct:0};
+  fact=+fact;
+  if(fact<s.cac_extra) return{zone:'extra2',bonus:s.cac_bextra,label:'🔵 Экстра',pct:100};
+  if(fact<=s.cac_green) return{zone:'green',bonus:s.cac_bonus,label:'🟢 Норма',pct:(s.cac_yellow-fact)/(s.cac_yellow-s.cac_extra)*85};
+  if(fact<=s.cac_yellow) return{zone:'yellow',bonus:s.cac_byellow,label:'🟡 Рабочая',pct:(s.cac_yellow-fact)/(s.cac_yellow-s.cac_extra)*55};
+  return{zone:'red',bonus:0,label:'🔴 Провал',pct:10};
 }
 
-// ===== TABS =====
-function switchTab(name) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  event.target.classList.add('active');
-  if (name==='simulation') updateSimulation();
-  if (name==='month') calcMonth();
+function calcMkt(fact,s,excl){
+  if(excl) return{zone:'excl',bonus:0,label:'— Искл.',pct:0};
+  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,label:'—',pct:0};
+  fact=+fact;
+  if(fact>=s.mkt_extra) return{zone:'extra2',bonus:s.mkt_bextra,label:'🔵 Экстра',pct:100};
+  if(fact>=s.mkt_red) return{zone:'green',bonus:s.mkt_bonus,label:'🟢 Норма',pct:fact/s.mkt_extra*85};
+  return{zone:'red',bonus:0,label:'🔴 Провал',pct:fact/s.mkt_red*40};
 }
 
-// ===== MASTER UPDATE =====
-function updateAll() {
-  updateCorridors();
+function zoneClass(z){
+  return{extra2:'zone-extra2',extra:'zone-extra',green:'zone-green',yellow:'zone-yellow',red:'zone-red',excl:'zone-excl'}[z]||'';
+}
+function zoneColor(z){
+  return{extra2:'#fbbf24',extra:'var(--gold)',green:'var(--green)',yellow:'var(--yellow)',red:'var(--red)'}[z]||'var(--text3)';
+}
+
+function applyKPI(pfx,id,r){
+  const badge=document.getElementById(pfx+'badge_'+id);
+  const bonus=document.getElementById(pfx+'bonus_'+id);
+  const bar=document.getElementById(pfx+'bar_'+id);
+  if(badge){badge.textContent=r.label;badge.className='fact-badge '+zoneClass(r.zone);}
+  if(bonus){bonus.textContent=(r.zone==='none'||r.zone==='excl')?'—':'$'+r.bonus;bonus.style.color=zoneColor(r.zone);}
+  if(bar){bar.style.width=Math.min(r.pct,100)+'%';bar.style.background=zoneColor(r.zone);}
+}
+
+// ==============================
+// MONTH CALC
+// ==============================
+function calcMonth(){
+  const s=getAppliedSettings();
+  const qi=getAppliedQual();
+  const leads=calcLeads(+v('mp_leads_fact'),+v('mp_leads_plan')||0,s);
+  const sa=calcSA(v('mp_sa_fact'),s,document.getElementById('mp_sa_excl').checked);
+  const cac=calcCAC(v('mp_cac_fact'),s,document.getElementById('mp_cac_excl').checked);
+  const mkt=calcMkt(v('mp_mkt_fact'),s,document.getElementById('mp_mkt_excl').checked);
+
+  applyKPI('','leads',leads);applyKPI('','sa',sa);applyKPI('','cac',cac);applyKPI('','mkt',mkt);
+
+  const qualBonus=qi.reduce((sum,item,i)=>{
+    const cb=document.getElementById('mq'+i);
+    const checked=cb&&cb.checked;
+    const qv=document.getElementById('mqval'+i);
+    if(qv){qv.style.color=checked?'var(--green)':'var(--text3)';qv.style.textDecoration=checked?'none':'line-through';}
+    return sum+(checked?item.bonus:0);
+  },0);
+
+  const rate=s.rate;
+  st('r_rate','$'+rate);
+  st('r_qual','$'+qualBonus);
+  st('r_leads',leads.zone==='none'?'—':'$'+leads.bonus);
+  st('r_sa',sa.zone==='none'?'—':sa.zone==='excl'?'— (исключён)':'$'+sa.bonus);
+  st('r_cac',cac.zone==='none'?'—':cac.zone==='excl'?'— (исключён)':'$'+cac.bonus);
+  st('r_mkt',mkt.zone==='none'?'—':mkt.zone==='excl'?'— (исключён)':'$'+mkt.bonus);
+
+  const kpi=leads.bonus+sa.bonus+cac.bonus+mkt.bonus;
+  const total=rate+qualBonus+kpi;
+  const tel=document.getElementById('r_total');
+  if(tel){tel.textContent='$'+total;tel.style.color=total>=900?'var(--green)':total>=700?'var(--yellow)':'var(--red)';}
+
+  updateNormLabels();
+}
+
+function clearMonth(){
+  ['mp_leads_fact','mp_sa_fact','mp_cac_fact','mp_mkt_fact'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  ['mp_sa_excl','mp_cac_excl','mp_mkt_excl'].forEach(id=>{const el=document.getElementById(id);if(el)el.checked=false;});
+  const qi=getAppliedQual();
+  qi.forEach((_,i)=>{const el=document.getElementById('mq'+i);if(el)el.checked=true;});
   calcMonth();
-  if (document.getElementById('tab-simulation').classList.contains('active')) updateSimulation();
+}
+
+// ==============================
+// SAVE / HISTORY
+// ==============================
+function getHistory(){try{return JSON.parse(localStorage.getItem('lolita_history')||'[]');}catch(e){return[];}}
+function saveHistoryData(h){localStorage.setItem('lolita_history',JSON.stringify(h));}
+
+function saveMonth(){
+  const month=v('mp_month_select');
+  if(!month){alert('Выберите месяц');return;}
+  const s=getAppliedSettings();
+  const qi=getAppliedQual();
+  const saExcl=document.getElementById('mp_sa_excl').checked;
+  const cacExcl=document.getElementById('mp_cac_excl').checked;
+  const mktExcl=document.getElementById('mp_mkt_excl').checked;
+  const leads=calcLeads(+v('mp_leads_fact'),+v('mp_leads_plan')||0,s);
+  const sa=calcSA(v('mp_sa_fact'),s,saExcl);
+  const cac=calcCAC(v('mp_cac_fact'),s,cacExcl);
+  const mkt=calcMkt(v('mp_mkt_fact'),s,mktExcl);
+  const qualBonus=qi.reduce((sum,item,i)=>{const cb=document.getElementById('mq'+i);return sum+((cb&&cb.checked)?item.bonus:0);},0);
+  const kpi=leads.bonus+sa.bonus+cac.bonus+mkt.bonus;
+  const total=s.rate+qualBonus+kpi;
+
+  const entry={month,plan:+v('mp_leads_plan')||0,
+    leads_fact:v('mp_leads_fact'),sa_fact:v('mp_sa_fact'),cac_fact:v('mp_cac_fact'),mkt_fact:v('mp_mkt_fact'),
+    sa_excl:saExcl,cac_excl:cacExcl,mkt_excl:mktExcl,
+    leads_zone:leads.zone,leads_bonus:leads.bonus,
+    sa_zone:sa.zone,sa_bonus:sa.bonus,
+    cac_zone:cac.zone,cac_bonus:cac.bonus,
+    mkt_zone:mkt.zone,mkt_bonus:mkt.bonus,
+    qual:qualBonus,kpi,total};
+
+  const h=getHistory().filter(e=>e.month!==month);
+  h.push(entry);
+  h.sort((a,b)=>MONTHS_ALL.indexOf(a.month)-MONTHS_ALL.indexOf(b.month));
+  saveHistoryData(h);
+  renderHistory();
+  const msg=document.getElementById('save-msg');
+  if(msg){msg.style.display='block';setTimeout(()=>msg.style.display='none',2500);}
+}
+
+function renderHistory(){
+  const h=getHistory();
+  const filter=document.getElementById('hist_filter').value;
+  const filtered=h.filter(e=>filter==='all'||e.month.includes(filter));
+  const tbody=document.getElementById('history-tbody');
+  if(!filtered.length){
+    if(tbody) tbody.innerHTML='<tr class="empty-row"><td colspan="9">Нет данных. Заполните месяц на вкладке «План и факт» и нажмите «Сохранить в историю».</td></tr>';
+    const hs=document.getElementById('history-summary');if(hs)hs.style.display='none';
+    return;
+  }
+  function zb(zone,bonus){
+    if(zone==='none') return '<span style="color:var(--text3)">—</span>';
+    if(zone==='excl') return '<span style="color:var(--text3);font-size:11px">искл.</span>';
+    return`<span class="badge ${zoneClass(zone)}" style="font-size:11px">$${bonus}</span>`;
+  }
+  if(tbody) tbody.innerHTML=filtered.map(e=>`
+    <tr>
+      <td>${e.month}</td>
+      <td style="font-family:monospace">${e.leads_fact||'—'}<span style="font-size:10px;color:var(--text3)">/${e.plan}</span> ${zb(e.leads_zone,e.leads_bonus)}</td>
+      <td style="font-family:monospace">${e.sa_fact||'—'}% ${zb(e.sa_zone,e.sa_bonus)}</td>
+      <td style="font-family:monospace">$${e.cac_fact||'—'} ${zb(e.cac_zone,e.cac_bonus)}</td>
+      <td style="font-family:monospace">${e.mkt_fact||'—'}% ${zb(e.mkt_zone,e.mkt_bonus)}</td>
+      <td style="font-family:monospace;color:var(--green)">$${e.qual}</td>
+      <td style="font-family:monospace;color:var(--accent2)">$${e.kpi}</td>
+      <td style="font-family:monospace;font-weight:700;color:${e.total>=900?'var(--green)':e.total>=700?'var(--yellow)':'var(--red)'}">$${e.total}</td>
+      <td><button class="del-month-btn" data-month="${e.month}" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);border-radius:var(--radius-sm);padding:4px 10px;font-size:11px;cursor:pointer;">✕</button></td>
+    </tr>
+  `).join('');
+
+  if(filtered.length>1){
+    const avg=Math.round(filtered.reduce((s,e)=>s+e.total,0)/filtered.length);
+    const max=Math.max(...filtered.map(e=>e.total));
+    const min=Math.min(...filtered.map(e=>e.total));
+    const hs=document.getElementById('history-summary');
+    if(hs){hs.style.display='grid';hs.innerHTML=`
+      <div class="stat-card"><div class="slabel">Средняя зарплата</div><div class="svalue" style="color:var(--green)">$${avg}</div><div class="sdesc">за ${filtered.length} мес.</div></div>
+      <div class="stat-card"><div class="slabel">Максимум</div><div class="svalue" style="color:var(--gold)">$${max}</div><div class="sdesc">лучший месяц</div></div>
+      <div class="stat-card"><div class="slabel">Минимум</div><div class="svalue" style="color:var(--red)">$${min}</div><div class="sdesc">худший месяц</div></div>
+    `;}
+  } else {
+    const hs=document.getElementById('history-summary');if(hs)hs.style.display='none';
+  }
+}
+
+function deleteMonth(month){
+  saveHistoryData(getHistory().filter(e=>e.month!==month));
+  renderHistory();
+}
+function deleteMonthByIndex(monthIdx){
+  const month=MONTHS_ALL[monthIdx];
+  if(!month) return;
+  saveHistoryData(getHistory().filter(e=>e.month!==month));
+  renderHistory();
+}
+function showClearConfirm(){
+  const el=document.getElementById('clear-confirm');
+  if(el){el.style.display='flex';}
+}
+function hideClearConfirm(){
+  const el=document.getElementById('clear-confirm');
+  if(el){el.style.display='none';}
+}
+function confirmClearHistory(){
+  localStorage.removeItem('lolita_history');
+  hideClearConfirm();
+  renderHistory();
+}
+function clearHistory(){
+  localStorage.removeItem('lolita_history');
+  renderHistory();
+}
+function exportHistory(){
+  const h=getHistory();
+  if(!h.length){alert('Нет данных');return;}
+  const hdr='Месяц,Лиды(план),Лиды(факт),SA%,CAC,Рынок%,Кач.блок,KPI,Итого';
+  const rows=h.map(e=>[e.month,e.plan,e.leads_fact,e.sa_fact,e.cac_fact,e.mkt_fact,e.qual,e.kpi,e.total].join(','));
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent([hdr,...rows].join('\n'));
+  a.download='lolita_kpi.csv';a.click();
+}
+
+// ==============================
+// SIMULATION
+// ==============================
+function calcCustom(){
+  const s=getAppliedSettings();
+  const qi=getAppliedQual();
+  const leads=calcLeads(+v('cs_leads_fact'),+v('cs_leads_plan')||0,s);
+  const sa=calcSA(v('cs_sa_fact'),s,false);
+  const cac=calcCAC(v('cs_cac_fact'),s,false);
+  const mkt=calcMkt(v('cs_mkt_fact'),s,false);
+  applyKPI('c','leads',leads);applyKPI('c','sa',sa);applyKPI('c','cac',cac);applyKPI('c','mkt',mkt);
+  st('cr_leads',leads.zone==='none'?'—':'$'+leads.bonus);
+  st('cr_sa',sa.zone==='none'?'—':'$'+sa.bonus);
+  st('cr_cac',cac.zone==='none'?'—':'$'+cac.bonus);
+  st('cr_mkt',mkt.zone==='none'?'—':'$'+mkt.bonus);
+  const qmax=qi.reduce((acc,q)=>acc+q.bonus,0);
+  const rate=s.rate;
+  const kpi=leads.bonus+sa.bonus+cac.bonus+mkt.bonus;
+  const total=rate+qmax+kpi;
+  st('cr_rate','$'+rate);
+  st('cr_qual_max','$'+qmax);
+  const el=document.getElementById('cr_total');
+  if(el){el.textContent='$'+total;el.style.color=total>=900?'var(--green)':total>=700?'var(--yellow)':'var(--red)';}
+  ['cs_sa_show','mp_sa_show'].forEach(id=>st(id,s.sa_red));
+  ['cs_cac_show','mp_cac_show'].forEach(id=>st(id,s.cac_green));
+  ['cs_mkt_show','mp_mkt_show'].forEach(id=>st(id,s.mkt_red));
+}
+
+// ==============================
+// CORRIDORS
+// ==============================
+function renderCorridors(){
+  const s=getAppliedSettings();
+  // Leads
+  let leadsCor=`<div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&lt;${s.leads_fail}%</span><span class="czval">$0</span></div>
+    <div class="cor-zone cz-yellow"><span class="czlabel">🟡 Рабочая</span><span class="czval">${s.leads_yellow}–${s.leads_green-1}%</span><span class="czval">$${s.leads_byellow}</span></div>
+    <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">${s.leads_green}–${s.leads_e1_from>0?s.leads_e1_from-1:'…'}%</span><span class="czval">$${s.leads_bonus}</span></div>`;
+  if(s.leads_be1>0&&s.leads_e1_from>0) leadsCor+=`<div class="cor-zone cz-extra"><span class="czlabel">🔵 Э1</span><span class="czval">${s.leads_e1_from}–${s.leads_e2_from>0?s.leads_e2_from-1:'…'}%</span><span class="czval">$${s.leads_be1}</span></div>`;
+  if(s.leads_be2>0&&s.leads_e2_from>0) leadsCor+=`<div class="cor-zone cz-extra2"><span class="czlabel">🔵 Э2</span><span class="czval">≥${s.leads_e2_from}%</span><span class="czval">$${s.leads_be2}</span></div>`;
+  si('cor_leads',leadsCor);
+
+  // SA
+  let saCor=`<div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&lt;${s.sa_red}%</span><span class="czval">$0</span></div>
+    <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">${s.sa_red}–${s.sa_e1_from>0?s.sa_e1_from-0.1:'…'}%</span><span class="czval">$${s.sa_bonus}</span></div>`;
+  if(s.sa_be1>0&&s.sa_e1_from>0) saCor+=`<div class="cor-zone cz-extra"><span class="czlabel">🔵 Э1</span><span class="czval">${s.sa_e1_from}–${s.sa_e2_from>0?s.sa_e2_from-0.1:'…'}%</span><span class="czval">$${s.sa_be1}</span></div>`;
+  if(s.sa_be2>0&&s.sa_e2_from>0) saCor+=`<div class="cor-zone cz-extra2"><span class="czlabel">🔵 Э2</span><span class="czval">≥${s.sa_e2_from}%</span><span class="czval">$${s.sa_be2}</span></div>`;
+  si('cor_sa',saCor);
+
+  // CAC
+  si('cor_cac',`
+    <div class="cor-zone cz-extra"><span class="czlabel">🔵 Экстра</span><span class="czval">&lt;$${s.cac_extra}</span><span class="czval">$${s.cac_bextra}</span></div>
+    <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">$${s.cac_extra}–$${s.cac_green}</span><span class="czval">$${s.cac_bonus}</span></div>
+    <div class="cor-zone cz-yellow"><span class="czlabel">🟡 Рабочая</span><span class="czval">$${s.cac_green}–$${s.cac_yellow}</span><span class="czval">$${s.cac_byellow}</span></div>
+    <div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&gt;$${s.cac_yellow}</span><span class="czval">$0</span></div>
+  `);
+
+  // Mkt
+  si('cor_mkt',`
+    <div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&lt;${s.mkt_red}%</span><span class="czval">$0</span></div>
+    <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">${s.mkt_red}–${s.mkt_extra}%</span><span class="czval">$${s.mkt_bonus}</span></div>
+    <div class="cor-zone cz-extra"><span class="czlabel">🔵 Экстра</span><span class="czval">≥${s.mkt_extra}%</span><span class="czval">$${s.mkt_bextra}</span></div>
+  `);
+}
+
+// ==============================
+// REGULATION — dynamic tables
+// ==============================
+function updateNormLabels(){
+  const s=getSettings();
+  ['mp_sa_show','cs_sa_show'].forEach(id=>st(id,s.sa_red));
+  ['mp_cac_show','cs_cac_show'].forEach(id=>st(id,s.cac_green));
+  ['mp_mkt_show','cs_mkt_show'].forEach(id=>st(id,s.mkt_red));
+}
+
+function updateRegTables(){
+  const s=getAppliedSettings();
+  const qi=getAppliedQual();
+  const qmax=qi.reduce((acc,q)=>acc+q.bonus,0);
+  const kpiNorm=s.leads_bonus+s.sa_bonus+s.cac_bonus+s.mkt_bonus;
+  const kpiExtra=Math.max(s.leads_be1,s.leads_be2)+Math.max(s.sa_be1,s.sa_be2)+s.cac_bextra+s.mkt_bextra;
+  const normTotal=s.rate+qmax+kpiNorm;
+  const maxTotal=s.rate+qmax+kpiExtra;
+
+  // Header badges
+  st('hdr_rate','$'+s.rate);
+  st('hdr_qual_max','$'+qmax);
+  st('hdr_kpi_max','$'+kpiNorm);
+
+  // Structure table
+  const stb=document.getElementById('reg-structure-tbody');
+  if(stb) stb.innerHTML=`
+    <tr><td>Фиксированная ставка</td><td style="font-family:monospace;color:var(--text)">$${s.rate}</td><td>Выплачивается всегда</td></tr>
+    <tr><td>Качественный бонус (отчёты)</td><td style="font-family:monospace;color:var(--text)">до $${qmax}</td><td>По каждому из ${qi.length} отчётных блоков</td></tr>
+    <tr><td>Количественный бонус (KPI)</td><td style="font-family:monospace;color:var(--text)">до $${kpiNorm}</td><td>По 4 KPI с коридорной логикой</td></tr>
+    <tr><td><strong>Итого норма</strong></td><td style="font-family:monospace;color:var(--green);font-weight:700">$${normTotal}</td><td>При выполнении всех блоков</td></tr>
+    <tr><td>Экстра-бонус (сверхнорма)</td><td style="font-family:monospace;color:var(--gold)">+до $${kpiExtra}</td><td>При превышении нормы по KPI</td></tr>
+    <tr><td><strong>Итого максимум</strong></td><td style="font-family:monospace;color:var(--gold);font-weight:700">$${maxTotal}</td><td>При достижении экстра по всем KPI</td></tr>
+  `;
+
+  // Qual table
+  const qtb=document.getElementById('reg-qual-tbody');
+  if(qtb) qtb.innerHTML=qi.map(item=>`
+    <tr><td>${escHtml(item.name)}</td><td style="color:var(--text2);font-size:12px">${escHtml(item.desc)}</td><td style="font-family:monospace;color:var(--green)">$${item.bonus}</td></tr>
+  `).join('');
+
+  // KPI table
+  function dz(cls,text){return`<span class="dz ${cls}">${text}</span>`;}
+  const kpiRows=[
+    ['Кол-во лидов',
+      dz('dz-red',`&lt;${s.leads_fail}% → $0`),
+      dz('dz-yellow',`${s.leads_yellow}–${s.leads_green-1}% → $${s.leads_byellow}`),
+      dz('dz-green',`${s.leads_green}–${s.leads_e1_from>0?s.leads_e1_from-1:'…'}% → $${s.leads_bonus}`),
+      (s.leads_be1>0?dz('dz-extra',`≥${s.leads_e1_from}% → $${s.leads_be1}`):'—')+(s.leads_be2>0?dz('dz-extra2',`≥${s.leads_e2_from}% → $${s.leads_be2}`):'')
+    ],
+    ['SA%',
+      dz('dz-red',`&lt;${s.sa_red}% → $0`),
+      '<span style="color:var(--text3);font-size:11px">—</span>',
+      dz('dz-green',`${s.sa_red}–${s.sa_e1_from>0?s.sa_e1_from:'…'}% → $${s.sa_bonus}`),
+      (s.sa_be1>0?dz('dz-extra',`≥${s.sa_e1_from}% → $${s.sa_be1}`):'—')+(s.sa_be2>0?dz('dz-extra2',`≥${s.sa_e2_from}% → $${s.sa_be2}`):'')
+    ],
+    ['CAC',
+      dz('dz-red',`&gt;$${s.cac_yellow} → $0`),
+      dz('dz-yellow',`$${s.cac_green}–$${s.cac_yellow} → $${s.cac_byellow}`),
+      dz('dz-green',`$${s.cac_extra}–$${s.cac_green} → $${s.cac_bonus}`),
+      dz('dz-extra',`&lt;$${s.cac_extra} → $${s.cac_bextra}`)
+    ],
+    ['Доля рынка',
+      dz('dz-red',`&lt;${s.mkt_red}% → $0`),
+      '<span style="color:var(--text3);font-size:11px">—</span>',
+      dz('dz-green',`${s.mkt_red}–${s.mkt_extra}% → $${s.mkt_bonus}`),
+      dz('dz-extra',`≥${s.mkt_extra}% → $${s.mkt_bextra}`)
+    ],
+  ];
+  const ktb=document.getElementById('reg-kpi-tbody');
+  if(ktb) ktb.innerHTML=kpiRows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+}
+
+// ==============================
+// MASTER UPDATE
+// ==============================
+function updateAll(){
+  renderCorridors();
+  updateNormLabels();
+  updateRegTables();
+  renderQualSettings();
+  renderMonthQualRows();
+  calcMonth();
   calcCustom();
 }
 
-// ===== INIT =====
-loadSettings();
-updateCorridors();
-calcMonth();
-calcCustom();
+// ==============================
+// TABS
+// ==============================
+function switchTab(name){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  const c=document.getElementById('tab-'+name);if(c)c.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes("'"+name+"'"))t.classList.add('active');});
+}
+function switchSubtab(name){
+  document.querySelectorAll('.subtab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.subtab').forEach(el=>el.classList.remove('active'));
+  const c=document.getElementById('subtab-'+name);if(c)c.classList.add('active');
+  document.querySelectorAll('.subtab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes("'"+name+"'"))t.classList.add('active');});
+}
+
+// ==============================
+// INIT
+// ==============================
+(function init(){
+  const sel=document.getElementById('mp_month_select');
+  MONTHS_ALL.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});
+  loadSettings();
+  appliedSettings=getSettings();
+  appliedQualItems=JSON.parse(JSON.stringify(qualItems));
+  updateAll();
+  renderHistory();
+
+  // Event delegation for delete month buttons
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.del-month-btn');
+    if(!btn) return;
+    const month = btn.getAttribute('data-month');
+    if(!month) return;
+    saveHistoryData(getHistory().filter(function(r){ return r.month !== month; }));
+    renderHistory();
+  });
+})();
 </script>
 </body>
 </html>
