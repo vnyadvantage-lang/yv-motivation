@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Финмотивация — Lolita</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161b27;
+  --bg3: #1e2535;
+  --bg4: #252d3f;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8eaf0;
+  --text2: #8b93a8;
+  --text3: #5a6278;
+  --accent: #4f7cff;
+  --accent2: #6b8fff;
+  --green: #22c55e;
+  --green-bg: rgba(34,197,94,0.1);
+  --green-border: rgba(34,197,94,0.25);
+  --yellow: #f59e0b;
+  --yellow-bg: rgba(245,158,11,0.1);
+  --yellow-border: rgba(245,158,11,0.25);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.1);
+  --red-border: rgba(239,68,68,0.25);
+  --blue: #3b82f6;
+  --blue-bg: rgba(59,130,246,0.12);
+  --blue-border: rgba(59,130,246,0.3);
+  --gold: #f0b429;
+  --gold-bg: rgba(240,180,41,0.1);
+  --gold-border: rgba(240,180,41,0.3);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* HEADER */
+.header { margin-bottom: 2rem; }
+.header h1 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.header .sub { font-size: 13px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
+.header .badge-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
+.badge-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.badge-gold { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-border); }
+
+/* TABS */
+.tabs { display: flex; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 1.5rem; }
+.tab { flex: 1; padding: 9px 12px; font-size: 13px; font-weight: 500; color: var(--text2); background: transparent; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; text-align: center; }
+.tab:hover { color: var(--text); background: var(--bg3); }
+.tab.active { background: var(--bg4); color: var(--text); border: 1px solid var(--border2); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* CARDS */
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+.card-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.card-title span { color: var(--accent2); }
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+/* KPI BLOCK */
+.kpi-block { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+.kpi-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.kpi-desc { font-size: 11px; color: var(--text3); margin-bottom: 1rem; line-height: 1.5; }
+.field { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.field label { font-size: 12px; color: var(--text2); flex: 1; min-width: 0; }
+.field input {
+  width: 80px; font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  padding: 5px 8px; border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); background: var(--bg4);
+  color: var(--text); outline: none; transition: border-color 0.15s;
+}
+.field input:focus { border-color: var(--accent); }
+.field .unit { font-size: 11px; color: var(--text3); min-width: 20px; font-family: 'JetBrains Mono', monospace; }
+
+/* CORRIDOR VIZ */
+.corridor { display: flex; gap: 3px; margin-top: 10px; }
+.cor-zone { flex: 1; border-radius: 4px; padding: 6px 4px; text-align: center; }
+.cor-zone .czlabel { font-size: 10px; font-weight: 500; display: block; }
+.cor-zone .czval { font-size: 11px; font-weight: 600; display: block; margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.cz-red { background: var(--red-bg); border: 1px solid var(--red-border); }
+.cz-red .czlabel { color: var(--red); }
+.cz-red .czval { color: #fca5a5; }
+.cz-yellow { background: var(--yellow-bg); border: 1px solid var(--yellow-border); }
+.cz-yellow .czlabel { color: var(--yellow); }
+.cz-yellow .czval { color: #fcd34d; }
+.cz-green { background: var(--green-bg); border: 1px solid var(--green-border); }
+.cz-green .czlabel { color: var(--green); }
+.cz-green .czval { color: #86efac; }
+.cz-extra { background: var(--gold-bg); border: 1px solid var(--gold-border); }
+.cz-extra .czlabel { color: var(--gold); }
+.cz-extra .czval { color: #fde68a; }
+
+/* LOGIC BOX */
+.logic-box { background: rgba(79,124,255,0.05); border: 1px solid rgba(79,124,255,0.15); border-radius: var(--radius-sm); padding: 10px 12px; margin-top: 10px; }
+.logic-box p { font-size: 11px; color: var(--text2); line-height: 1.6; }
+.logic-box strong { color: var(--accent2); }
+
+/* STAT CARDS */
+.stat-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+.stat-card .slabel { font-size: 11px; color: var(--text3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-card .svalue { font-size: 24px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.stat-card .sdesc { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+/* FACT INPUT SECTION */
+.fact-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.fact-row:last-child { border-bottom: none; }
+.fact-name { font-size: 13px; color: var(--text); min-width: 200px; }
+.fact-plan { font-size: 12px; color: var(--text3); min-width: 80px; font-family: 'JetBrains Mono', monospace; }
+.fact-input { width: 90px; font-size: 13px; font-family: 'JetBrains Mono', monospace; padding: 6px 10px; border: 1px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg4); color: var(--text); outline: none; transition: border-color 0.15s; }
+.fact-input:focus { border-color: var(--accent); }
+.fact-badge { min-width: 110px; text-align: center; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
+.fact-bonus { font-size: 16px; font-weight: 600; font-family: 'JetBrains Mono', monospace; min-width: 60px; text-align: right; }
+.bar-outer { flex: 1; height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; min-width: 60px; }
+.bar-inner { height: 100%; border-radius: 2px; transition: width 0.3s; }
+
+/* RESULT PANEL */
+.result-panel { background: linear-gradient(135deg, rgba(79,124,255,0.08), rgba(34,197,94,0.05)); border: 1px solid rgba(79,124,255,0.2); border-radius: var(--radius); padding: 1.5rem; }
+.result-panel h3 { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 1rem; }
+.result-line { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.result-line:last-child { border-bottom: none; }
+.result-line.total { font-size: 18px; font-weight: 600; padding-top: 12px; margin-top: 4px; }
+.result-line .rname { color: var(--text2); }
+.result-line .rval { font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+
+/* SIMULATION */
+.sim-month { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+.sim-month-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.sim-month-name { font-size: 15px; font-weight: 600; color: var(--text); }
+.sim-month-total { font-size: 20px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.sim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1rem; }
+.sim-kpi { background: var(--bg3); border-radius: var(--radius-sm); padding: 10px; border: 1px solid var(--border); }
+.sim-kpi .sk-name { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.sim-kpi .sk-fact { font-size: 16px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.sim-kpi .sk-plan { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.sim-kpi .sk-badge { font-size: 11px; font-weight: 600; margin-top: 6px; padding: 2px 8px; border-radius: 20px; display: inline-block; }
+.sim-kpi .sk-bonus { font-size: 13px; font-weight: 600; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+
+/* COMPARISON TABLE */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.compare-table th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+.compare-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text2); }
+.compare-table td:first-child { color: var(--text); font-weight: 500; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+/* SECTION HEADER */
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+.section-header h2 { font-size: 14px; font-weight: 600; color: var(--text); }
+.section-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* TOGGLE */
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; }
+.toggle-label { font-size: 13px; color: var(--text2); }
+.toggle-btn { background: var(--bg4); border: 1px solid var(--border2); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--text2); cursor: pointer; transition: all 0.15s; }
+.toggle-btn.on { background: var(--blue-bg); border-color: var(--blue-border); color: var(--blue); }
+.toggle-btn:hover { border-color: var(--border2); }
+
+/* MONTH HEADER */
+.month-input-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
+.month-input-row label { font-size: 13px; color: var(--text2); }
+.month-input-row input[type=text], .month-input-row select {
+  font-size: 13px; padding: 6px 10px; border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); background: var(--bg4); color: var(--text); outline: none;
+  font-family: 'Inter', sans-serif;
+}
+.month-input-row input[type=text] { width: 140px; }
+
+@media (max-width: 640px) {
+  .grid-2, .grid-4, .grid-3, .sim-grid { grid-template-columns: 1fr 1fr; }
+  .fact-name { min-width: 120px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>Финансовая мотивация</h1>
+    <div class="sub">Менеджер платформы Etsy — Lolita · 2026</div>
+    <div class="badge-row">
+      <span class="badge badge-blue">Ставка $350</span>
+      <span class="badge badge-blue">Кач. бонус $350</span>
+      <span class="badge badge-green">Кол. бонус $200</span>
+      <span class="badge badge-gold">Экстра +$200</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('settings')">⚙ Настройки</button>
+    <button class="tab" onclick="switchTab('month')">📅 План месяца</button>
+    <button class="tab" onclick="switchTab('simulation')">📊 Симуляция</button>
+  </div>
+
+  <!-- =================== TAB 1: SETTINGS =================== -->
+  <div id="tab-settings" class="tab-content active">
+
+    <div class="card">
+      <div class="card-title">Структура выплат — <span>фиксированные параметры</span></div>
+      <div class="grid-4">
+        <div class="stat-card">
+          <div class="slabel">Ставка</div>
+          <div class="svalue" style="color:var(--text)">$350</div>
+          <div class="sdesc">фиксированная</div>
+        </div>
+        <div class="stat-card">
+          <div class="slabel">Кач. бонус</div>
+          <div class="svalue" style="color:var(--blue)">$350</div>
+          <div class="sdesc">отчёты + системность</div>
+        </div>
+        <div class="stat-card">
+          <div class="slabel">Кол. бонус</div>
+          <div class="svalue" style="color:var(--green)">$200</div>
+          <div class="sdesc">4 × $50 при выполнении</div>
+        </div>
+        <div class="stat-card">
+          <div class="slabel">Экстра</div>
+          <div class="svalue" style="color:var(--gold)">+$200</div>
+          <div class="sdesc">4 × $50 сверхнорма</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:13px; color:var(--text2)">Максимум без экстра</span>
+        <span style="font-size:18px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--text)">$900</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+        <span style="font-size:13px; color:var(--text2)">Максимум с экстра</span>
+        <span style="font-size:18px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--gold)">$1 100</span>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:1.5rem;">
+      <div class="dot"></div>
+      <h2>Настройка коридоров количественных KPI</h2>
+    </div>
+
+    <div class="grid-2">
+
+      <!-- KPI 1: ЛИДЫ -->
+      <div class="kpi-block">
+        <div class="kpi-name">1. Количество лидов</div>
+        <div class="kpi-desc">План выставляется каждый месяц отдельно с учётом сезонности. Используется процентный коридор от плана.</div>
+        <div class="field"><label>Жёлтый — от (% плана)</label><input type="number" id="s_leads_yellow" value="85" min="1" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Зелёный — от (% плана)</label><input type="number" id="s_leads_green" value="90" min="1" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Экстра — от (% плана)</label><input type="number" id="s_leads_extra" value="105" min="100" max="200" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_leads_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра</label><input type="number" id="s_leads_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="corridor" id="cor_leads"></div>
+        <div class="logic-box">
+          <p><strong>Жёлтый:</strong> частичный бонус — не дотянула до нормы, но не провал. 50% от зелёного бонуса.<br>
+          <strong>Зелёный:</strong> норма выполнена — полный бонус.<br>
+          <strong>Экстра:</strong> план перевыполнен — повышенный бонус.<br>
+          <strong>Провал:</strong> значительное недовыполнение — бонус не начисляется.<br>
+          <em>План по лидам выставляется индивидуально каждый месяц с учётом сезонности.</em></p>
+        </div>
+      </div>
+
+      <!-- KPI 2: SA% -->
+      <div class="kpi-block">
+        <div class="kpi-name">2. Качество лидов (SA%)</div>
+        <div class="kpi-desc">Доля лидов, купивших самостоятельно (без менеджера). Фиксированный порог — не зависит от плана месяца.</div>
+        <div class="field"><label>Порог провала — ниже</label><input type="number" id="s_sa_red" value="25" min="0" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Экстра — от</label><input type="number" id="s_sa_extra" value="30" min="0" max="100" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_sa_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра</label><input type="number" id="s_sa_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="corridor" id="cor_sa"></div>
+        <div class="logic-box">
+          <p><strong>Зелёный:</strong> показатель в норме — полный бонус.<br>
+          <strong>Экстра:</strong> показатель превысил верхнюю планку — повышенный бонус. Ранее это был стандарт, теперь — сверхнорма.<br>
+          <strong>Провал:</strong> ниже порога — бонус не начисляется.<br>
+          <em>Аномальные периоды (системная просадка, форс-мажор) исключаются из оценки.</em></p>
+        </div>
+      </div>
+
+      <!-- KPI 3: CAC -->
+      <div class="kpi-block">
+        <div class="kpi-name">3. CAC (стоимость привлечения)</div>
+        <div class="kpi-desc">Меньше — лучше. Норма меняется при изменении рекламного бюджета или сезона. Коридор задаётся в абсолютных значениях $.</div>
+        <div class="field"><label>Зелёный — до</label><input type="number" id="s_cac_green" value="38" min="1" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Жёлтый — до</label><input type="number" id="s_cac_yellow" value="45" min="1" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Экстра — ниже</label><input type="number" id="s_cac_extra" value="30" min="1" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_cac_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра</label><input type="number" id="s_cac_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="corridor" id="cor_cac"></div>
+        <div class="logic-box">
+          <p><strong>Экстра:</strong> CAC значительно ниже нормы — отличное управление бюджетом, повышенный бонус.<br>
+          <strong>Зелёный:</strong> CAC в допустимом коридоре — полный бонус.<br>
+          <strong>Жёлтый:</strong> CAC немного выше нормы — частичный бонус, не провал.<br>
+          <strong>Провал:</strong> CAC вышел за верхнюю границу — бонус не начисляется.<br>
+          <em>Норма пересматривается при изменении рекламного бюджета или сезона.</em></p>
+        </div>
+      </div>
+
+      <!-- KPI 4: ДОЛЯ РЫНКА -->
+      <div class="kpi-block">
+        <div class="kpi-name">4. Доля рынка (ПЧ+ХМ)</div>
+        <div class="kpi-desc">Совокупная доля продаж в нише. Норма пересматривается при изменении состава конкурентов. Текущая база: ~14% (после апреля 2026).</div>
+        <div class="field"><label>Порог провала — ниже</label><input type="number" id="s_mkt_red" value="14" min="0" max="100" step="0.1" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Экстра — от</label><input type="number" id="s_mkt_extra" value="16" min="0" max="100" step="0.1" oninput="saveSettings();updateAll()"><span class="unit">%</span></div>
+        <div class="field"><label>Бонус (зелёный)</label><input type="number" id="s_mkt_bonus" value="50" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="field"><label>Бонус экстра</label><input type="number" id="s_mkt_bextra" value="100" min="0" oninput="saveSettings();updateAll()"><span class="unit">$</span></div>
+        <div class="corridor" id="cor_mkt"></div>
+        <div class="logic-box">
+          <p><strong>Зелёный:</strong> доля в норме — полный бонус.<br>
+          <strong>Экстра:</strong> доля превысила верхнюю планку — рост в конкурентных условиях, повышенный бонус.<br>
+          <strong>Провал:</strong> доля ниже минимума — бонус не начисляется.<br>
+          <em>Норма пересматривается ежемесячно. При аномальных или отсутствующих данных — месяц исключается из оценки.</em></p>
+        </div>
+      </div>
+
+    </div><!-- /grid-2 -->
+  </div><!-- /tab-settings -->
+
+  <!-- =================== TAB 2: ПЛАН МЕСЯЦА =================== -->
+  <div id="tab-month" class="tab-content">
+
+    <div class="card">
+      <div class="card-title">Параметры месяца</div>
+      <div class="month-input-row">
+        <label>Название месяца</label>
+        <input type="text" id="m_name" value="Май 2026" oninput="calcMonth()">
+        <label style="margin-left:1rem;">Сезон</label>
+        <select id="m_season" onchange="calcMonth()">
+          <option value="normal">Обычный</option>
+          <option value="peak">Сезон (пик)</option>
+          <option value="low">Несезон (тихий)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Плановые показатели — <span>установи план и введи факт</span></div>
+
+      <div class="fact-row">
+        <div class="fact-name">Количество лидов</div>
+        <div class="fact-plan" id="mp_leads_plan_show">план: 230</div>
+        <input class="fact-input" type="number" id="mp_leads_plan" value="230" placeholder="план" oninput="calcMonth()">
+        <input class="fact-input" type="number" id="mf_leads" value="" placeholder="факт" oninput="calcMonth()">
+        <span class="fact-badge" id="mb_leads">—</span>
+        <div class="bar-outer"><div class="bar-inner" id="mbar_leads" style="width:0%"></div></div>
+        <span class="fact-bonus" id="mbonus_leads">—</span>
+      </div>
+
+      <div class="fact-row">
+        <div class="fact-name">Качество лидов SA (%)</div>
+        <div class="fact-plan">план: ≥<span id="mp_sa_show">25</span>%</div>
+        <input class="fact-input" type="number" id="mf_sa" value="" placeholder="факт %" oninput="calcMonth()" step="0.01">
+        <span class="fact-badge" id="mb_sa">—</span>
+        <div class="bar-outer"><div class="bar-inner" id="mbar_sa" style="width:0%"></div></div>
+        <span class="fact-bonus" id="mbonus_sa">—</span>
+      </div>
+
+      <div class="fact-row">
+        <div class="fact-name">CAC ($)</div>
+        <div class="fact-plan">норма: ≤$<span id="mp_cac_show">38</span></div>
+        <input class="fact-input" type="number" id="mf_cac" value="" placeholder="факт $" oninput="calcMonth()" step="0.1">
+        <span class="fact-badge" id="mb_cac">—</span>
+        <div class="bar-outer"><div class="bar-inner" id="mbar_cac" style="width:0%"></div></div>
+        <span class="fact-bonus" id="mbonus_cac">—</span>
+      </div>
+
+      <div class="fact-row">
+        <div class="fact-name">Доля рынка ПЧ+ХМ (%)</div>
+        <div class="fact-plan">норма: ≥<span id="mp_mkt_show">14</span>%</div>
+        <input class="fact-input" type="number" id="mf_mkt" value="" placeholder="факт %" oninput="calcMonth()" step="0.01">
+        <span class="fact-badge" id="mb_mkt">—</span>
+        <div class="bar-outer"><div class="bar-inner" id="mbar_mkt" style="width:0%"></div></div>
+        <span class="fact-bonus" id="mbonus_mkt">—</span>
+      </div>
+    </div>
+
+    <div class="result-panel">
+      <h3>Итог месяца: <span id="m_name_result">—</span></h3>
+      <div class="result-line">
+        <span class="rname">Ставка фиксированная</span>
+        <span class="rval" style="color:var(--text)">$350</span>
+      </div>
+      <div class="result-line">
+        <span class="rname">Качественный бонус (отчёты)</span>
+        <span class="rval" style="color:var(--blue)">$350</span>
+      </div>
+      <div class="result-line">
+        <span class="rname">Бонус: Лиды</span>
+        <span class="rval" id="mr_leads" style="color:var(--text2)">—</span>
+      </div>
+      <div class="result-line">
+        <span class="rname">Бонус: SA%</span>
+        <span class="rval" id="mr_sa" style="color:var(--text2)">—</span>
+      </div>
+      <div class="result-line">
+        <span class="rname">Бонус: CAC</span>
+        <span class="rval" id="mr_cac" style="color:var(--text2)">—</span>
+      </div>
+      <div class="result-line">
+        <span class="rname">Бонус: Доля рынка</span>
+        <span class="rval" id="mr_mkt" style="color:var(--text2)">—</span>
+      </div>
+      <div class="result-line total">
+        <span class="rname" style="color:var(--text)">Итого к выплате</span>
+        <span class="rval" id="mr_total" style="color:var(--gold); font-size:24px">—</span>
+      </div>
+    </div>
+  </div><!-- /tab-month -->
+
+  <!-- =================== TAB 3: СИМУЛЯЦИЯ =================== -->
+  <div id="tab-simulation" class="tab-content">
+
+    <div class="card">
+      <div class="card-title">Симуляция по реальным данным — <span>март и апрель 2026</span></div>
+      <p style="font-size:12px; color:var(--text3); line-height:1.6;">Применяем текущие настройки коридоров к реальным показателям за март и апрель 2026. Ниже показано, сколько получила бы Lolita по новой системе.</p>
+    </div>
+
+    <div id="sim_march" class="sim-month"></div>
+    <div id="sim_april" class="sim-month"></div>
+
+    <div class="card" style="margin-top:1rem;">
+      <div class="card-title">Сравнение: старая vs новая система</div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Месяц</th>
+            <th>Старая система ($)</th>
+            <th>Новая система ($)</th>
+            <th>Разница</th>
+            <th>Потерянный заработок</th>
+          </tr>
+        </thead>
+        <tbody id="compare_body"></tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:1rem;">
+      <div class="card-title">Кастомная симуляция — <span>введи любые значения</span></div>
+      <div class="month-input-row">
+        <label>Название</label>
+        <input type="text" id="cs_name" value="Кастомный месяц" oninput="calcCustom()">
+      </div>
+      <div class="fact-row">
+        <div class="fact-name">Лиды: план</div>
+        <input class="fact-input" type="number" id="cs_leads_plan" value="230" oninput="calcCustom()">
+        <div class="fact-name" style="margin-left:8px;">факт</div>
+        <input class="fact-input" type="number" id="cs_leads_fact" value="200" oninput="calcCustom()">
+        <span class="fact-badge" id="csb_leads">—</span>
+        <span class="fact-bonus" id="csbonus_leads">—</span>
+      </div>
+      <div class="fact-row">
+        <div class="fact-name">SA% факт</div>
+        <input class="fact-input" type="number" id="cs_sa" value="27" step="0.1" oninput="calcCustom()">
+        <span class="fact-badge" id="csb_sa">—</span>
+        <span class="fact-bonus" id="csbonus_sa">—</span>
+      </div>
+      <div class="fact-row">
+        <div class="fact-name">CAC факт ($)</div>
+        <input class="fact-input" type="number" id="cs_cac" value="36" step="0.1" oninput="calcCustom()">
+        <span class="fact-badge" id="csb_cac">—</span>
+        <span class="fact-bonus" id="csbonus_cac">—</span>
+      </div>
+      <div class="fact-row">
+        <div class="fact-name">Доля рынка факт (%)</div>
+        <input class="fact-input" type="number" id="cs_mkt" value="15" step="0.1" oninput="calcCustom()">
+        <span class="fact-badge" id="csb_mkt">—</span>
+        <span class="fact-bonus" id="csbonus_mkt">—</span>
+      </div>
+      <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:14px; color:var(--text2)">Итого к выплате</span>
+        <span style="font-size:24px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--gold);" id="cs_total">—</span>
+      </div>
+    </div>
+
+  </div><!-- /tab-simulation -->
+
+</div><!-- /page -->
+
+<script>
+// ===== STATE =====
+const REAL_DATA = {
+  march: { name: 'Март 2026', leads_plan: 183, leads_fact: 205, sa: 20.49, cac: 37.84, mkt: 0, mkt_excl: true },
+  april: { name: 'Апрель 2026', leads_plan: 232, leads_fact: 216, sa: 28.24, cac: 39.3, mkt: 15.98 }
+};
+
+function getS(id) { return parseFloat(document.getElementById(id).value) || 0; }
+function getSettings() {
+  return {
+    leads: { yellow: getS('s_leads_yellow'), green: getS('s_leads_green'), extra: getS('s_leads_extra'), bonus: getS('s_leads_bonus'), bextra: getS('s_leads_bextra') },
+    sa: { red: getS('s_sa_red'), extra: getS('s_sa_extra'), bonus: getS('s_sa_bonus'), bextra: getS('s_sa_bextra') },
+    cac: { green: getS('s_cac_green'), yellow: getS('s_cac_yellow'), extra: getS('s_cac_extra'), bonus: getS('s_cac_bonus'), bextra: getS('s_cac_bextra') },
+    mkt: { red: getS('s_mkt_red'), extra: getS('s_mkt_extra'), bonus: getS('s_mkt_bonus'), bextra: getS('s_mkt_bextra') }
+  };
+}
+
+// ===== KPI CALCULATORS =====
+function calcLeads(fact, plan, s) {
+  if (!fact || !plan) return { zone:'none', bonus:0, label:'—', pct:0 };
+  const pct = (fact / plan * 100);
+  if (pct >= s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра '+pct.toFixed(1)+'%', pct };
+  if (pct >= s.green) return { zone:'green', bonus:s.bonus, label:'✓ '+pct.toFixed(1)+'%', pct };
+  if (pct >= s.yellow) return { zone:'yellow', bonus:Math.round(s.bonus*0.5), label:'~ '+pct.toFixed(1)+'%', pct };
+  return { zone:'red', bonus:0, label:'✗ '+pct.toFixed(1)+'%', pct };
+}
+function calcSA(fact, s) {
+  if (!fact) return { zone:'none', bonus:0, label:'—', pct:0 };
+  if (fact >= s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра '+fact.toFixed(1)+'%', pct: Math.min(fact/s.extra*100,120) };
+  if (fact >= s.red) return { zone:'green', bonus:s.bonus, label:'✓ '+fact.toFixed(1)+'%', pct: fact/s.extra*100 };
+  return { zone:'red', bonus:0, label:'✗ '+fact.toFixed(1)+'%', pct: fact/s.red*80 };
+}
+function calcCAC(fact, s) {
+  if (!fact) return { zone:'none', bonus:0, label:'—', pct:0 };
+  if (fact < s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра $'+fact.toFixed(1), pct:95 };
+  if (fact <= s.green) return { zone:'green', bonus:s.bonus, label:'✓ $'+fact.toFixed(1), pct:70 };
+  if (fact <= s.yellow) return { zone:'yellow', bonus:Math.round(s.bonus*0.5), label:'~ $'+fact.toFixed(1), pct:40 };
+  return { zone:'red', bonus:0, label:'✗ $'+fact.toFixed(1), pct:15 };
+}
+function calcMkt(fact, s, excluded) {
+  if (excluded) return { zone:'excl', bonus:0, label:'Исключён', pct:0 };
+  if (!fact) return { zone:'none', bonus:0, label:'—', pct:0 };
+  if (fact >= s.extra) return { zone:'extra', bonus:s.bextra, label:'Экстра '+fact.toFixed(1)+'%', pct: Math.min(fact/s.extra*100,120) };
+  if (fact >= s.red) return { zone:'green', bonus:s.bonus, label:'✓ '+fact.toFixed(1)+'%', pct: fact/s.extra*100 };
+  return { zone:'red', bonus:0, label:'✗ '+fact.toFixed(1)+'%', pct: fact/s.red*80 };
+}
+
+// ===== BADGE HELPER =====
+const ZONE_STYLES = {
+  red:    { bg:'var(--red-bg)',    color:'var(--red)',    border:'var(--red-border)',    barColor:'var(--red)' },
+  yellow: { bg:'var(--yellow-bg)', color:'var(--yellow)', border:'var(--yellow-border)', barColor:'var(--yellow)' },
+  green:  { bg:'var(--green-bg)',  color:'var(--green)',  border:'var(--green-border)',  barColor:'var(--green)' },
+  extra:  { bg:'var(--gold-bg)',   color:'var(--gold)',   border:'var(--gold-border)',   barColor:'var(--gold)' },
+  excl:   { bg:'rgba(139,147,168,0.1)', color:'var(--text3)', border:'var(--border)', barColor:'var(--text3)' },
+  none:   { bg:'transparent', color:'var(--text3)', border:'transparent', barColor:'transparent' }
+};
+function applyBadge(badgeId, res) {
+  const el = document.getElementById(badgeId);
+  if (!el) return;
+  const st = ZONE_STYLES[res.zone] || ZONE_STYLES.none;
+  el.style.background = st.bg; el.style.color = st.color;
+  el.style.border = '1px solid '+st.border;
+  el.textContent = res.label;
+}
+function applyBar(barId, res) {
+  const el = document.getElementById(barId);
+  if (!el) return;
+  const st = ZONE_STYLES[res.zone] || ZONE_STYLES.none;
+  el.style.width = Math.min(Math.max(res.pct,0),100).toFixed(1)+'%';
+  el.style.background = st.barColor;
+}
+function applyBonus(bonusId, res) {
+  const el = document.getElementById(bonusId);
+  if (!el) return;
+  const st = ZONE_STYLES[res.zone] || ZONE_STYLES.none;
+  el.style.color = res.zone==='none' ? 'var(--text3)' : st.color;
+  el.textContent = res.zone==='none' ? '—' : '$'+res.bonus;
+}
+
+// ===== CORRIDOR RENDERER =====
+function renderCorridor(containerId, zones) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = zones.map(z => `<div class="cor-zone cz-${z.cls}"><span class="czlabel">${z.label}</span><span class="czval">${z.val}</span></div>`).join('');
+}
+
+function updateCorridors() {
+  const st = getSettings();
+  renderCorridor('cor_leads', [
+    { cls:'red', label:'Провал', val: '<'+st.leads.yellow+'%' },
+    { cls:'yellow', label:'Жёлтый', val: st.leads.yellow+'–'+(st.leads.green-1)+'%' },
+    { cls:'green', label:'Зелёный', val: st.leads.green+'–'+(st.leads.extra-1)+'%' },
+    { cls:'extra', label:'Экстра', val: '≥'+st.leads.extra+'%' }
+  ]);
+  renderCorridor('cor_sa', [
+    { cls:'red', label:'Провал', val: '<'+st.sa.red+'%' },
+    { cls:'green', label:'Зелёный', val: st.sa.red+'–'+(st.sa.extra-0.01).toFixed(0)+'%' },
+    { cls:'extra', label:'Экстра', val: '≥'+st.sa.extra+'%' }
+  ]);
+  renderCorridor('cor_cac', [
+    { cls:'extra', label:'Экстра', val: '<$'+st.cac.extra },
+    { cls:'green', label:'Зелёный', val: '$'+st.cac.extra+'–$'+st.cac.green },
+    { cls:'yellow', label:'Жёлтый', val: '$'+st.cac.green+'–$'+st.cac.yellow },
+    { cls:'red', label:'Провал', val: '>$'+st.cac.yellow }
+  ]);
+  renderCorridor('cor_mkt', [
+    { cls:'red', label:'Провал', val: '<'+st.mkt.red+'%' },
+    { cls:'green', label:'Зелёный', val: st.mkt.red+'–'+(st.mkt.extra-0.1).toFixed(1)+'%' },
+    { cls:'extra', label:'Экстра', val: '≥'+st.mkt.extra+'%' }
+  ]);
+}
+
+// ===== MONTH TAB =====
+function calcMonth() {
+  const st = getSettings();
+  const name = document.getElementById('m_name').value || '—';
+  document.getElementById('m_name_result').textContent = name;
+  const plan = parseFloat(document.getElementById('mp_leads_plan').value) || 0;
+  document.getElementById('mp_leads_plan_show').textContent = 'план: '+plan;
+  document.getElementById('mp_sa_show').textContent = st.sa.red;
+  document.getElementById('mp_cac_show').textContent = st.cac.green;
+  document.getElementById('mp_mkt_show').textContent = st.mkt.red;
+
+  const fLeads = parseFloat(document.getElementById('mf_leads').value);
+  const fSA = parseFloat(document.getElementById('mf_sa').value);
+  const fCAC = parseFloat(document.getElementById('mf_cac').value);
+  const fMkt = parseFloat(document.getElementById('mf_mkt').value);
+
+  const rL = calcLeads(fLeads, plan, st.leads);
+  const rS = calcSA(fSA, st.sa);
+  const rC = calcCAC(fCAC, st.cac);
+  const rM = calcMkt(fMkt, st.mkt, false);
+
+  [['mb_leads','mbar_leads','mbonus_leads',rL],['mb_sa','mbar_sa','mbonus_sa',rS],
+   ['mb_cac','mbar_cac','mbonus_cac',rC],['mb_mkt','mbar_mkt','mbonus_mkt',rM]].forEach(([b,bar,bon,r])=>{
+    applyBadge(b,r); applyBar(bar,r); applyBonus(bon,r);
+  });
+
+  const setRval = (id, r) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const st2 = ZONE_STYLES[r.zone] || ZONE_STYLES.none;
+    el.style.color = r.zone==='none' ? 'var(--text3)' : st2.color;
+    el.textContent = r.zone==='none' ? '—' : '$'+r.bonus;
+  };
+  setRval('mr_leads',rL); setRval('mr_sa',rS); setRval('mr_cac',rC); setRval('mr_mkt',rM);
+
+  const quant = rL.bonus + rS.bonus + rC.bonus + rM.bonus;
+  const total = 350 + 350 + quant;
+  const tEl = document.getElementById('mr_total');
+  tEl.textContent = '$'+total;
+  tEl.style.color = total >= 900 ? 'var(--gold)' : total >= 800 ? 'var(--green)' : total >= 700 ? 'var(--yellow)' : 'var(--red)';
+}
+
+// ===== SIMULATION RENDERER =====
+function renderSimMonth(containerId, data, st) {
+  const rL = calcLeads(data.leads_fact, data.leads_plan, st.leads);
+  const rS = calcSA(data.sa, st.sa);
+  const rC = calcCAC(data.cac, st.cac);
+  const rM = calcMkt(data.mkt, st.mkt, data.mkt_excl);
+  const quant = rL.bonus + rS.bonus + rC.bonus + rM.bonus;
+  const total = 350 + 350 + quant;
+
+  const zoneHtml = (r, name, factStr, planStr) => {
+    const s = ZONE_STYLES[r.zone] || ZONE_STYLES.none;
+    return `<div class="sim-kpi" style="border-color:${s.border}">
+      <div class="sk-name">${name}</div>
+      <div class="sk-fact" style="color:${s.color}">${factStr}</div>
+      <div class="sk-plan">${planStr}</div>
+      <span class="sk-badge" style="background:${s.bg};color:${s.color};border:1px solid ${s.border}">${r.label}</span>
+      <div class="sk-bonus" style="color:${s.color}">$${r.bonus}</div>
+    </div>`;
+  };
+
+  const totalColor = total >= 900 ? 'var(--gold)' : total >= 800 ? 'var(--green)' : total >= 700 ? 'var(--yellow)' : 'var(--red)';
+  const pctLeads = data.leads_plan ? (data.leads_fact/data.leads_plan*100).toFixed(1)+'%' : '—';
+
+  document.getElementById(containerId).innerHTML = `
+    <div class="sim-month-header">
+      <div class="sim-month-name">${data.name}</div>
+      <div class="sim-month-total" style="color:${totalColor}">$${total} <span style="font-size:13px;color:var(--text3)">из $900</span></div>
+    </div>
+    <div class="sim-grid">
+      ${zoneHtml(rL,'Лиды',data.leads_fact+' шт','план '+data.leads_plan+' / '+pctLeads)}
+      ${zoneHtml(rS,'SA%',data.sa.toFixed(1)+'%','норма ≥'+st.sa.red+'%')}
+      ${zoneHtml(rC,'CAC','$'+data.cac,'норма ≤$'+st.cac.green)}
+      ${zoneHtml(rM,'Доля рынка',data.mkt_excl ? 'исключён' : data.mkt.toFixed(1)+'%','норма ≥'+st.mkt.red+'%')}
+    </div>
+    <div style="display:flex;gap:1.5rem;font-size:12px;color:var(--text3);flex-wrap:wrap;">
+      <span>Ставка: <strong style="color:var(--text)">$350</strong></span>
+      <span>Кач. бонус: <strong style="color:var(--blue)">$350</strong></span>
+      <span>Кол. бонус: <strong style="color:${quant>0?'var(--green)':'var(--red)'}">$${quant}</strong></span>
+    </div>
+  `;
+  return { total, quant };
+}
+
+function calcCustom() {
+  const st = getSettings();
+  const plan = parseFloat(document.getElementById('cs_leads_plan').value)||0;
+  const fact = parseFloat(document.getElementById('cs_leads_fact').value);
+  const sa = parseFloat(document.getElementById('cs_sa').value);
+  const cac = parseFloat(document.getElementById('cs_cac').value);
+  const mkt = parseFloat(document.getElementById('cs_mkt').value);
+  const rL = calcLeads(fact, plan, st.leads);
+  const rS = calcSA(sa, st.sa);
+  const rC = calcCAC(cac, st.cac);
+  const rM = calcMkt(mkt, st.mkt, false);
+  applyBadge('csb_leads',rL); applyBonus('csbonus_leads',rL);
+  applyBadge('csb_sa',rS); applyBonus('csbonus_sa',rS);
+  applyBadge('csb_cac',rC); applyBonus('csbonus_cac',rC);
+  applyBadge('csb_mkt',rM); applyBonus('csbonus_mkt',rM);
+  const total = 350+350+rL.bonus+rS.bonus+rC.bonus+rM.bonus;
+  const el = document.getElementById('cs_total');
+  el.textContent = '$'+total;
+  el.style.color = total>=900?'var(--gold)':total>=800?'var(--green)':total>=700?'var(--yellow)':'var(--red)';
+}
+
+function updateSimulation() {
+  const st = getSettings();
+  const mR = renderSimMonth('sim_march', REAL_DATA.march, st);
+  const mA = renderSimMonth('sim_april', REAL_DATA.april, st);
+
+  // Old system results (from image data)
+  const OLD = { march: 800, april: 800 };
+  const tbody = document.getElementById('compare_body');
+  tbody.innerHTML = [
+    { name:'Март 2026', old: OLD.march, newV: mR.total },
+    { name:'Апрель 2026', old: OLD.april, newV: mA.total }
+  ].map(r => {
+    const diff = r.newV - r.old;
+    const diffStr = (diff>0?'+':'') + diff;
+    const diffColor = diff>0?'var(--green)':diff<0?'var(--red)':'var(--text2)';
+    const lostOld = r.old - 900;
+    const lostNew = r.newV - 900;
+    return `<tr>
+      <td>${r.name}</td>
+      <td class="mono">$${r.old}</td>
+      <td class="mono" style="color:var(--green)">$${r.newV}</td>
+      <td class="mono" style="color:${diffColor}">${diffStr}</td>
+      <td class="mono" style="color:${lostNew<0?'var(--red)':'var(--green)'}">${lostNew<0?lostNew:'✓'}</td>
+    </tr>`;
+  }).join('');
+  calcCustom();
+}
+
+// ===== SETTINGS SAVE/LOAD =====
+function saveSettings() {
+  const fields = ['s_leads_yellow','s_leads_green','s_leads_extra','s_leads_bonus','s_leads_bextra',
+    's_sa_red','s_sa_extra','s_sa_bonus','s_sa_bextra',
+    's_cac_green','s_cac_yellow','s_cac_extra','s_cac_bonus','s_cac_bextra',
+    's_mkt_red','s_mkt_extra','s_mkt_bonus','s_mkt_bextra'];
+  const data = {};
+  fields.forEach(id => { data[id] = document.getElementById(id).value; });
+  localStorage.setItem('lolita_settings', JSON.stringify(data));
+}
+function loadSettings() {
+  try {
+    const saved = localStorage.getItem('lolita_settings');
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    Object.entries(data).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    });
+  } catch(e) {}
+}
+
+// ===== TABS =====
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+  if (name==='simulation') updateSimulation();
+  if (name==='month') calcMonth();
+}
+
+// ===== MASTER UPDATE =====
+function updateAll() {
+  updateCorridors();
+  calcMonth();
+  if (document.getElementById('tab-simulation').classList.contains('active')) updateSimulation();
+  calcCustom();
+}
+
+// ===== INIT =====
+loadSettings();
+updateCorridors();
+calcMonth();
+calcCustom();
+</script>
+</body>
+</html>
