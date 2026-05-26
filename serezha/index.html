@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Финмотивация — Сережа</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252d3f;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#e8eaf0;--text2:#8b93a8;--text3:#5a6278;
+  --accent:#4f7cff;--accent2:#6b8fff;
+  --green:#22c55e;--green-bg:rgba(34,197,94,0.1);--green-border:rgba(34,197,94,0.25);
+  --yellow:#f59e0b;--yellow-bg:rgba(245,158,11,0.1);--yellow-border:rgba(245,158,11,0.25);
+  --red:#ef4444;--red-bg:rgba(239,68,68,0.1);--red-border:rgba(239,68,68,0.25);
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,0.12);--blue-border:rgba(59,130,246,0.3);
+  --gold:#f0b429;--gold-bg:rgba(240,180,41,0.1);--gold-border:rgba(240,180,41,0.3);
+  --radius:10px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+.page{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+
+/* HEADER */
+.header{margin-bottom:2rem;}
+.header-top{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4f7cff,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;}
+.header h1{font-size:22px;font-weight:600;}
+.header .sub{font-size:13px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-left:54px;}
+.badge-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border);}
+.badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.badge-gold{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
+
+/* MAIN TABS */
+.tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:4px;margin-bottom:1.5rem;overflow-x:auto;}
+.tab{flex:1;padding:9px 10px;font-size:12px;font-weight:500;color:var(--text2);background:transparent;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;text-align:center;white-space:nowrap;}
+.tab:hover{color:var(--text);background:var(--bg3);}
+.tab.active{background:var(--bg4);color:var(--text);border:1px solid var(--border2);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;}
+.card-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;}
+.card-title span{color:var(--accent2);}
+
+/* GRIDS */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+
+/* FIELD */
+.kpi-block{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;margin-bottom:.75rem;}
+.kpi-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.kpi-desc{font-size:11px;color:var(--text3);margin-bottom:1rem;line-height:1.5;}
+.field{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.field label{font-size:12px;color:var(--text2);flex:1;min-width:0;}
+.field input[type=number]{width:80px;font-size:12px;font-family:'JetBrains Mono',monospace;padding:5px 8px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;transition:border-color 0.15s;}
+.field input[type=number]:focus{border-color:var(--accent);}
+.field input[type=text]{flex:1;font-size:12px;font-family:'Inter',sans-serif;padding:5px 8px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;transition:border-color 0.15s;}
+.field input[type=text]:focus{border-color:var(--accent);}
+.field .unit{font-size:11px;color:var(--text3);min-width:20px;font-family:'JetBrains Mono',monospace;}
+
+/* LOGIC BOX */
+.logic-box{background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.15);border-radius:var(--radius-sm);padding:10px 12px;margin-top:10px;}
+.logic-box p{font-size:11px;color:var(--text2);line-height:1.6;}
+.logic-box strong{color:var(--accent2);}
+
+/* REG TABLES */
+.reg-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.reg-table th{padding:7px 10px;text-align:left;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.reg-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;}
+.reg-table td:first-child{color:var(--text);font-weight:500;}
+
+/* NOTICE */
+.notice{background:rgba(240,180,41,0.06);border:1px solid rgba(240,180,41,0.2);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;}
+.notice p{font-size:12px;color:#fcd34d;line-height:1.6;}
+.notice-info{background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.15);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;}
+.notice-info p{font-size:12px;color:var(--accent2);line-height:1.6;}
+
+/* QUAL ROWS */
+.qual-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+.qual-row:last-child{border-bottom:none;}
+.qual-check{width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex-shrink:0;margin-top:2px;}
+.qual-info{flex:1;}
+.qual-name{font-size:13px;color:var(--text);font-weight:500;}
+.qual-desc{font-size:11px;color:var(--text3);margin-top:3px;line-height:1.5;}
+.qual-bonus{font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--green);min-width:50px;text-align:right;}
+
+/* CRITERIA BLOCK */
+.criteria-block{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px;}
+.criteria-block p{font-size:12px;color:var(--text2);line-height:1.7;}
+.criteria-block ul{padding-left:16px;margin-top:4px;}
+.criteria-block li{font-size:12px;color:var(--text2);line-height:1.7;}
+
+/* RESULT PANEL */
+.result-panel{background:linear-gradient(135deg,rgba(79,124,255,0.08),rgba(34,197,94,0.05));border:1px solid rgba(79,124,255,0.2);border-radius:var(--radius);padding:1.5rem;}
+.result-panel h3{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:1rem;}
+.result-line{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.result-line:last-child{border-bottom:none;}
+.result-line.total{font-size:18px;font-weight:600;padding-top:12px;margin-top:4px;}
+.rname{color:var(--text2);}
+.rval{font-family:'JetBrains Mono',monospace;font-weight:500;}
+
+/* HISTORY */
+.history-table{width:100%;border-collapse:collapse;font-size:13px;}
+.history-table th{padding:8px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap;}
+.history-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2);}
+.history-table td:first-child{color:var(--text);font-weight:500;}
+.history-table tr:hover td{background:var(--bg3);}
+.history-table .empty-row td{text-align:center;color:var(--text3);font-size:12px;padding:2rem;}
+.history-controls{display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap;align-items:center;}
+.history-filter{font-size:13px;padding:6px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;}
+
+/* STAT */
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;}
+.stat-card .slabel{font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;}
+.stat-card .svalue{font-size:24px;font-weight:600;font-family:'JetBrains Mono',monospace;}
+.stat-card .sdesc{font-size:11px;color:var(--text3);margin-top:4px;}
+
+/* BTN */
+.btn{padding:8px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;border:none;}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent2);}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+.btn-danger:hover{background:rgba(239,68,68,0.2);}
+.btn-ghost{background:var(--bg4);color:var(--text2);border:1px solid var(--border2);}
+.btn-ghost:hover{color:var(--text);}
+
+/* MISC */
+.month-row{display:flex;align-items:center;gap:12px;margin-bottom:1rem;flex-wrap:wrap;}
+.month-row label{font-size:13px;color:var(--text2);}
+.month-row select{font-size:13px;padding:6px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg4);color:var(--text);outline:none;}
+.zone-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+
+@media(max-width:640px){
+  .grid-3{grid-template-columns:1fr 1fr;}
+  .tabs{gap:2px;}.tab{padding:8px 6px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="avatar">С</div>
+    <div><h1>Сережа — Финансовая мотивация</h1></div>
+  </div>
+  <div class="sub">IT-специалист · Sambanis / Portraithy · 2026–2027</div>
+  <div class="badge-row">
+    <span class="badge badge-blue">Ставка <span id="hdr_rate">$1 600</span></span>
+    <span class="badge badge-green">Бонусы до <span id="hdr_bonus_max">$150</span></span>
+    <span class="badge badge-gold">Итого до <span id="hdr_total_max">$1 750</span></span>
+  </div>
+</div>
+
+<!-- MAIN TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('regulation')">📋 Регламент</button>
+  <button class="tab" onclick="switchTab('settings')">⚙ Настройки</button>
+  <button class="tab" onclick="switchTab('simulation')">🔬 Симуляция</button>
+  <button class="tab" onclick="switchTab('month')">📅 План и факт</button>
+  <button class="tab" onclick="switchTab('history')">📊 История</button>
+</div>
+
+<!-- ========== REGULATION ========== -->
+<div id="tab-regulation" class="tab-content active">
+
+  <div class="card">
+    <div class="card-title">ЦКП — Ценный конечный продукт</div>
+    <p style="font-size:14px;color:var(--text);font-weight:500;line-height:1.7;">IT-инфраструктура компании работает <strong style="color:var(--green)">стабильно и проактивно</strong>: системы мониторятся, инциденты устраняются <strong style="color:var(--green)">своевременно</strong>, команда обеспечена технической поддержкой, знания зафиксированы в базе.</p>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <span class="badge badge-blue">Стабильность систем</span>
+      <span class="badge badge-green">Быстрое устранение инцидентов</span>
+      <span class="badge badge-gold">Знания в базе</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Структура выплат <span>(обновляется из настроек)</span></div>
+    <table class="reg-table" id="reg-structure-table">
+      <thead><tr><th>Компонент</th><th>Сумма</th><th>Условие</th></tr></thead>
+      <tbody id="reg-structure-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Бонусные блоки <span>(обновляется из настроек)</span></div>
+    <div class="notice"><p>⭐ Каждый бонусный блок — это конкретные критерии качества работы. Бонус выплачивается при соответствии критериям в течение месяца.</p></div>
+    <table class="reg-table">
+      <thead><tr><th>Блок</th><th>Критерии</th><th>Бонус</th></tr></thead>
+      <tbody id="reg-qual-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Принципы системы</div>
+    <ul style="padding-left:18px;">
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Ставка выплачивается всегда — это базовый стандарт</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Каждый бонус — самостоятельный блок, независимый от других</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Главная цель — чтобы ты получал <strong style="color:var(--accent2)">все бонусы полностью каждый месяц</strong></li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Если бонус не выплачивается — это сигнал, что нужно вместе разобраться</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;">Следующий пересмотр условий — при выходе e-com направления на $25 000+ выручки</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Детальные критерии по блокам</div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Блок 1 — Мониторинг и стабильность систем</div>
+      <div class="criteria-block">
+        <ul>
+          <li>Самостоятельное отслеживание состояния коннекторов AmoCRM, почты и памяти сервера — <strong>проактивно</strong>, не по факту жалоб</li>
+          <li>При обнаружении проблемы: уведомление команды в течение <strong>1 часа</strong>, устранение — в течение <strong>рабочего дня</strong></li>
+          <li>Память AmoCRM чистится до момента, когда она начинает мешать работе команды</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Блок 2 — Качество планирования и выполнение спринта</div>
+      <div class="criteria-block">
+        <ul>
+          <li>Самостоятельное формирование плана спринта: регулярные процессы + буфер на непредвиденные задачи</li>
+          <li>Приоритеты согласованы с руководителем <strong>до начала спринта</strong></li>
+          <li>Цель — выполнение <strong>80%+</strong> запланированного объёма</li>
+          <li>Один сбой по объективной причине на бонус не влияет, систематическое недовыполнение — влияет</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Блок 3 — Техподдержка команды (SLA)</div>
+      <div class="criteria-block">
+        <ul>
+          <li>Плановые запросы: ответ в течение <strong>1 часа</strong>, решение в течение рабочего дня</li>
+          <li>Критический запрос (блокирует работу отдела): ответ в течение <strong>15 минут</strong> — даже во время звонка</li>
+          <li>Самостоятельная оценка приоритета запроса</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Блок 4 — Документация в Platrum</div>
+      <div class="criteria-block">
+        <ul>
+          <li>Минимум <strong>2 статьи в месяц</strong> в корпоративной базе знаний</li>
+          <li>Темы: устройство систем, инструкции для пользователей, правила безопасности, настройка инструментов</li>
+          <li>Задача фиксируется в плане спринта заранее</li>
+          <li>Цель: любой в команде может разобраться в базовых вещах самостоятельно</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <div class="card-title">Следующий пересмотр</div>
+    <div style="background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.12);border-radius:var(--radius-sm);padding:12px 16px;">
+      <p style="font-size:13px;color:var(--text2);line-height:1.7;">Следующий разговор о зарплате — когда <strong style="color:var(--accent2)">e-com направление выйдет на $25 000+ выручки</strong> в месяц. Это конкретная точка: не дата, а результат. Как только это происходит — садимся и разговариваем.</p>
+    </div>
+  </div>
+
+</div><!-- /regulation -->
+
+<!-- ========== SETTINGS ========== -->
+<div id="tab-settings" class="tab-content">
+  <div class="notice-info"><p>⚙ Изменения применяются после нажатия «Сохранить». До этого — показывается бейдж «Есть несохранённые изменения».</p></div>
+
+  <div class="card">
+    <div class="card-title">Фиксированная ставка</div>
+    <div class="kpi-block">
+      <div class="field"><label>Размер ставки</label><input type="number" id="s_rate" value="1600" min="0" oninput="markDirty()"><span class="unit">$</span></div>
+      <div class="logic-box"><p>Ставка выплачивается <strong>всегда</strong>, независимо от результатов по бонусным блокам.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Бонусные блоки — критерии и суммы</div>
+    <div class="notice"><p>📌 Редактируйте название, описание и сумму каждого блока.</p></div>
+    <div class="kpi-block" id="qual-settings-block"><!-- rendered by JS --></div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-ghost" style="font-size:12px;padding:6px 14px" onclick="addQualItem()">+ Добавить блок</button>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:12px;margin-top:1rem;padding:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
+    <button class="btn btn-primary save-settings-btn" onclick="applyAndSaveSettings()">💾 Сохранить</button>
+    <span class="settings-dirty-badge" style="display:none;font-size:11px;background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);padding:3px 10px;border-radius:20px;">● Есть несохранённые изменения</span>
+    <span style="font-size:12px;color:var(--text3)">Изменения применятся после нажатия «Сохранить»</span>
+  </div>
+</div><!-- /settings -->
+
+<!-- ========== SIMULATION ========== -->
+<div id="tab-simulation" class="tab-content">
+  <div class="card">
+    <div class="card-title">Симуляция месяца</div>
+    <div class="notice-info"><p>🔬 Отметьте выполненные блоки — увидите итоговую сумму. Данные не сохраняются.</p></div>
+    <div id="sim-qual-rows"><!-- rendered by JS --></div>
+  </div>
+
+  <div class="result-panel">
+    <h3>Результат симуляции</h3>
+    <div class="result-line"><span class="rname">Фиксированная ставка</span><span class="rval" id="cr_rate">—</span></div>
+    <div id="cr-qual-lines"><!-- rendered by JS --></div>
+    <div class="result-line total"><span class="rname">Итого</span><span class="rval" id="cr_total" style="color:var(--green)">—</span></div>
+  </div>
+</div><!-- /simulation -->
+
+<!-- ========== MONTH ========== -->
+<div id="tab-month" class="tab-content">
+  <div class="card">
+    <div class="card-title">Выберите месяц</div>
+    <div class="month-row">
+      <label>Месяц:</label>
+      <select id="mp_month_select" onchange="calcMonth()"><option value="">— выберите —</option></select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Бонусные блоки <span>(галочки влияют на итог)</span></div>
+    <div class="notice"><p>📌 Отметьте выполненные блоки. Снятая галочка = бонус за этот блок не начислен.</p></div>
+    <div id="month-qual-rows"><!-- rendered by JS --></div>
+  </div>
+
+  <div class="result-panel">
+    <h3>Итоговый расчёт</h3>
+    <div class="result-line"><span class="rname">Фиксированная ставка</span><span class="rval" id="r_rate">$1 600</span></div>
+    <div id="r-qual-lines"><!-- rendered by JS --></div>
+    <div class="result-line total"><span class="rname">Итого</span><span class="rval" id="r_total" style="color:var(--green)">—</span></div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-top:1rem;flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="saveMonth()">💾 Сохранить в историю</button>
+    <button class="btn btn-ghost" onclick="clearMonth()">✕ Очистить форму</button>
+  </div>
+  <div id="save-msg" style="font-size:12px;color:var(--green);margin-top:8px;display:none">✓ Месяц сохранён</div>
+</div><!-- /month -->
+
+<!-- ========== HISTORY ========== -->
+<div id="tab-history" class="tab-content">
+  <div class="card">
+    <div class="card-title">История по месяцам</div>
+    <div class="history-controls">
+      <select class="history-filter" id="hist_filter" onchange="renderHistory()">
+        <option value="all">Все месяцы</option>
+        <option value="2026">2026 год</option>
+        <option value="2027">2027 год</option>
+      </select>
+      <button class="btn btn-ghost" onclick="exportHistory()">📥 Экспорт CSV</button>
+      <button class="btn btn-danger" onclick="showClearConfirm()" style="margin-left:auto">🗑 Очистить всё</button>
+    </div>
+    <!-- inline confirm -->
+    <div id="clear-confirm" style="display:none;background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:1rem;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="font-size:13px;color:var(--red);flex:1">Удалить всю историю? Это нельзя отменить.</span>
+      <button class="btn btn-danger" onclick="confirmClearHistory()" style="padding:6px 16px">Да, удалить</button>
+      <button class="btn btn-ghost" onclick="hideClearConfirm()" style="padding:6px 16px">Отмена</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="history-table">
+        <thead><tr id="history-thead"><th>Месяц</th><th>Итого бонус</th><th>Итого</th><th></th></tr></thead>
+        <tbody id="history-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="history-summary" class="grid-3" style="margin-top:1rem;display:none"></div>
+</div><!-- /history -->
+
+</div><!-- /page -->
+<script>
+// ==============================
+// DATA
+// ==============================
+const MONTHS_ALL=['Январь 2026','Февраль 2026','Март 2026','Апрель 2026','Май 2026','Июнь 2026','Июль 2026','Август 2026','Сентябрь 2026','Октябрь 2026','Ноябрь 2026','Декабрь 2026','Январь 2027','Февраль 2027','Март 2027','Апрель 2027','Май 2027','Июнь 2027','Июль 2027','Август 2027','Сентябрь 2027','Октябрь 2027','Ноябрь 2027','Декабрь 2027'];
+
+// Default bonus blocks (4 блока из документа)
+let qualItems=[
+  {
+    name:'Мониторинг и стабильность систем',
+    desc:'Проактивный мониторинг AmoCRM, почты, сервера. Уведомление за 1 ч, устранение за рабочий день.',
+    bonus:50
+  },
+  {
+    name:'Качество планирования и выполнение спринта',
+    desc:'Самостоятельный план, согласованные приоритеты, выполнение 80%+ объёма.',
+    bonus:50
+  },
+  {
+    name:'Техподдержка команды (SLA)',
+    desc:'Плановые запросы — 1 час / рабочий день. Критические — 15 минут ответа.',
+    bonus:25
+  },
+  {
+    name:'Документация в Platrum',
+    desc:'Минимум 2 статьи в месяц в корпоративной базе знаний.',
+    bonus:25
+  },
+];
+
+// ==============================
+// HELPERS
+// ==============================
+function v(id){const el=document.getElementById(id);return el?el.value:0;}
+function n(id){return +v(id)||0;}
+function si(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
+function st(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ==============================
+// SETTINGS
+// ==============================
+function getRate(){return n('s_rate');}
+let appliedRate=null;
+let appliedQualItems=null;
+let settingsDirty=false;
+function getAppliedRate(){return appliedRate!==null?appliedRate:getRate();}
+function getAppliedQual(){return appliedQualItems||qualItems;}
+
+function markDirty(){
+  settingsDirty=true;
+  document.querySelectorAll('.save-settings-btn').forEach(btn=>{
+    btn.style.background='var(--yellow)';btn.style.color='#000';btn.textContent='💾 Сохранить изменения';
+  });
+  document.querySelectorAll('.settings-dirty-badge').forEach(el=>el.style.display='inline-block');
+}
+
+function applyAndSaveSettings(){
+  appliedRate=getRate();
+  appliedQualItems=JSON.parse(JSON.stringify(qualItems));
+  saveSettings();
+  settingsDirty=false;
+  document.querySelectorAll('.save-settings-btn').forEach(btn=>{
+    btn.style.background='var(--green)';btn.style.color='#fff';btn.textContent='✓ Сохранено';
+    setTimeout(()=>{btn.style.background='var(--accent)';btn.style.color='#fff';btn.textContent='💾 Сохранить';},2000);
+  });
+  document.querySelectorAll('.settings-dirty-badge').forEach(el=>el.style.display='none');
+  updateAll();
+}
+
+function saveSettings(){
+  localStorage.setItem('serezha_s1',JSON.stringify({rate:getRate(),q:qualItems}));
+}
+
+function loadSettings(){
+  try{
+    const raw=localStorage.getItem('serezha_s1');
+    if(!raw) return;
+    const d=JSON.parse(raw);
+    if(d.rate!==undefined){const el=document.getElementById('s_rate');if(el)el.value=d.rate;}
+    if(d.q&&Array.isArray(d.q)) qualItems=d.q;
+  }catch(e){}
+}
+
+// ==============================
+// QUAL ITEMS MANAGEMENT
+// ==============================
+function renderQualSettings(){
+  const block=document.getElementById('qual-settings-block');
+  if(!block) return;
+  block.innerHTML=qualItems.map((item,i)=>`
+    <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:10px;margin-bottom:8px;">
+      <div class="field"><label style="font-size:11px;color:var(--text3)">Название блока</label><input type="text" value="${escHtml(item.name)}" oninput="updateQualItem(${i},'name',this.value)"></div>
+      <div class="field"><label style="font-size:11px;color:var(--text3)">Описание / критерии</label><input type="text" value="${escHtml(item.desc)}" oninput="updateQualItem(${i},'desc',this.value)"></div>
+      <div class="field">
+        <label style="font-size:11px;color:var(--text3)">Бонус</label>
+        <input type="number" value="${item.bonus}" min="0" style="width:80px;font-size:12px;font-family:'JetBrains Mono',monospace;padding:5px 8px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;" oninput="updateQualItem(${i},'bonus',+this.value)">
+        <span class="unit">$</span>
+        ${qualItems.length>1?`<button onclick="removeQualItem(${i})" style="margin-left:auto;background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;">✕</button>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateQualItem(i,field,val){
+  qualItems[i][field]=val;
+  markDirty();
+  renderQualSettings();
+}
+function addQualItem(){
+  qualItems.push({name:'Новый блок',desc:'Описание критериев',bonus:25});
+  markDirty();
+  renderQualSettings();
+}
+function removeQualItem(i){
+  qualItems.splice(i,1);
+  markDirty();
+  renderQualSettings();
+}
+
+function renderMonthQualRows(){
+  const el=document.getElementById('month-qual-rows');
+  if(!el) return;
+  const qi=getAppliedQual();
+  el.innerHTML=qi.map((item,i)=>`
+    <div class="qual-row">
+      <input type="checkbox" class="qual-check" id="mq${i}" checked onchange="calcMonth()">
+      <div class="qual-info">
+        <div class="qual-name">${escHtml(item.name)}</div>
+        <div class="qual-desc">${escHtml(item.desc)}</div>
+      </div>
+      <div class="qual-bonus" id="mqval${i}">$${item.bonus}</div>
+    </div>
+  `).join('');
+}
+
+function renderSimQualRows(){
+  const el=document.getElementById('sim-qual-rows');
+  if(!el) return;
+  const qi=getAppliedQual();
+  el.innerHTML=qi.map((item,i)=>`
+    <div class="qual-row">
+      <input type="checkbox" class="qual-check" id="sq${i}" checked onchange="calcSimulation()">
+      <div class="qual-info">
+        <div class="qual-name">${escHtml(item.name)}</div>
+        <div class="qual-desc">${escHtml(item.desc)}</div>
+      </div>
+      <div class="qual-bonus" id="sqval${i}">$${item.bonus}</div>
+    </div>
+  `).join('');
+}
+
+// ==============================
+// MONTH CALC
+// ==============================
+function calcMonth(){
+  const rate=getAppliedRate();
+  const qi=getAppliedQual();
+
+  const qualBonus=qi.reduce((sum,item,i)=>{
+    const cb=document.getElementById('mq'+i);
+    const checked=cb&&cb.checked;
+    const qv=document.getElementById('mqval'+i);
+    if(qv){qv.style.color=checked?'var(--green)':'var(--text3)';qv.style.textDecoration=checked?'none':'line-through';}
+    return sum+(checked?item.bonus:0);
+  },0);
+
+  st('r_rate','$'+rate);
+
+  // Render qual lines in result panel
+  const rl=document.getElementById('r-qual-lines');
+  if(rl) rl.innerHTML=qi.map((item,i)=>{
+    const cb=document.getElementById('mq'+i);
+    const checked=cb&&cb.checked;
+    return`<div class="result-line"><span class="rname">${escHtml(item.name)}</span><span class="rval" style="color:${checked?'var(--green)':'var(--text3)'};${checked?'':'text-decoration:line-through'}">$${item.bonus}</span></div>`;
+  }).join('');
+
+  const total=rate+qualBonus;
+  const tel=document.getElementById('r_total');
+  if(tel){tel.textContent='$'+total;tel.style.color=total>=1750?'var(--green)':total>=1700?'var(--yellow)':'var(--red)';}
+}
+
+function clearMonth(){
+  const qi=getAppliedQual();
+  qi.forEach((_,i)=>{const el=document.getElementById('mq'+i);if(el)el.checked=true;});
+  calcMonth();
+}
+
+// ==============================
+// SIMULATION CALC
+// ==============================
+function calcSimulation(){
+  const rate=getAppliedRate();
+  const qi=getAppliedQual();
+
+  const qualBonus=qi.reduce((sum,item,i)=>{
+    const cb=document.getElementById('sq'+i);
+    const checked=cb&&cb.checked;
+    const qv=document.getElementById('sqval'+i);
+    if(qv){qv.style.color=checked?'var(--green)':'var(--text3)';qv.style.textDecoration=checked?'none':'line-through';}
+    return sum+(checked?item.bonus:0);
+  },0);
+
+  st('cr_rate','$'+rate);
+
+  // Render qual lines in simulation result
+  const rl=document.getElementById('cr-qual-lines');
+  if(rl) rl.innerHTML=qi.map((item,i)=>{
+    const cb=document.getElementById('sq'+i);
+    const checked=cb&&cb.checked;
+    return`<div class="result-line"><span class="rname">${escHtml(item.name)}</span><span class="rval" style="color:${checked?'var(--green)':'var(--text3)'};${checked?'':'text-decoration:line-through'}">$${item.bonus}</span></div>`;
+  }).join('');
+
+  const total=rate+qualBonus;
+  const el=document.getElementById('cr_total');
+  if(el){el.textContent='$'+total;el.style.color=total>=1750?'var(--green)':total>=1700?'var(--yellow)':'var(--red)';}
+}
+
+// ==============================
+// SAVE / HISTORY
+// ==============================
+function getHistory(){try{return JSON.parse(localStorage.getItem('serezha_history')||'[]');}catch(e){return[];}}
+function saveHistoryData(h){localStorage.setItem('serezha_history',JSON.stringify(h));}
+
+function saveMonth(){
+  const month=v('mp_month_select');
+  if(!month){return;}
+  const rate=getAppliedRate();
+  const qi=getAppliedQual();
+
+  const qualBonus=qi.reduce((sum,item,i)=>{
+    const cb=document.getElementById('mq'+i);
+    return sum+((cb&&cb.checked)?item.bonus:0);
+  },0);
+
+  // Save per-block state
+  const blocks=qi.map((item,i)=>{
+    const cb=document.getElementById('mq'+i);
+    return{name:item.name,bonus:item.bonus,checked:cb?cb.checked:true};
+  });
+
+  const total=rate+qualBonus;
+  const entry={month,rate,qualBonus,blocks,total};
+
+  const h=getHistory().filter(e=>e.month!==month);
+  h.push(entry);
+  h.sort((a,b)=>MONTHS_ALL.indexOf(a.month)-MONTHS_ALL.indexOf(b.month));
+  saveHistoryData(h);
+  renderHistory();
+  const msg=document.getElementById('save-msg');
+  if(msg){msg.style.display='block';setTimeout(()=>msg.style.display='none',2500);}
+}
+
+function renderHistory(){
+  const h=getHistory();
+  const filter=document.getElementById('hist_filter').value;
+  const filtered=h.filter(e=>filter==='all'||e.month.includes(filter));
+  const tbody=document.getElementById('history-tbody');
+
+  if(!filtered.length){
+    if(tbody) tbody.innerHTML='<tr class="empty-row"><td colspan="4">Нет данных. Заполните месяц на вкладке «План и факт» и нажмите «Сохранить в историю».</td></tr>';
+    const hs=document.getElementById('history-summary');if(hs)hs.style.display='none';
+    return;
+  }
+
+  if(tbody) tbody.innerHTML=filtered.map(e=>{
+    const blockBadges=(e.blocks||[]).map(b=>`
+      <span style="display:inline-block;font-size:10px;padding:2px 6px;border-radius:10px;margin:1px;background:${b.checked?'var(--green-bg)':'var(--bg4)'};color:${b.checked?'var(--green)':'var(--text3)'};border:1px solid ${b.checked?'var(--green-border)':'var(--border)'}">${escHtml(b.name.length>20?b.name.slice(0,20)+'…':b.name)} $${b.bonus}</span>
+    `).join('');
+    return`<tr>
+      <td>${e.month}</td>
+      <td>${blockBadges}</td>
+      <td style="font-family:monospace;font-weight:700;color:${e.total>=1750?'var(--green)':e.total>=1700?'var(--yellow)':'var(--red)'}">$${e.total}</td>
+      <td><button class="del-month-btn" data-month="${e.month}" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);border-radius:var(--radius-sm);padding:4px 10px;font-size:11px;cursor:pointer;">✕</button></td>
+    </tr>`;
+  }).join('');
+
+  if(filtered.length>1){
+    const avg=Math.round(filtered.reduce((s,e)=>s+e.total,0)/filtered.length);
+    const max=Math.max(...filtered.map(e=>e.total));
+    const min=Math.min(...filtered.map(e=>e.total));
+    const hs=document.getElementById('history-summary');
+    if(hs){hs.style.display='grid';hs.innerHTML=`
+      <div class="stat-card"><div class="slabel">Средняя зарплата</div><div class="svalue" style="color:var(--green)">$${avg}</div><div class="sdesc">за ${filtered.length} мес.</div></div>
+      <div class="stat-card"><div class="slabel">Максимум</div><div class="svalue" style="color:var(--gold)">$${max}</div><div class="sdesc">лучший месяц</div></div>
+      <div class="stat-card"><div class="slabel">Минимум</div><div class="svalue" style="color:var(--red)">$${min}</div><div class="sdesc">худший месяц</div></div>
+    `;}
+  } else {
+    const hs=document.getElementById('history-summary');if(hs)hs.style.display='none';
+  }
+}
+
+function showClearConfirm(){
+  const el=document.getElementById('clear-confirm');
+  if(el){el.style.display='flex';}
+}
+function hideClearConfirm(){
+  const el=document.getElementById('clear-confirm');
+  if(el){el.style.display='none';}
+}
+function confirmClearHistory(){
+  localStorage.removeItem('serezha_history');
+  hideClearConfirm();
+  renderHistory();
+}
+function exportHistory(){
+  const h=getHistory();
+  if(!h.length){return;}
+  const hdr='Месяц,Ставка,Бонус итого,Итого';
+  const rows=h.map(e=>[e.month,e.rate,e.qualBonus,e.total].join(','));
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent([hdr,...rows].join('\n'));
+  a.download='serezha_kpi.csv';a.click();
+}
+
+// ==============================
+// REGULATION TABLES
+// ==============================
+function updateRegTables(){
+  const rate=getAppliedRate();
+  const qi=getAppliedQual();
+  const bonusMax=qi.reduce((acc,q)=>acc+q.bonus,0);
+  const total=rate+bonusMax;
+
+  // Header badges
+  st('hdr_rate','$'+rate);
+  st('hdr_bonus_max','$'+bonusMax);
+  st('hdr_total_max','$'+total);
+
+  // Structure table
+  const stb=document.getElementById('reg-structure-tbody');
+  if(stb) stb.innerHTML=`
+    <tr><td>Фиксированная ставка</td><td style="font-family:monospace;color:var(--text)">$${rate}</td><td>Выплачивается всегда</td></tr>
+    <tr><td>Бонусные блоки (${qi.length} блока)</td><td style="font-family:monospace;color:var(--text)">до $${bonusMax}</td><td>По каждому блоку при выполнении критериев</td></tr>
+    <tr><td><strong>Итого при выполнении всех</strong></td><td style="font-family:monospace;color:var(--green);font-weight:700">$${total}</td><td>Ставка + все бонусные блоки</td></tr>
+  `;
+
+  // Qual table
+  const qtb=document.getElementById('reg-qual-tbody');
+  if(qtb) qtb.innerHTML=qi.map(item=>`
+    <tr>
+      <td>${escHtml(item.name)}</td>
+      <td style="color:var(--text2);font-size:12px">${escHtml(item.desc)}</td>
+      <td style="font-family:monospace;color:var(--green)">$${item.bonus}</td>
+    </tr>
+  `).join('');
+
+  // Update r_rate default display
+  st('r_rate','$'+rate);
+}
+
+// ==============================
+// MASTER UPDATE
+// ==============================
+function updateAll(){
+  updateRegTables();
+  renderQualSettings();
+  renderMonthQualRows();
+  renderSimQualRows();
+  calcMonth();
+  calcSimulation();
+}
+
+// ==============================
+// TABS
+// ==============================
+function switchTab(name){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  const c=document.getElementById('tab-'+name);if(c)c.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes("'"+name+"'"))t.classList.add('active');});
+}
+
+// ==============================
+// INIT
+// ==============================
+(function init(){
+  const sel=document.getElementById('mp_month_select');
+  MONTHS_ALL.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});
+  loadSettings();
+  appliedRate=getRate();
+  appliedQualItems=JSON.parse(JSON.stringify(qualItems));
+  updateAll();
+  renderHistory();
+
+  // Event delegation for delete month buttons
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.del-month-btn');
+    if(!btn) return;
+    const month = btn.getAttribute('data-month');
+    if(!month) return;
+    saveHistoryData(getHistory().filter(function(r){ return r.month !== month; }));
+    renderHistory();
+  });
+})();
+</script>
+</body>
+</html>
