@@ -729,46 +729,46 @@ function getQualMax(){return qualItems.reduce((s,q)=>s+q.bonus,0);}
 // CALC ENGINE
 // ==============================
 function calcLeads(fact,plan,s){
-  if(!fact||!plan) return{zone:'none',bonus:0,label:'—',pct:0};
+  if(!fact||!plan) return{zone:'none',bonus:0,label:'—',pct:0,base:0,extra:0};
   const pct=fact/plan*100;
   const e2ok=s.leads_be2>0&&s.leads_e2_from>0;
   const e1ok=s.leads_be1>0&&s.leads_e1_from>0;
-  if(e2ok&&pct>=s.leads_e2_from) return{zone:'extra2',bonus:s.leads_be2,label:'🔵 Экстра 2',pct:Math.min(pct/s.leads_e2_from*95,110)};
-  if(e1ok&&pct>=s.leads_e1_from) return{zone:'extra',bonus:s.leads_be1,label:'🔵 Экстра 1',pct:95};
-  if(pct>=s.leads_green) return{zone:'green',bonus:s.leads_bonus,label:'🟢 Норма',pct:pct/Math.max(s.leads_e1_from||s.leads_e2_from||105,1)*90};
-  if(pct>=s.leads_yellow) return{zone:'yellow',bonus:s.leads_byellow,label:'🟡 Рабочая',pct:pct/s.leads_green*70};
-  return{zone:'red',bonus:0,label:'🔴 Провал',pct:pct/s.leads_yellow*25};
+  if(e2ok&&pct>=s.leads_e2_from) return{zone:'extra2',bonus:s.leads_bonus+s.leads_be2,base:s.leads_bonus,extra:s.leads_be2,label:'🔵 Экстра 2',pct:Math.min(pct/s.leads_e2_from*95,110)};
+  if(e1ok&&pct>=s.leads_e1_from) return{zone:'extra',bonus:s.leads_bonus+s.leads_be1,base:s.leads_bonus,extra:s.leads_be1,label:'🔵 Экстра 1',pct:95};
+  if(pct>=s.leads_green) return{zone:'green',bonus:s.leads_bonus,base:s.leads_bonus,extra:0,label:'🟢 Норма',pct:pct/Math.max(s.leads_e1_from||s.leads_e2_from||105,1)*90};
+  if(pct>=s.leads_yellow) return{zone:'yellow',bonus:s.leads_byellow,base:s.leads_byellow,extra:0,label:'🟡 Рабочая',pct:pct/s.leads_green*70};
+  return{zone:'red',bonus:0,base:0,extra:0,label:'🔴 Провал',pct:pct/s.leads_yellow*25};
 }
 
 function calcSA(fact,s,excl){
-  if(excl) return{zone:'excl',bonus:0,label:'— Искл.',pct:0};
-  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,label:'—',pct:0};
+  if(excl) return{zone:'excl',bonus:0,base:0,extra:0,label:'— Искл.',pct:0};
+  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,base:0,extra:0,label:'—',pct:0};
   fact=+fact;
   const e2ok=s.sa_be2>0&&s.sa_e2_from>0;
   const e1ok=s.sa_be1>0&&s.sa_e1_from>0;
-  if(e2ok&&fact>=s.sa_e2_from) return{zone:'extra2',bonus:s.sa_be2,label:'🔵 Экстра 2',pct:100};
-  if(e1ok&&fact>=s.sa_e1_from) return{zone:'extra',bonus:s.sa_be1,label:'🔵 Экстра 1',pct:90};
-  if(fact>=s.sa_red) return{zone:'green',bonus:s.sa_bonus,label:'🟢 Норма',pct:fact/(s.sa_e1_from||s.sa_e2_from||30)*80};
-  return{zone:'red',bonus:0,label:'🔴 Провал',pct:fact/s.sa_red*40};
+  if(e2ok&&fact>=s.sa_e2_from) return{zone:'extra2',bonus:s.sa_bonus+s.sa_be2,base:s.sa_bonus,extra:s.sa_be2,label:'🔵 Экстра 2',pct:100};
+  if(e1ok&&fact>=s.sa_e1_from) return{zone:'extra',bonus:s.sa_bonus+s.sa_be1,base:s.sa_bonus,extra:s.sa_be1,label:'🔵 Экстра 1',pct:90};
+  if(fact>=s.sa_red) return{zone:'green',bonus:s.sa_bonus,base:s.sa_bonus,extra:0,label:'🟢 Норма',pct:fact/(s.sa_e1_from||s.sa_e2_from||30)*80};
+  return{zone:'red',bonus:0,base:0,extra:0,label:'🔴 Провал',pct:fact/s.sa_red*40};
 }
 
 function calcCAC(fact,s,excl){
-  if(excl) return{zone:'excl',bonus:0,label:'— Искл.',pct:0};
-  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,label:'—',pct:0};
+  if(excl) return{zone:'excl',bonus:0,base:0,extra:0,label:'— Искл.',pct:0};
+  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,base:0,extra:0,label:'—',pct:0};
   fact=+fact;
-  if(fact<s.cac_extra) return{zone:'extra2',bonus:s.cac_bextra,label:'🔵 Экстра',pct:100};
-  if(fact<=s.cac_green) return{zone:'green',bonus:s.cac_bonus,label:'🟢 Норма',pct:(s.cac_yellow-fact)/(s.cac_yellow-s.cac_extra)*85};
-  if(fact<=s.cac_yellow) return{zone:'yellow',bonus:s.cac_byellow,label:'🟡 Рабочая',pct:(s.cac_yellow-fact)/(s.cac_yellow-s.cac_extra)*55};
-  return{zone:'red',bonus:0,label:'🔴 Провал',pct:10};
+  if(fact<s.cac_extra) return{zone:'extra2',bonus:s.cac_bonus+s.cac_bextra,base:s.cac_bonus,extra:s.cac_bextra,label:'🔵 Экстра',pct:100};
+  if(fact<=s.cac_green) return{zone:'green',bonus:s.cac_bonus,base:s.cac_bonus,extra:0,label:'🟢 Норма',pct:(s.cac_yellow-fact)/(s.cac_yellow-s.cac_extra)*85};
+  if(fact<=s.cac_yellow) return{zone:'yellow',bonus:s.cac_byellow,base:s.cac_byellow,extra:0,label:'🟡 Рабочая',pct:(s.cac_yellow-fact)/(s.cac_yellow-s.cac_extra)*55};
+  return{zone:'red',bonus:0,base:0,extra:0,label:'🔴 Провал',pct:10};
 }
 
 function calcMkt(fact,s,excl){
-  if(excl) return{zone:'excl',bonus:0,label:'— Искл.',pct:0};
-  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,label:'—',pct:0};
+  if(excl) return{zone:'excl',bonus:0,base:0,extra:0,label:'— Искл.',pct:0};
+  if(fact===''||fact===null||isNaN(+fact)) return{zone:'none',bonus:0,base:0,extra:0,label:'—',pct:0};
   fact=+fact;
-  if(fact>=s.mkt_extra) return{zone:'extra2',bonus:s.mkt_bextra,label:'🔵 Экстра',pct:100};
-  if(fact>=s.mkt_red) return{zone:'green',bonus:s.mkt_bonus,label:'🟢 Норма',pct:fact/s.mkt_extra*85};
-  return{zone:'red',bonus:0,label:'🔴 Провал',pct:fact/s.mkt_red*40};
+  if(fact>=s.mkt_extra) return{zone:'extra2',bonus:s.mkt_bonus+s.mkt_bextra,base:s.mkt_bonus,extra:s.mkt_bextra,label:'🔵 Экстра',pct:100};
+  if(fact>=s.mkt_red) return{zone:'green',bonus:s.mkt_bonus,base:s.mkt_bonus,extra:0,label:'🟢 Норма',pct:fact/s.mkt_extra*85};
+  return{zone:'red',bonus:0,base:0,extra:0,label:'🔴 Провал',pct:fact/s.mkt_red*40};
 }
 
 function zoneClass(z){
@@ -783,7 +783,14 @@ function applyKPI(pfx,id,r){
   const bonus=document.getElementById(pfx+'bonus_'+id);
   const bar=document.getElementById(pfx+'bar_'+id);
   if(badge){badge.textContent=r.label;badge.className='fact-badge '+zoneClass(r.zone);}
-  if(bonus){bonus.textContent=(r.zone==='none'||r.zone==='excl')?'—':'$'+r.bonus;bonus.style.color=zoneColor(r.zone);}
+  if(bonus){
+    let bonusText;
+    if(r.zone==='none'||r.zone==='excl') bonusText='—';
+    else if(r.extra>0) bonusText='$'+r.base+' +$'+r.extra;
+    else bonusText='$'+r.bonus;
+    bonus.textContent=bonusText;
+    bonus.style.color=zoneColor(r.zone);
+  }
   if(bar){bar.style.width=Math.min(r.pct,100)+'%';bar.style.background=zoneColor(r.zone);}
 }
 
@@ -809,12 +816,13 @@ function calcMonth(){
   },0);
 
   const rate=s.rate;
+  function fmtBonus(r){ if(r.zone==='none') return '—'; if(r.zone==='excl') return '— (исключён)'; return r.extra>0?'$'+r.base+' +$'+r.extra:'$'+r.bonus; }
   st('r_rate','$'+rate);
   st('r_qual','$'+qualBonus);
-  st('r_leads',leads.zone==='none'?'—':'$'+leads.bonus);
-  st('r_sa',sa.zone==='none'?'—':sa.zone==='excl'?'— (исключён)':'$'+sa.bonus);
-  st('r_cac',cac.zone==='none'?'—':cac.zone==='excl'?'— (исключён)':'$'+cac.bonus);
-  st('r_mkt',mkt.zone==='none'?'—':mkt.zone==='excl'?'— (исключён)':'$'+mkt.bonus);
+  st('r_leads',fmtBonus(leads));
+  st('r_sa',fmtBonus(sa));
+  st('r_cac',fmtBonus(cac));
+  st('r_mkt',fmtBonus(mkt));
 
   const kpi=leads.bonus+sa.bonus+cac.bonus+mkt.bonus;
   const total=rate+qualBonus+kpi;
@@ -964,10 +972,11 @@ function calcCustom(){
   const cac=calcCAC(v('cs_cac_fact'),s,false);
   const mkt=calcMkt(v('cs_mkt_fact'),s,false);
   applyKPI('c','leads',leads);applyKPI('c','sa',sa);applyKPI('c','cac',cac);applyKPI('c','mkt',mkt);
-  st('cr_leads',leads.zone==='none'?'—':'$'+leads.bonus);
-  st('cr_sa',sa.zone==='none'?'—':'$'+sa.bonus);
-  st('cr_cac',cac.zone==='none'?'—':'$'+cac.bonus);
-  st('cr_mkt',mkt.zone==='none'?'—':'$'+mkt.bonus);
+  function fmtC(r){ if(r.zone==='none') return '—'; return r.extra>0?'$'+r.base+' +$'+r.extra:'$'+r.bonus; }
+  st('cr_leads',fmtC(leads));
+  st('cr_sa',fmtC(sa));
+  st('cr_cac',fmtC(cac));
+  st('cr_mkt',fmtC(mkt));
   const qmax=qi.reduce((acc,q)=>acc+q.bonus,0);
   const rate=s.rate;
   const kpi=leads.bonus+sa.bonus+cac.bonus+mkt.bonus;
@@ -990,20 +999,20 @@ function renderCorridors(){
   let leadsCor=`<div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&lt;${s.leads_fail}%</span><span class="czval">$0</span></div>
     <div class="cor-zone cz-yellow"><span class="czlabel">🟡 Рабочая</span><span class="czval">${s.leads_yellow}–${s.leads_green-1}%</span><span class="czval">$${s.leads_byellow}</span></div>
     <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">${s.leads_green}–${s.leads_e1_from>0?s.leads_e1_from-1:'…'}%</span><span class="czval">$${s.leads_bonus}</span></div>`;
-  if(s.leads_be1>0&&s.leads_e1_from>0) leadsCor+=`<div class="cor-zone cz-extra"><span class="czlabel">🔵 Э1</span><span class="czval">${s.leads_e1_from}–${s.leads_e2_from>0?s.leads_e2_from-1:'…'}%</span><span class="czval">$${s.leads_be1}</span></div>`;
-  if(s.leads_be2>0&&s.leads_e2_from>0) leadsCor+=`<div class="cor-zone cz-extra2"><span class="czlabel">🔵 Э2</span><span class="czval">≥${s.leads_e2_from}%</span><span class="czval">$${s.leads_be2}</span></div>`;
+  if(s.leads_be1>0&&s.leads_e1_from>0) leadsCor+=`<div class="cor-zone cz-extra"><span class="czlabel">🔵 Э1</span><span class="czval">${s.leads_e1_from}–${s.leads_e2_from>0?s.leads_e2_from-1:'…'}%</span><span class="czval">$${s.leads_bonus}+$${s.leads_be1}</span></div>`;
+  if(s.leads_be2>0&&s.leads_e2_from>0) leadsCor+=`<div class="cor-zone cz-extra2"><span class="czlabel">🔵 Э2</span><span class="czval">≥${s.leads_e2_from}%</span><span class="czval">$${s.leads_bonus}+$${s.leads_be2}</span></div>`;
   si('cor_leads',leadsCor);
 
   // SA
   let saCor=`<div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&lt;${s.sa_red}%</span><span class="czval">$0</span></div>
     <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">${s.sa_red}–${s.sa_e1_from>0?s.sa_e1_from-0.1:'…'}%</span><span class="czval">$${s.sa_bonus}</span></div>`;
-  if(s.sa_be1>0&&s.sa_e1_from>0) saCor+=`<div class="cor-zone cz-extra"><span class="czlabel">🔵 Э1</span><span class="czval">${s.sa_e1_from}–${s.sa_e2_from>0?s.sa_e2_from-0.1:'…'}%</span><span class="czval">$${s.sa_be1}</span></div>`;
-  if(s.sa_be2>0&&s.sa_e2_from>0) saCor+=`<div class="cor-zone cz-extra2"><span class="czlabel">🔵 Э2</span><span class="czval">≥${s.sa_e2_from}%</span><span class="czval">$${s.sa_be2}</span></div>`;
+  if(s.sa_be1>0&&s.sa_e1_from>0) saCor+=`<div class="cor-zone cz-extra"><span class="czlabel">🔵 Э1</span><span class="czval">${s.sa_e1_from}–${s.sa_e2_from>0?s.sa_e2_from-0.1:'…'}%</span><span class="czval">$${s.sa_bonus}+$${s.sa_be1}</span></div>`;
+  if(s.sa_be2>0&&s.sa_e2_from>0) saCor+=`<div class="cor-zone cz-extra2"><span class="czlabel">🔵 Э2</span><span class="czval">≥${s.sa_e2_from}%</span><span class="czval">$${s.sa_bonus}+$${s.sa_be2}</span></div>`;
   si('cor_sa',saCor);
 
   // CAC
   si('cor_cac',`
-    <div class="cor-zone cz-extra"><span class="czlabel">🔵 Экстра</span><span class="czval">&lt;$${s.cac_extra}</span><span class="czval">$${s.cac_bextra}</span></div>
+    <div class="cor-zone cz-extra"><span class="czlabel">🔵 Экстра</span><span class="czval">&lt;$${s.cac_extra}</span><span class="czval">$${s.cac_bonus}+$${s.cac_bextra}</span></div>
     <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">$${s.cac_extra}–$${s.cac_green}</span><span class="czval">$${s.cac_bonus}</span></div>
     <div class="cor-zone cz-yellow"><span class="czlabel">🟡 Рабочая</span><span class="czval">$${s.cac_green}–$${s.cac_yellow}</span><span class="czval">$${s.cac_byellow}</span></div>
     <div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&gt;$${s.cac_yellow}</span><span class="czval">$0</span></div>
@@ -1013,7 +1022,7 @@ function renderCorridors(){
   si('cor_mkt',`
     <div class="cor-zone cz-red"><span class="czlabel">🔴 Провал</span><span class="czval">&lt;${s.mkt_red}%</span><span class="czval">$0</span></div>
     <div class="cor-zone cz-green"><span class="czlabel">🟢 Норма</span><span class="czval">${s.mkt_red}–${s.mkt_extra}%</span><span class="czval">$${s.mkt_bonus}</span></div>
-    <div class="cor-zone cz-extra"><span class="czlabel">🔵 Экстра</span><span class="czval">≥${s.mkt_extra}%</span><span class="czval">$${s.mkt_bextra}</span></div>
+    <div class="cor-zone cz-extra"><span class="czlabel">🔵 Экстра</span><span class="czval">≥${s.mkt_extra}%</span><span class="czval">$${s.mkt_bonus}+$${s.mkt_bextra}</span></div>
   `);
 }
 
@@ -1032,7 +1041,7 @@ function updateRegTables(){
   const qi=getAppliedQual();
   const qmax=qi.reduce((acc,q)=>acc+q.bonus,0);
   const kpiNorm=s.leads_bonus+s.sa_bonus+s.cac_bonus+s.mkt_bonus;
-  const kpiExtra=Math.max(s.leads_be1,s.leads_be2)+Math.max(s.sa_be1,s.sa_be2)+s.cac_bextra+s.mkt_bextra;
+  const kpiExtra=(s.leads_bonus+Math.max(s.leads_be1,s.leads_be2))+(s.sa_bonus+Math.max(s.sa_be1,s.sa_be2))+(s.cac_bonus+s.cac_bextra)+(s.mkt_bonus+s.mkt_bextra);
   const normTotal=s.rate+qmax+kpiNorm;
   const maxTotal=s.rate+qmax+kpiExtra;
 
@@ -1048,7 +1057,7 @@ function updateRegTables(){
     <tr><td>Качественный бонус (отчёты)</td><td style="font-family:monospace;color:var(--text)">до $${qmax}</td><td>По каждому из ${qi.length} отчётных блоков</td></tr>
     <tr><td>Количественный бонус (KPI)</td><td style="font-family:monospace;color:var(--text)">до $${kpiNorm}</td><td>По 4 KPI с коридорной логикой</td></tr>
     <tr><td><strong>Итого норма</strong></td><td style="font-family:monospace;color:var(--green);font-weight:700">$${normTotal}</td><td>При выполнении всех блоков</td></tr>
-    <tr><td>Экстра-бонус (сверхнорма)</td><td style="font-family:monospace;color:var(--gold)">+до $${kpiExtra}</td><td>При превышении нормы по KPI</td></tr>
+    <tr><td>Экстра-бонус (сверхнорма)</td><td style="font-family:monospace;color:var(--gold)">+до $${kpiExtra-kpiNorm}</td><td>Начисляется сверх нормы при перевыполнении</td></tr>
     <tr><td><strong>Итого максимум</strong></td><td style="font-family:monospace;color:var(--gold);font-weight:700">$${maxTotal}</td><td>При достижении экстра по всем KPI</td></tr>
   `;
 
@@ -1065,25 +1074,25 @@ function updateRegTables(){
       dz('dz-red',`&lt;${s.leads_fail}% → $0`),
       dz('dz-yellow',`${s.leads_yellow}–${s.leads_green-1}% → $${s.leads_byellow}`),
       dz('dz-green',`${s.leads_green}–${s.leads_e1_from>0?s.leads_e1_from-1:'…'}% → $${s.leads_bonus}`),
-      (s.leads_be1>0?dz('dz-extra',`≥${s.leads_e1_from}% → $${s.leads_be1}`):'—')+(s.leads_be2>0?dz('dz-extra2',`≥${s.leads_e2_from}% → $${s.leads_be2}`):'')
+      (s.leads_be1>0?dz('dz-extra',`≥${s.leads_e1_from}% → $${s.leads_bonus}+$${s.leads_be1}`):'—')+(s.leads_be2>0?dz('dz-extra2',`≥${s.leads_e2_from}% → $${s.leads_bonus}+$${s.leads_be2}`):'')
     ],
     ['SA%',
       dz('dz-red',`&lt;${s.sa_red}% → $0`),
       '<span style="color:var(--text3);font-size:11px">—</span>',
       dz('dz-green',`${s.sa_red}–${s.sa_e1_from>0?s.sa_e1_from:'…'}% → $${s.sa_bonus}`),
-      (s.sa_be1>0?dz('dz-extra',`≥${s.sa_e1_from}% → $${s.sa_be1}`):'—')+(s.sa_be2>0?dz('dz-extra2',`≥${s.sa_e2_from}% → $${s.sa_be2}`):'')
+      (s.sa_be1>0?dz('dz-extra',`≥${s.sa_e1_from}% → $${s.sa_bonus}+$${s.sa_be1}`):'—')+(s.sa_be2>0?dz('dz-extra2',`≥${s.sa_e2_from}% → $${s.sa_bonus}+$${s.sa_be2}`):'')
     ],
     ['CAC',
       dz('dz-red',`&gt;$${s.cac_yellow} → $0`),
       dz('dz-yellow',`$${s.cac_green}–$${s.cac_yellow} → $${s.cac_byellow}`),
       dz('dz-green',`$${s.cac_extra}–$${s.cac_green} → $${s.cac_bonus}`),
-      dz('dz-extra',`&lt;$${s.cac_extra} → $${s.cac_bextra}`)
+      dz('dz-extra',`&lt;$${s.cac_extra} → $${s.cac_bonus}+$${s.cac_bextra}`)
     ],
     ['Доля рынка',
       dz('dz-red',`&lt;${s.mkt_red}% → $0`),
       '<span style="color:var(--text3);font-size:11px">—</span>',
       dz('dz-green',`${s.mkt_red}–${s.mkt_extra}% → $${s.mkt_bonus}`),
-      dz('dz-extra',`≥${s.mkt_extra}% → $${s.mkt_bextra}`)
+      dz('dz-extra',`≥${s.mkt_extra}% → $${s.mkt_bonus}+$${s.mkt_bextra}`)
     ],
   ];
   const ktb=document.getElementById('reg-kpi-tbody');
