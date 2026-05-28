@@ -82,10 +82,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .cz-yellow .czlabel{color:var(--yellow);}.cz-yellow .czval{color:#fcd34d;}
 .cz-green{background:var(--green-bg);border:1px solid var(--green-border);}
 .cz-green .czlabel{color:var(--green);}.cz-green .czval{color:#86efac;}
-.cz-extra{background:var(--gold-bg);border:1px solid var(--gold-border);}
-.cz-extra .czlabel{color:var(--gold);}.cz-extra .czval{color:#fde68a;}
-.cz-extra2{background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.4);}
-.cz-extra2 .czlabel{color:#fbbf24;}.cz-extra2 .czval{color:#fef3c7;}
+.cz-extra{background:var(--blue-bg);border:1px solid var(--blue-border);}
+.cz-extra .czlabel{color:var(--blue);}.cz-extra .czval{color:#93c5fd;}
+.cz-extra2{background:rgba(59,130,246,0.18);border:1px solid rgba(59,130,246,0.45);}
+.cz-extra2 .czlabel{color:#60a5fa;}.cz-extra2 .czval{color:#bfdbfe;}
 
 /* LOGIC BOX */
 .logic-box{background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.15);border-radius:var(--radius-sm);padding:10px 12px;margin-top:10px;}
@@ -140,8 +140,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .dz-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
 .dz-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);}
 .dz-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
-.dz-extra{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
-.dz-extra2{background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);}
+.dz-extra{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border);}
+.dz-extra2{background:rgba(59,130,246,0.18);color:#60a5fa;border:1px solid rgba(59,130,246,0.45);}
 
 /* HISTORY */
 .history-table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -181,8 +181,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .zone-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
 .zone-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border);}
 .zone-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
-.zone-extra{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
-.zone-extra2{background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);}
+.zone-extra{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border);}
+.zone-extra2{background:rgba(59,130,246,0.18);color:#60a5fa;border:1px solid rgba(59,130,246,0.45);}
 .zone-excl{background:var(--bg4);color:var(--text3);border:1px solid var(--border);}
 
 @media(max-width:640px){
@@ -775,7 +775,7 @@ function zoneClass(z){
   return{extra2:'zone-extra2',extra:'zone-extra',green:'zone-green',yellow:'zone-yellow',red:'zone-red',excl:'zone-excl'}[z]||'';
 }
 function zoneColor(z){
-  return{extra2:'#fbbf24',extra:'var(--gold)',green:'var(--green)',yellow:'var(--yellow)',red:'var(--red)'}[z]||'var(--text3)';
+  return{extra2:'#60a5fa',extra:'var(--blue)',green:'var(--green)',yellow:'var(--yellow)',red:'var(--red)'}[z]||'var(--text3)';
 }
 
 function applyKPI(pfx,id,r){
@@ -916,7 +916,7 @@ function renderHistory(){
     const hs=document.getElementById('history-summary');
     if(hs){hs.style.display='grid';hs.innerHTML=`
       <div class="stat-card"><div class="slabel">Средняя зарплата</div><div class="svalue" style="color:var(--green)">$${avg}</div><div class="sdesc">за ${filtered.length} мес.</div></div>
-      <div class="stat-card"><div class="slabel">Максимум</div><div class="svalue" style="color:var(--gold)">$${max}</div><div class="sdesc">лучший месяц</div></div>
+      <div class="stat-card"><div class="slabel">Максимум</div><div class="svalue" style="color:var(--blue)">$${max}</div><div class="sdesc">лучший месяц</div></div>
       <div class="stat-card"><div class="slabel">Минимум</div><div class="svalue" style="color:var(--red)">$${min}</div><div class="sdesc">худший месяц</div></div>
     `;}
   } else {
@@ -1057,8 +1057,8 @@ function updateRegTables(){
     <tr><td>Качественный бонус (отчёты)</td><td style="font-family:monospace;color:var(--text)">до $${qmax}</td><td>По каждому из ${qi.length} отчётных блоков</td></tr>
     <tr><td>Количественный бонус (KPI)</td><td style="font-family:monospace;color:var(--text)">до $${kpiNorm}</td><td>По 4 KPI с коридорной логикой</td></tr>
     <tr><td><strong>Итого норма</strong></td><td style="font-family:monospace;color:var(--green);font-weight:700">$${normTotal}</td><td>При выполнении всех блоков</td></tr>
-    <tr><td>Экстра-бонус (сверхнорма)</td><td style="font-family:monospace;color:var(--gold)">+до $${kpiExtra-kpiNorm}</td><td>Начисляется сверх нормы при перевыполнении</td></tr>
-    <tr><td><strong>Итого максимум</strong></td><td style="font-family:monospace;color:var(--gold);font-weight:700">$${maxTotal}</td><td>При достижении экстра по всем KPI</td></tr>
+    <tr><td>Экстра-бонус (сверхнорма)</td><td style="font-family:monospace;color:var(--blue)">+до $${kpiExtra-kpiNorm}</td><td>Начисляется сверх нормы при перевыполнении</td></tr>
+    <tr><td><strong>Итого максимум</strong></td><td style="font-family:monospace;color:var(--blue);font-weight:700">$${maxTotal}</td><td>При достижении экстра по всем KPI</td></tr>
   `;
 
   // Qual table
