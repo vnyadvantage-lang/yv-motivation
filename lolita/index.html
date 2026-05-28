@@ -262,7 +262,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <ul style="padding-left:18px;">
       <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Нет «всё или ничего» — жёлтый коридор даёт частичный бонус</li>
       <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">План по лидам выставляется <strong style="color:var(--accent2)">каждый месяц отдельно</strong> с учётом сезонности</li>
-      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Норма CAC привязана к рекламному бюджету и сезону — при изменении бюджета норма пересматривается</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Норма CAC по SA привязана к рекламному бюджету и сезону — при изменении бюджета норма пересматривается</li>
       <li style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px;">Норма доли рынка обновляется при изменении состава конкурентов</li>
       <li style="font-size:13px;color:var(--text2);line-height:1.7;">Форс-мажорные периоды исключаются из оценки</li>
     </ul>
@@ -275,7 +275,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <tbody>
         <tr><td>Лиды (план)</td><td>Каждый месяц</td><td>Индивидуально под сезонность</td></tr>
         <tr><td>SA%</td><td>Раз в квартал</td><td>Q3 2026: если >27.5% стабильно → порог поднимается</td></tr>
-        <tr><td>CAC</td><td>Раз в квартал / при смене бюджета</td><td>Новый бюджет → новая норма</td></tr>
+        <tr><td>CAC по SA</td><td>Раз в квартал / при смене бюджета</td><td>Новый бюджет → новая норма</td></tr>
         <tr><td>Доля рынка</td><td>Раз в квартал</td><td>По итогам периода + изменение конкурентов</td></tr>
       </tbody>
     </table>
@@ -440,7 +440,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <span class="fact-bonus" id="cbonus_sa">—</span>
     </div>
     <div class="fact-row">
-      <div class="fact-name">CAC $</div>
+      <div class="fact-name">CAC по SA $</div>
       <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≤$<span id="cs_cac_show">38</span></span></div>
       <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">$</span><input class="fact-input" type="number" id="cs_cac_fact" value="36" oninput="calcCustom()"></div>
       <div class="bar-outer"><div class="bar-inner" id="cbar_cac"></div></div>
@@ -508,9 +508,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="excl-row"><input type="checkbox" id="mp_sa_excl" onchange="calcMonth()"><label for="mp_sa_excl">Исключить из оценки (форс-мажор / аномалия)</label></div>
 
     <div class="fact-row">
-      <div class="fact-name">CAC</div>
+      <div class="fact-name">CAC по SA</div>
       <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">норма: ≤$<span id="mp_cac_show">38</span></span></div>
-      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">$</span><input class="fact-input" type="number" id="mp_cac_fact" placeholder="CAC" oninput="calcMonth()"></div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0"><span style="font-size:12px;color:var(--text3)">$</span><input class="fact-input" type="number" id="mp_cac_fact" placeholder="CAC по SA" oninput="calcMonth()"></div>
       <div class="bar-outer"><div class="bar-inner" id="bar_cac"></div></div>
       <span class="fact-badge" id="badge_cac">—</span>
       <span class="fact-bonus" id="bonus_cac">—</span>
@@ -567,7 +567,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     </div>
     <div style="overflow-x:auto">
       <table class="history-table">
-        <thead><tr><th>Месяц</th><th>Лиды</th><th>SA%</th><th>CAC</th><th>Рынок</th><th>Кач.</th><th>KPI</th><th>Итого</th><th></th></tr></thead>
+        <thead><tr><th>Месяц</th><th>Лиды</th><th>SA%</th><th>CAC по SA</th><th>Рынок</th><th>Кач.</th><th>KPI</th><th>Итого</th><th></th></tr></thead>
         <tbody id="history-tbody"></tbody>
       </table>
     </div>
@@ -954,7 +954,7 @@ function clearHistory(){
 function exportHistory(){
   const h=getHistory();
   if(!h.length){alert('Нет данных');return;}
-  const hdr='Месяц,Лиды(план),Лиды(факт),SA%,CAC,Рынок%,Кач.блок,KPI,Итого';
+  const hdr='Месяц,Лиды(план),Лиды(факт),SA%,CAC по SA,Рынок%,Кач.блок,KPI,Итого';
   const rows=h.map(e=>[e.month,e.plan,e.leads_fact,e.sa_fact,e.cac_fact,e.mkt_fact,e.qual,e.kpi,e.total].join(','));
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent([hdr,...rows].join('\n'));
@@ -1082,7 +1082,7 @@ function updateRegTables(){
       dz('dz-green',`${s.sa_red}–${s.sa_e1_from>0?s.sa_e1_from:'…'}% → $${s.sa_bonus}`),
       (s.sa_be1>0?dz('dz-extra',`≥${s.sa_e1_from}% → $${s.sa_bonus}+$${s.sa_be1}`):'—')+(s.sa_be2>0?dz('dz-extra2',`≥${s.sa_e2_from}% → $${s.sa_bonus}+$${s.sa_be2}`):'')
     ],
-    ['CAC',
+    ['CAC по SA',
       dz('dz-red',`&gt;$${s.cac_yellow} → $0`),
       dz('dz-yellow',`$${s.cac_green}–$${s.cac_yellow} → $${s.cac_byellow}`),
       dz('dz-green',`$${s.cac_extra}–$${s.cac_green} → $${s.cac_bonus}`),
