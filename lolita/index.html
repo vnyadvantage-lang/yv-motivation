@@ -377,10 +377,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     </div>
 
     <div class="card">
-      <div class="card-title">KPI 3 — CAC</div>
+      <div class="card-title">KPI 3 — CAC по SA</div>
       <div class="kpi-block">
-        <div class="kpi-name">Cost per Acquired Customer</div>
-        <div class="kpi-desc">Меньше = лучше. Пересматривается при изменении рекламного бюджета.</div>
+        <div class="kpi-name">CAC по SA (самостоятельные покупки)</div>
+        <div class="kpi-desc">Стоимость привлечения лида, который купил самостоятельно (SA). Меньше = лучше. Пересматривается при изменении рекламного бюджета.</div>
         <div class="field-section">Зоны</div>
         <div class="field"><label>🔵 Экстра — ниже</label><input type="number" id="s_cac_extra" value="30" min="1" oninput="markDirty()"><span class="unit">$</span></div>
         <div class="field"><label>🟢 Зелёный — до</label><input type="number" id="s_cac_green" value="38" min="1" oninput="markDirty()"><span class="unit">$</span></div>
@@ -463,7 +463,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="result-line"><span class="rname">Качественный бонус (100%)</span><span class="rval" id="cr_qual_max">—</span></div>
     <div class="result-line"><span class="rname">KPI — лиды</span><span class="rval" id="cr_leads">—</span></div>
     <div class="result-line"><span class="rname">KPI — SA%</span><span class="rval" id="cr_sa">—</span></div>
-    <div class="result-line"><span class="rname">KPI — CAC</span><span class="rval" id="cr_cac">—</span></div>
+    <div class="result-line"><span class="rname">KPI — CAC по SA</span><span class="rval" id="cr_cac">—</span></div>
     <div class="result-line"><span class="rname">KPI — доля рынка</span><span class="rval" id="cr_mkt">—</span></div>
     <div class="result-line total"><span class="rname">Итого</span><span class="rval" id="cr_total" style="color:var(--green)">—</span></div>
   </div>
@@ -534,7 +534,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="result-line"><span class="rname">Качественный бонус</span><span class="rval" id="r_qual">—</span></div>
     <div class="result-line"><span class="rname">KPI — лиды</span><span class="rval" id="r_leads">—</span></div>
     <div class="result-line"><span class="rname">KPI — SA%</span><span class="rval" id="r_sa">—</span></div>
-    <div class="result-line"><span class="rname">KPI — CAC</span><span class="rval" id="r_cac">—</span></div>
+    <div class="result-line"><span class="rname">KPI — CAC по SA</span><span class="rval" id="r_cac">—</span></div>
     <div class="result-line"><span class="rname">KPI — доля рынка</span><span class="rval" id="r_mkt">—</span></div>
     <div class="result-line total"><span class="rname">Итого</span><span class="rval" id="r_total" style="color:var(--green)">—</span></div>
   </div>
